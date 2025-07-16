@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 function ComputerLayout({ children }) {
   return (
     <div className="flex justify-center items-center px-0 sm:px-4 xsm:px-8 lg:px-18 py-8 lg:py-18 w-full h-full">
@@ -5,6 +7,19 @@ function ComputerLayout({ children }) {
         {/* Computer Monitor */}
         <div className="relative flex justify-center items-center m-auto rounded-xl w-full h-full bg-white shadow-inner">
           {children}
+
+          {/* Wallpaper */}
+          <div className="z-[1] absolute top-0 left-0 rounded-xl w-full h-full xxmd:h-auto max-h-full object-cover overflow-hidden">
+            <Image
+              src="/img/mac-bg.jpg"
+              alt="Mac default background image with orange and blue lights spread out from the center top."
+              loading="lazy"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
         </div>
 
         {/* Computer Stand */}

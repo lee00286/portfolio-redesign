@@ -17,7 +17,7 @@ export default function Home() {
       {/* Desktop */}
       <div className="z-[10] grid grid-rows-[auto_8%] xsm:grid-rows-[auto_10%] xxmd:grid-rows-none xxmd:grid-cols-[28%_auto] rounded-tl-xl xxmd:rounded-tl-none rounded-tr-xl xxmd:rounded-tr-none xxmd:rounded-bl-xl xxmd:rounded-br-xl w-full h-[calc(100%-40px)]">
         {/* Left Screen (Sidebar) */}
-        <div className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-between xxmd:justify-start items-stretch gap-3 rounded-bl-xl rounded-br-xl xxmd:rounded-br-none px-5 py-4 xsm:py-6 bg-primary-200">
+        <aside className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-between xxmd:justify-start items-stretch gap-3 rounded-bl-xl rounded-br-xl xxmd:rounded-br-none px-5 py-4 xsm:py-6 bg-primary-200">
           <a
             className="btn btn--nav"
             href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -63,12 +63,12 @@ export default function Home() {
             />
             <span className="hidden md:inline-block">Go to nextjs.org →</span>
           </a>
-        </div>
+        </aside>
 
         {/* Right Screen */}
         <div className="px-5 xxmd:px-8 py-6">
           {/* Window */}
-          <div className="rounded-lg w-full h-full bg-yellow-50">
+          <div id="window" className="rounded-lg w-full h-full bg-yellow-50">
             {/* Window Title Bar */}
             <div className="z-[20] flex justify-between items-center rounded-tl-xl rounded-tr-xl px-4 py-2 w-full h-[40px] bg-yellow-200">
               <div className="flex justify-start items-center gap-2">
@@ -100,6 +100,7 @@ export default function Home() {
             </div>
 
             <div className="px-4 py-2 w-full h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
+              <section></section>
               <h1>
                 THIS is a TesT
                 <br />
@@ -114,18 +115,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="z-[1] absolute top-0 left-0 rounded-xl w-full h-full xxmd:h-auto max-h-full object-cover overflow-hidden">
-        <Image
-          src="/img/mac-bg.jpg"
-          alt="Mac default background image with orange and blue lights spread out from the center top."
-          loading="lazy"
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
       </div>
     </div>
   );
