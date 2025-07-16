@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from 'next/font/google';
+import ComputerLayout from '@/components/ComputerLayout';
 import './globals.css';
 
 const geistSans = Geist({
@@ -23,11 +24,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header>
-          <a href="#main" className="skip">
+          <a href="#screen" className="skip">
             Skip to main content
           </a>
         </header>
-        {children}
+        <ComputerLayout>{children}</ComputerLayout>
       </body>
     </html>
   );
