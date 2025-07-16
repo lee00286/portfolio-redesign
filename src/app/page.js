@@ -3,7 +3,10 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className="gap-16 px-0 sm:px-4 xsm:px-8 lg:px-18 py-8 lg:py-18 w-full h-full">
-      <main className="flex justify-center items-center w-full h-full">
+      <main
+        id="main"
+        className="flex justify-center items-center w-full h-full"
+      >
         <div className="relative w-full h-full xxmd:h-auto xxmd:aspect-[4/3] xl:aspect-[16/10] bg-primary-600 rounded-2xl border-4 p-6 mb-[20px] md:mb-[40px] xxmd:mb-[50px] border-primary-500 shadow-inner">
           {/* Computer Monitor */}
           <div className="relative flex flex-col justify-start items-center m-auto rounded-xl w-full h-full bg-white shadow-inner">
