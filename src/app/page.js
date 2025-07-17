@@ -1,11 +1,12 @@
 import Image from 'next/image';
+import SimpleSection from '@/components/SimpleSection';
 
 export default function Home() {
   return (
     <div
       id="screen"
       role="main"
-      tabindex="-1"
+      tabIndex="-1"
       className="flex flex-col justify-start items-center p-0 w-full h-full"
     >
       {/* Menu Bar */}
@@ -66,7 +67,7 @@ export default function Home() {
         </aside>
 
         {/* Right Screen */}
-        <div className="px-5 xxmd:px-8 py-6">
+        <div className="px-5 xxmd:px-8 py-6 h-full overflow-hidden">
           {/* Window */}
           <div id="window" className="rounded-lg w-full h-full bg-yellow-50">
             {/* Window Title Bar */}
@@ -99,8 +100,18 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="px-4 py-2 w-full h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
-              <section></section>
+            <div className="px-4 py-2 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
+              <SimpleSection
+                title="Experiences"
+                description="List of work experiences."
+                dbTableName="experiences"
+              />
+              <SimpleSection
+                title="Projects"
+                description="List of projects I have worked on."
+                dbTableName="projects"
+              />
+
               <h1>
                 THIS is a TesT
                 <br />

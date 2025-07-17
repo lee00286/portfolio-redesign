@@ -189,6 +189,10 @@ strong {
   @apply bg-yellow-500;
 }
 
+.simple-section--container {
+  @apply flex flex-col gap-2 border border-primary-500 rounded-lg p-4 w-full;
+}
+
 @media screen and (max-width: theme(--breakpoint-md)) {
   h1,
   .h1 {
