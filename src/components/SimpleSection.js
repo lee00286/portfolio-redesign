@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useSupabaseData } from '@/hooks/useSupabaseData';
+import ExperienceCard from './simpleSectionCards/ExperienceCard';
 import ProjectCard from './simpleSectionCards/ProjectCard';
 
 function SimpleSection({ title = '', description = '', dbTableName = '' }) {
@@ -15,10 +16,13 @@ function SimpleSection({ title = '', description = '', dbTableName = '' }) {
           {description && <p>{description}</p>}
         </div>
       )}
+
       {Array.isArray(dbData) && dbData.length > 0 && (
         <div className="simple-section--container">
           {dbData.map((data, index) =>
-            dbTableName === 'projects' ? (
+            dbTableName === 'experiences' ? (
+              <ExperienceCard key={data.id} projectIndex={index} data={data} />
+            ) : dbTableName === 'projects' ? (
               <ProjectCard key={data.id} projectIndex={index} data={data} />
             ) : (
               <React.Fragment key={data.id || `data-${index}`}></React.Fragment>

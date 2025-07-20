@@ -1,7 +1,7 @@
 import NewWindowIcon from '../icons/NewWindowIcon';
 import GitHubLogo from '../icons/GitHubLogo';
 
-function ProjectCard({ projectIndex, data }) {
+function ExperienceCard({ projectIndex, data }) {
   if (!data) return <></>;
 
   const lang = 'en';
@@ -10,14 +10,16 @@ function ProjectCard({ projectIndex, data }) {
     logo: data.logo,
     start_date: data.start_date || '',
     end_date: data.end_date || '',
-    title: lang === 'ko' ? data.title_ko : data.title_en,
+    company_name: lang === 'ko' ? data.company_name_ko : data.company_name_en,
+    company_description:
+      lang === 'ko' ? data.company_description_ko : data.company_description_en,
     position: lang === 'ko' ? data.pos_title_ko : data.pos_title_en,
+    pos_description:
+      lang === 'ko' ? data.pos_description_ko : data.pos_description_en,
     location: lang === 'ko' ? data.location_ko : data.location_en,
     description: lang === 'ko' ? data.description_ko : data.description_en,
     detail: lang === 'ko' ? data.detail_ko : data.detail_en,
-    tech_stack: data.tech_stack || '',
-    github: data.github || '',
-    url: data.url || ''
+    tech_stack: data.tech_stack || ''
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };
@@ -27,7 +29,7 @@ function ProjectCard({ projectIndex, data }) {
       {filteredData.image_url && (
         <img
           src={filteredData.image_url}
-          alt={filteredData.title}
+          alt={filteredData.company_name}
           className="w-full h-48 object-cover rounded"
         />
       )}
@@ -72,10 +74,10 @@ function ProjectCard({ projectIndex, data }) {
           </div>
         </div>
 
-        {(filteredData.position || filteredData.title) && (
+        {(filteredData.position || filteredData.company_name) && (
           <h3>
             {filteredData.position || ''}
-            {filteredData.title && ` - ${filteredData.title}`}
+            {filteredData.company_name && ` - ${filteredData.company_name}`}
           </h3>
         )}
 
@@ -105,4 +107,4 @@ function ProjectCard({ projectIndex, data }) {
   );
 }
 
-export default ProjectCard;
+export default ExperienceCard;

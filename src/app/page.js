@@ -71,7 +71,7 @@ export default function Home() {
           {/* Window */}
           <div
             id="window"
-            className="rounded-0 sm:rounded-lg w-full h-full bg-yellow-50"
+            className="rounded-0 sm:rounded-xl w-full h-full bg-yellow-50"
           >
             {/* Window Title Bar */}
             <div className="z-[20] flex justify-between items-center rounded-tl-xl rounded-tr-xl px-4 py-2 w-full h-[40px] bg-yellow-200">
@@ -104,6 +104,11 @@ export default function Home() {
             </div>
 
             <div className="px-4 py-2 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
+              <SimpleSection
+                title="Experiences"
+                description="List of work experiences."
+                dbTableName="experiences"
+              />
               <SimpleSection
                 title="Projects"
                 description="List of projects I have worked on."

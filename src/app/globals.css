@@ -112,7 +112,7 @@ h2,
 
 h3,
 .h3 {
-  @apply text-base-primary font-bold text-3xl leading-[1.875rem];
+  @apply text-base-primary font-bold text-3xl leading-[2rem];
 }
 
 h4,
@@ -135,12 +135,20 @@ ul,
 li,
 p,
 .p {
-  @apply text-black font-normal text-base leading-[1rem];
+  @apply text-black font-normal text-base leading-[1.125rem];
 }
 
 b,
 strong {
   @apply font-bold;
+}
+
+.eyebrow {
+  @apply font-bold text-sm text-primary-500;
+}
+
+.tech-stack {
+  @apply rounded-lg px-3 py-1 bg-primary-200 !text-sm text-center text-nowrap;
 }
 
 .btn {
@@ -181,16 +189,62 @@ strong {
   background-color: rgb(255, 182, 3, 0.8);
 }
 
+.btn--link {
+  @apply gap-1.5 border-none p-0 text-gray-500 shadow-none;
+}
+
+.btn--link:hover {
+  @apply border-none text-primary-500;
+}
+
+.btn--link .new-window-icon path,
+.btn--link .new-window-icon line {
+  stroke: var(--color-gray-500);
+}
+
+.btn--link:hover .new-window-icon path,
+.btn--link:hover .new-window-icon line {
+  stroke: var(--color-primary-500);
+}
+
+.btn--link .github-logo path {
+  fill: var(--color-gray-500);
+}
+
+.btn--link:hover .github-logo path {
+  fill: var(--color-primary-500);
+}
+
 .mac-btn {
-  @apply flex justify-center items-center rounded-full p-[6px] h-full bg-yellow-400 text-black font-bold leading-1 aspect-square cursor-pointer;
+  @apply flex justify-center items-center rounded-full p-[6px] h-full bg-primary-400 text-black font-bold leading-1 aspect-square cursor-pointer;
 }
 
 .mac-btn:hover {
-  @apply bg-yellow-500;
+  @apply bg-primary-500;
+}
+
+.simple-section {
+  @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
 }
 
 .simple-section--container {
-  @apply flex flex-col gap-2 border border-primary-500 rounded-lg p-4 w-full;
+  @apply flex flex-col border-2 border-primary-500 rounded-lg px-3 sm:px-4 py-4 sm:py-5 w-full bg-[rgba(255,255,255,0.4)];
+}
+
+.simple-section--card {
+  @apply flex flex-col justify-start items-start gap-3 py-4 sm:py-5 w-full;
+}
+
+.simple-section--card:first-of-type {
+  @apply pt-0;
+}
+
+.simple-section--card:last-of-type {
+  @apply pb-0;
+}
+
+.simple-section--card:not(:last-of-type) {
+  @apply border-b border-primary-500;
 }
 
 @media screen and (max-width: theme(--breakpoint-md)) {
