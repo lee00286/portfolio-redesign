@@ -67,9 +67,12 @@ export default function Home() {
         </aside>
 
         {/* Right Screen */}
-        <div className="px-5 xxmd:px-8 py-6 h-full overflow-hidden">
+        <div className="px-0 sm:px-5 xxmd:px-8 py-0 sm:py-6 h-full overflow-hidden">
           {/* Window */}
-          <div id="window" className="rounded-lg w-full h-full bg-yellow-50">
+          <div
+            id="window"
+            className="rounded-0 sm:rounded-lg w-full h-full bg-yellow-50"
+          >
             {/* Window Title Bar */}
             <div className="z-[20] flex justify-between items-center rounded-tl-xl rounded-tr-xl px-4 py-2 w-full h-[40px] bg-yellow-200">
               <div className="flex justify-start items-center gap-2">
@@ -102,17 +105,12 @@ export default function Home() {
 
             <div className="px-4 py-2 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
               <SimpleSection
-                title="Experiences"
-                description="List of work experiences."
-                dbTableName="experiences"
-              />
-              <SimpleSection
                 title="Projects"
                 description="List of projects I have worked on."
                 dbTableName="projects"
               />
 
-              <h1>
+              {/* <h1>
                 THIS is a TesT
                 <br />
                 TEST
@@ -122,7 +120,7 @@ export default function Home() {
               <h4>THIS is a TesT</h4>
               <h5>THIS is a TesT</h5>
               <h6>THIS is a TesT</h6>
-              <p>THIS is a TesT</p>
+              <p>THIS is a TesT</p> */}
             </div>
           </div>
         </div>
