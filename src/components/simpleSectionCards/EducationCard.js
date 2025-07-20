@@ -1,4 +1,4 @@
-function ExperienceCard({ projectIndex, data }) {
+function EducationCard({ projectIndex, data }) {
   if (!data) return <></>;
 
   const lang = 'en';
@@ -7,16 +7,11 @@ function ExperienceCard({ projectIndex, data }) {
     logo: data.logo,
     start_date: data.start_date || '',
     end_date: data.end_date || '',
-    company_name: lang === 'ko' ? data.company_name_ko : data.company_name_en,
-    company_description:
-      lang === 'ko' ? data.company_description_ko : data.company_description_en,
-    position: lang === 'ko' ? data.pos_title_ko : data.pos_title_en,
-    pos_description:
-      lang === 'ko' ? data.pos_description_ko : data.pos_description_en,
+    school: lang === 'ko' ? data.school_ko : data.school_en,
+    major: lang === 'ko' ? data.major_ko : data.major_en,
     location: lang === 'ko' ? data.location_ko : data.location_en,
     description: lang === 'ko' ? data.description_ko : data.description_en,
-    detail: lang === 'ko' ? data.detail_ko : data.detail_en,
-    tech_stack: data.tech_stack || ''
+    detail: lang === 'ko' ? data.detail_ko : data.detail_en
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };
@@ -26,7 +21,7 @@ function ExperienceCard({ projectIndex, data }) {
       {filteredData.image_url && (
         <img
           src={filteredData.image_url}
-          alt={filteredData.company_name}
+          alt={filteredData.school}
           className="w-full h-48 object-cover rounded"
         />
       )}
@@ -46,10 +41,10 @@ function ExperienceCard({ projectIndex, data }) {
           )}
         </div>
 
-        {(filteredData.position || filteredData.company_name) && (
-          <h3>
-            {filteredData.position || ''}
-            {filteredData.company_name && ` - ${filteredData.company_name}`}
+        {(filteredData.major || filteredData.school) && (
+          <h3 className="h4">
+            {filteredData.major || ''}
+            {filteredData.school && ` - ${filteredData.school}`}
           </h3>
         )}
 
@@ -61,22 +56,8 @@ function ExperienceCard({ projectIndex, data }) {
       </div>
 
       {filteredData.description && <p>{filteredData.description}</p>}
-
-      {Array.isArray(filteredData.tech_stack) &&
-        filteredData.tech_stack.length > 0 && (
-          <div className="flex flex-wrap justify-start items-center gap-2 mt-2 w-full">
-            {filteredData.tech_stack.map((stack, index) => (
-              <p
-                key={`project-${projectIndex}-tech-stack-${index}`}
-                className="tech-stack"
-              >
-                {stack}
-              </p>
-            ))}
-          </div>
-        )}
     </div>
   );
 }
 
-export default ExperienceCard;
+export default EducationCard;

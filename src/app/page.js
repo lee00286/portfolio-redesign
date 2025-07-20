@@ -105,6 +105,11 @@ export default function Home() {
 
             <div className="px-4 py-2 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
               <SimpleSection
+                title="Educations"
+                description="List of educations."
+                dbTableName="educations"
+              />
+              <SimpleSection
                 title="Experiences"
                 description="List of work experiences."
                 dbTableName="experiences"

@@ -117,7 +117,7 @@ h3,
 
 h4,
 .h4 {
-  @apply text-black font-bold text-2xl leading-[1.5rem];
+  @apply text-base-primary font-bold text-2xl leading-[1.725rem];
 }
 
 h5,
