@@ -1,6 +1,33 @@
 import Image from 'next/image';
 import SimpleSection from '@/components/SimpleSection';
 
+const sections = [
+  {
+    title: 'Educations',
+    description: 'List of educations.',
+    dbTableName: 'educations',
+    iconSrc: '/img/icons/education-icon.svg',
+    iconAlt: 'Education',
+    width: 25,
+    height: 25,
+    sidebarClass: 'btn--sidebar-lg'
+  },
+  {
+    title: 'Experiences',
+    description: 'List of experiences.',
+    dbTableName: 'experiences',
+    iconSrc: '/img/icons/work-bag-icon.svg',
+    iconAlt: 'Work bag icon'
+  },
+  {
+    title: 'Projects',
+    description: 'List of projects I have worked on.',
+    dbTableName: 'projects',
+    iconSrc: '/img/icons/write-icon.svg',
+    iconAlt: 'Write icon'
+  }
+];
+
 export default function Home() {
   return (
     <div
@@ -18,52 +45,30 @@ export default function Home() {
       {/* Desktop */}
       <div className="z-[10] grid grid-rows-[auto_8%] xsm:grid-rows-[auto_10%] xxmd:grid-rows-none xxmd:grid-cols-[28%_auto] rounded-tl-xl xxmd:rounded-tl-none rounded-tr-xl xxmd:rounded-tr-none xxmd:rounded-bl-xl xxmd:rounded-br-xl w-full h-[calc(100%-40px)]">
         {/* Left Screen (Sidebar) */}
-        <aside className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-between xxmd:justify-start items-stretch gap-3 rounded-bl-xl rounded-br-xl xxmd:rounded-br-none px-5 py-4 xsm:py-6 bg-primary-200">
-          <a
-            className="btn btn--nav"
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/file.svg"
-              alt="File icon"
-              width={16}
-              height={16}
-            />
-            <span className="hidden md:inline-block">Learn</span>
-          </a>
-          <a
-            className="btn btn--nav"
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/window.svg"
-              alt="Window icon"
-              width={16}
-              height={16}
-            />
-            <span className="hidden md:inline-block">Examples</span>
-          </a>
-          <a
-            className="btn btn--nav"
-            href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/globe.svg"
-              alt="Globe icon"
-              width={16}
-              height={16}
-            />
-            <span className="hidden md:inline-block">Go to nextjs.org →</span>
-          </a>
+        <aside className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 rounded-bl-xl rounded-br-xl xxmd:rounded-br-none px-5 py-4 xsm:py-6 bg-primary-200">
+          {Array.isArray(sections) &&
+            sections.length > 0 &&
+            sections.map((section, index) => (
+              <a
+                key={`sidebar-button-${index}`}
+                className="btn btn--nav aspect-square xxmd:aspect-auto"
+                href={`#${section.title}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  aria-hidden
+                  src={section.iconSrc}
+                  alt={section.iconAlt}
+                  width={section.width ?? 20}
+                  height={section.height ?? 20}
+                  className={`btn--sidebar ${section.sidebarClass ? section.sidebarClass : ''}`}
+                />
+                <span className="hidden xxmd:inline-block">
+                  {section.title}
+                </span>
+              </a>
+            ))}
         </aside>
 
         {/* Right Screen */}
@@ -104,21 +109,16 @@ export default function Home() {
             </div>
 
             <div className="px-4 py-2 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
-              <SimpleSection
-                title="Educations"
-                description="List of educations."
-                dbTableName="educations"
-              />
-              <SimpleSection
-                title="Experiences"
-                description="List of work experiences."
-                dbTableName="experiences"
-              />
-              <SimpleSection
-                title="Projects"
-                description="List of projects I have worked on."
-                dbTableName="projects"
-              />
+              {Array.isArray(sections) &&
+                sections.length > 0 &&
+                sections.map((section, index) => (
+                  <SimpleSection
+                    key={`simple-section-${index}`}
+                    title={section.title}
+                    description={section.description}
+                    dbTableName={section.dbTableName}
+                  />
+                ))}
 
               {/* <h1>
                 THIS is a TesT

@@ -189,6 +189,14 @@ strong {
   background-color: rgb(255, 182, 3, 0.8);
 }
 
+.btn--sidebar {
+  @apply w-full xxmd:w-[20px] h-full xxmd:h-[20px];
+}
+
+.btn--sidebar-lg {
+  @apply xxmd:w-[25px] xxmd:h-[25px];
+}
+
 .btn--link {
   @apply gap-1.5 border-none p-0 text-gray-500 shadow-none;
 }
