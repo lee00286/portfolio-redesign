@@ -231,6 +231,10 @@ strong {
   @apply bg-primary-500;
 }
 
+.mbl-only {
+  @apply xxmd:!hidden;
+}
+
 .simple-section {
   @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
 }
@@ -253,6 +257,12 @@ strong {
 
 .simple-section--card:not(:last-of-type) {
   @apply border-b border-primary-500;
+}
+
+@media screen and (max-width: theme(--breakpoint-xxmd)) {
+  .dskt-only {
+    @apply !hidden;
+  }
 }
 
 @media screen and (max-width: theme(--breakpoint-md)) {

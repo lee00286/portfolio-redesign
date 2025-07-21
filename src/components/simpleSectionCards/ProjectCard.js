@@ -1,7 +1,7 @@
 import NewWindowIcon from '../icons/NewWindowIcon';
 import GitHubLogo from '../icons/GitHubLogo';
 
-function ProjectCard({ projectIndex, data }) {
+function ProjectCard({ cardIndex, data }) {
   if (!data) return <></>;
 
   const lang = 'en';
@@ -93,7 +93,7 @@ function ProjectCard({ projectIndex, data }) {
           <div className="flex flex-wrap justify-start items-center gap-2 mt-2 w-full">
             {filteredData.tech_stack.map((stack, index) => (
               <p
-                key={`project-${projectIndex}-tech-stack-${index}`}
+                key={`project-${cardIndex}-tech-stack-${index}`}
                 className="tech-stack"
               >
                 {stack}

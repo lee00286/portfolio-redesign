@@ -1,4 +1,4 @@
-function EducationCard({ projectIndex, data }) {
+function EducationCard({ data }) {
   if (!data) return <></>;
 
   const lang = 'en';

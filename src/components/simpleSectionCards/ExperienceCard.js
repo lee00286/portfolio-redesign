@@ -1,4 +1,4 @@
-function ExperienceCard({ projectIndex, data }) {
+function ExperienceCard({ cardIndex, data }) {
   if (!data) return <></>;
 
   const lang = 'en';
@@ -67,7 +67,7 @@ function ExperienceCard({ projectIndex, data }) {
           <div className="flex flex-wrap justify-start items-center gap-2 mt-2 w-full">
             {filteredData.tech_stack.map((stack, index) => (
               <p
-                key={`project-${projectIndex}-tech-stack-${index}`}
+                key={`experience-${cardIndex}-tech-stack-${index}`}
                 className="tech-stack"
               >
                 {stack}

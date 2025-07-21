@@ -46,6 +46,13 @@ export default function Home() {
       <div className="z-[10] grid grid-rows-[auto_8%] xsm:grid-rows-[auto_10%] xxmd:grid-rows-none xxmd:grid-cols-[28%_auto] rounded-tl-xl xxmd:rounded-tl-none rounded-tr-xl xxmd:rounded-tr-none xxmd:rounded-bl-xl xxmd:rounded-br-xl w-full h-[calc(100%-40px)]">
         {/* Left Screen (Sidebar) */}
         <aside className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 rounded-bl-xl rounded-br-xl xxmd:rounded-br-none px-5 py-4 xsm:py-6 bg-primary-200">
+          <SimpleSection
+            dbTableName="about"
+            desktopOnly={true}
+            sectionClass="!mb-4 !p-0"
+            sectionContainerClass="!bg-[rgba(255,255,255,0.6)]"
+          />
+
           {Array.isArray(sections) &&
             sections.length > 0 &&
             sections.map((section, index) => (
@@ -109,6 +116,12 @@ export default function Home() {
             </div>
 
             <div className="px-4 py-2 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
+              <SimpleSection
+                dbTableName="about"
+                mobileOnly={true}
+                sectionContainerClass="!bg-[rgba(255,255,255,0.8)]"
+              />
+
               {Array.isArray(sections) &&
                 sections.length > 0 &&
                 sections.map((section, index) => (
@@ -119,18 +132,6 @@ export default function Home() {
                     dbTableName={section.dbTableName}
                   />
                 ))}
-
-              {/* <h1>
-                THIS is a TesT
-                <br />
-                TEST
-              </h1>
-              <h2>THIS is a TesT</h2>
-              <h3>THIS is a TesT</h3>
-              <h4>THIS is a TesT</h4>
-              <h5>THIS is a TesT</h5>
-              <h6>THIS is a TesT</h6>
-              <p>THIS is a TesT</p> */}
             </div>
           </div>
         </div>
