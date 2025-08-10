@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import SimpleSection from '@/components/SimpleSection';
 
@@ -56,11 +57,10 @@ export default function Home() {
           {Array.isArray(sections) &&
             sections.length > 0 &&
             sections.map((section, index) => (
-              <a
+              <Link
                 key={`sidebar-button-${index}`}
                 className="btn btn--nav aspect-square xxmd:aspect-auto"
-                href={`#${section.title}`}
-                target="_blank"
+                href={`#${section.title ? section.title.toLowerCase() : ''}`}
                 rel="noopener noreferrer"
               >
                 <Image
@@ -74,7 +74,7 @@ export default function Home() {
                 <span className="hidden xxmd:inline-block">
                   {section.title}
                 </span>
-              </a>
+              </Link>
             ))}
         </aside>
 

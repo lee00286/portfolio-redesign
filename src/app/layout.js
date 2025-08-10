@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Geist, Geist_Mono } from 'next/font/google';
 import ComputerLayout from '@/components/ComputerLayout';
 import './globals.css';
@@ -24,9 +25,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header>
-          <a href="#screen" className="skip">
+          <Link href="#screen" className="skip">
             Skip to main content
-          </a>
+          </Link>
         </header>
         <ComputerLayout>{children}</ComputerLayout>
       </body>
