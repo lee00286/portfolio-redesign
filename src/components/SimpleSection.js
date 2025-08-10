@@ -1,13 +1,11 @@
-'use client';
-
 import React from 'react';
-import { useSupabaseData } from '@/hooks/useSupabaseData';
+import { getSupabaseData } from '@/lib/getSupbaseData';
 import AboutCard from './simpleSectionCards/AboutCard';
 import EducationCard from './simpleSectionCards/EducationCard';
 import ExperienceCard from './simpleSectionCards/ExperienceCard';
 import ProjectCard from './simpleSectionCards/ProjectCard';
 
-function SimpleSection({
+async function SimpleSection({
   title = '',
   description = '',
   dbTableName = '',
@@ -16,7 +14,7 @@ function SimpleSection({
   sectionClass = '',
   sectionContainerClass = ''
 }) {
-  const { dbData } = useSupabaseData(dbTableName);
+  const { dbData, error } = await getSupabaseData(dbTableName);
 
   return (
     <section
@@ -30,7 +28,7 @@ function SimpleSection({
         </div>
       )}
 
-      {Array.isArray(dbData) && dbData.length > 0 && (
+      {Array.isArray(dbData) && dbData.length > 0 ? (
         <div
           className={`simple-section--container ${sectionContainerClass ? sectionContainerClass : ''}`}
         >
@@ -48,6 +46,14 @@ function SimpleSection({
             )
           )}
         </div>
+      ) : Array.isArray(dbData) && dbData.length === 0 ? (
+        <p className="!font-bold !text-blue-600">
+          <span className="capitalize">{dbTableName}</span> list is empty.
+        </p>
+      ) : (
+        <p className="!font-bold !text-red-600">
+          {error ?? `Failed to load ${dbTableName} data.`}
+        </p>
       )}
     </section>
   );
