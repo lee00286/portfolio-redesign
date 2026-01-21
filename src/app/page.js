@@ -38,15 +38,15 @@ export default function Home() {
       className="flex flex-col justify-start items-center p-0 w-full h-full"
     >
       {/* Menu Bar */}
-      <div className="z-[20] flex justify-between items-center rounded-tl-xl rounded-tr-xl px-4 py-2 w-full h-[40px] bg-white opacity-50">
+      <div className="z-[20] flex justify-between items-center rounded-tl-sm md:rounded-tl-xl rounded-tr-md sm:rounded-tr-xl px-4 py-2 w-full h-[40px] bg-white opacity-50">
         <p className="!font-bold !text-xl"></p>
         <p className="!font-bold">TIME</p>
       </div>
 
       {/* Desktop */}
-      <div className="z-[10] grid grid-rows-[auto_8%] xsm:grid-rows-[auto_10%] xxmd:grid-rows-none xxmd:grid-cols-[28%_auto] rounded-tl-xl xxmd:rounded-tl-none rounded-tr-xl xxmd:rounded-tr-none xxmd:rounded-bl-xl xxmd:rounded-br-xl w-full h-[calc(100%-40px)]">
+      <div className="z-[10] grid grid-rows-[auto_8%] xsm:grid-rows-[auto_10%] xxmd:grid-rows-none xxmd:grid-cols-[28%_auto] rounded-tl-md sm:rounded-tl-xl xxmd:rounded-tl-none rounded-tr-md sm:rounded-tr-xl xxmd:rounded-tr-none xxmd:rounded-bl-xl xxmd:rounded-br-xl w-full h-[calc(100%-40px)]">
         {/* Left Screen (Sidebar) */}
-        <aside className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 rounded-bl-xl rounded-br-xl xxmd:rounded-br-none px-5 py-4 xsm:py-6 bg-primary-200">
+        <aside className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 rounded-bl-md sm:rounded-bl-xl rounded-br-md sm:rounded-br-xl xxmd:rounded-br-none px-4 sm:px-5 py-2.5 xxmd:py-6 bg-primary-200">
           <SimpleSection
             dbTableName="about"
             desktopOnly={true}
@@ -59,9 +59,10 @@ export default function Home() {
             sections.map((section, index) => (
               <Link
                 key={`sidebar-button-${index}`}
-                className="btn btn--nav aspect-square xxmd:aspect-auto"
+                className="btn btn--nav"
                 href={`#${section.title ? section.title.toLowerCase() : ''}`}
                 rel="noopener noreferrer"
+                aria-label={section.iconAlt}
               >
                 <Image
                   aria-hidden
@@ -71,9 +72,7 @@ export default function Home() {
                   height={section.height ?? 20}
                   className={`btn--sidebar ${section.sidebarClass ? section.sidebarClass : ''}`}
                 />
-                <span className="hidden xxmd:inline-block">
-                  {section.title}
-                </span>
+                <span className="hidden md:inline-block">{section.title}</span>
               </Link>
             ))}
         </aside>
@@ -86,7 +85,7 @@ export default function Home() {
             className="rounded-0 sm:rounded-xl w-full h-full bg-yellow-50"
           >
             {/* Window Title Bar */}
-            <div className="z-[20] flex justify-between items-center rounded-tl-xl rounded-tr-xl px-4 py-2 w-full h-[40px] bg-yellow-200">
+            <div className="z-[20] flex justify-between items-center sm:rounded-tl-xl sm:rounded-tr-xl px-4 py-2 w-full h-[40px] bg-yellow-200">
               <div className="flex justify-start items-center gap-2">
                 <button className="mac-btn">
                   <Image

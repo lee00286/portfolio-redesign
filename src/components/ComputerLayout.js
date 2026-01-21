@@ -3,13 +3,13 @@ import Image from 'next/image';
 function ComputerLayout({ children }) {
   return (
     <div className="flex justify-center items-center px-0 sm:px-4 xsm:px-8 lg:px-18 py-8 lg:py-18 w-full h-full">
-      <div className="relative mx-auto my-0 max-w-[var(--breakpoint-desktop)] w-full h-full xxmd:h-auto xxmd:aspect-[4/3] xl:aspect-[16/10] bg-primary-600 rounded-2xl border-4 p-6 mb-[20px] md:mb-[40px] xxmd:mb-[50px] border-primary-500 shadow-inner">
+      <div className="relative mx-auto my-0 max-w-[var(--breakpoint-desktop)] w-full h-full xxmd:h-auto xxmd:aspect-[4/3] xl:aspect-[16/10] bg-primary-600 rounded-2xl border-4 mb-[20px] md:mb-[40px] xxmd:mb-[50px] border-primary-500 p-4 xs:p-6 shadow-inner">
         {/* Computer Monitor */}
-        <div className="relative flex justify-center items-center m-auto rounded-xl w-full h-full bg-white shadow-inner">
+        <div className="relative flex justify-center items-center m-auto rounded-md sm:rounded-xl w-full h-full bg-white shadow-inner">
           {children}
 
           {/* Wallpaper */}
-          <div className="z-[1] absolute top-0 left-0 rounded-xl w-full h-full xxmd:h-auto max-h-full object-cover overflow-hidden">
+          <div className="z-[1] absolute top-0 left-0 rounded-md sm:rounded-xl w-full h-full xxmd:h-auto max-h-full object-cover overflow-hidden">
             <Image
               src="/img/mac-bg.jpg"
               alt="Mac default background image with orange and blue lights spread out from the center top."

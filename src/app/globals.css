@@ -176,10 +176,14 @@ strong {
   box-shadow:
     0 0 12px 0 rgba(240, 164, 0, 0.5),
     0 4px 12px 0 rgba(240, 164, 0, 0.5);
+  transition:
+    border 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .btn--nav {
-  @apply border-none rounded-xl border-b-primary-500;
+  @apply flex-1 xxmd:flex-none justify-center xxmd:justify-start border-none rounded-md sm:rounded-xl border-b-primary-500 h-full xxmd:h-auto;
   /* background-color: rgb(212, 142, 0, 0.3); */
   background-color: rgb(255, 182, 3, 0.6);
   box-shadow: none;
@@ -187,6 +191,16 @@ strong {
 
 .btn--nav:hover {
   background-color: rgb(255, 182, 3, 0.8);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn--nav .btn--sidebar {
+  @apply w-[20px] h-[20px];
+  max-width: unset;
+}
+
+.btn--nav .btn--sidebar-lg {
+  @apply w-[25px] h-[25px];
 }
 
 .btn--sidebar {
@@ -203,6 +217,9 @@ strong {
 
 .btn--link:hover {
   @apply border-none text-primary-500;
+  transition:
+    border 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 .btn--link .new-window-icon path,
@@ -213,6 +230,7 @@ strong {
 .btn--link:hover .new-window-icon path,
 .btn--link:hover .new-window-icon line {
   stroke: var(--color-primary-500);
+  transition: stroke 0.2s ease-in-out;
 }
 
 .btn--link .github-logo path {
@@ -221,6 +239,7 @@ strong {
 
 .btn--link:hover .github-logo path {
   fill: var(--color-primary-500);
+  transition: fill 0.2s ease-in-out;
 }
 
 .mac-btn {
@@ -229,6 +248,7 @@ strong {
 
 .mac-btn:hover {
   @apply bg-primary-500;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .mbl-only {
@@ -240,7 +260,7 @@ strong {
 }
 
 .simple-section--container {
-  @apply flex flex-col border-2 border-primary-500 rounded-lg px-3 sm:px-4 py-4 sm:py-5 w-full bg-[rgba(255,255,255,0.4)];
+  @apply flex flex-col gap-2 border-2 border-primary-500 rounded-lg px-3 sm:px-4 py-4 sm:py-5 w-full bg-[rgba(255,255,255,0.4)];
 }
 
 .simple-section--card {
