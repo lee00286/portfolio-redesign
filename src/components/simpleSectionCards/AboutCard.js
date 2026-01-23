@@ -1,16 +1,11 @@
+import { getFilteredAboutData } from '@/util/helpers';
+
+const lang = 'en';
+
 function AboutCard({ data }) {
   if (!data) return <></>;
 
-  const lang = 'en';
-
-  const filteredData = {
-    name: lang === 'ko' ? data.name_ko : data.name_en,
-    position: lang === 'ko' ? data.pos_title_ko : data.pos_title_en,
-    summary: lang === 'ko' ? data.summary_ko : data.summary_en,
-    detail: lang === 'ko' ? data.detail_ko : data.detail_en
-    // created_at: data.created_at,
-    // updated_at: data.updated_at
-  };
+  const filteredData = getFilteredAboutData(data, lang);
 
   return (
     <div className="simple-section--card text-center">

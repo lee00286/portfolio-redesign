@@ -1,9 +1,11 @@
 import { getFilteredExperienceData } from '@/util/helpers';
 
+const lang = 'en';
+
 function ExperienceCard({ cardIndex, data }) {
   if (!data) return <></>;
 
-  const filteredData = getFilteredExperienceData(data);
+  const filteredData = getFilteredExperienceData(data, lang);
 
   return (
     <div className="simple-section--card">
