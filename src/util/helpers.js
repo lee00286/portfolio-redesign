@@ -45,7 +45,8 @@ export const getFilteredExperienceData = (data, lang = 'en') => {
     location: lang === 'ko' ? data.location_ko : data.location_en,
     description: lang === 'ko' ? data.description_ko : data.description_en,
     detail: lang === 'ko' ? data.detail_ko : data.detail_en,
-    tech_stack: data.tech_stack || ''
+    tech_stack: data.tech_stack || '',
+    detail_md: lang === 'ko' ? data.detail_md_ko : data.detail_md_en
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };

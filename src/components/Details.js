@@ -1,5 +1,6 @@
 import { getSupabaseData } from '@/lib/getSupbaseData';
 import { getFilteredExperienceData } from '@/util/helpers';
+import DetailsMarkdown from './markdown/DetailsMarkdown';
 
 async function Details({ dbTableName = '', dbFilters = {}, dataId = '' }) {
   if (!dbTableName || !dbFilters || !Object.keys(dbFilters).length) {
@@ -71,6 +72,8 @@ async function Details({ dbTableName = '', dbFilters = {}, dataId = '' }) {
       )}
 
       {data.description && <p>{data.description}</p>}
+
+      {data.detail_md && <DetailsMarkdown data={data} />}
     </section>
   );
 }
