@@ -9,6 +9,7 @@ import {
   H4,
   InlineCode,
   ListItem,
+  MarkdownLink,
   OrderedList,
   Paragraph,
   UnorderedList
@@ -49,6 +50,9 @@ function DetailsMarkdown({ data }) {
           ul: ({ children }) => <UnorderedList>{children}</UnorderedList>,
           ol: ({ children }) => <OrderedList>{children}</OrderedList>,
           li: ({ children }) => <ListItem>{children}</ListItem>,
+          a: ({ href, children }) => (
+            <MarkdownLink href={href}>{children}</MarkdownLink>
+          ),
           img: (props) => <MarkdownImage {...props} lang={lang} />,
           imageGrid: (props) => <ImageGrid {...props} />,
           code: ({ inline, className, children }) =>

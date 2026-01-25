@@ -173,6 +173,10 @@ code {
   box-shadow:
     0 0 12px 0 rgba(240, 164, 0, 0.4),
     0 4px 12px 0 rgba(240, 164, 0, 0.4);
+  transition:
+    border 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .btn--primary:hover {
@@ -180,10 +184,6 @@ code {
   box-shadow:
     0 0 12px 0 rgba(240, 164, 0, 0.5),
     0 4px 12px 0 rgba(240, 164, 0, 0.5);
-  transition:
-    border 0.2s ease-in-out,
-    background-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
 }
 
 .btn--nav {
@@ -191,11 +191,11 @@ code {
   /* background-color: rgb(212, 142, 0, 0.3); */
   background-color: rgb(255, 182, 3, 0.6);
   box-shadow: none;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .btn--nav:hover {
   background-color: rgb(255, 182, 3, 0.8);
-  transition: background-color 0.2s ease-in-out;
 }
 
 .btn--nav .btn--sidebar {
@@ -217,42 +217,42 @@ code {
 
 .btn--link {
   @apply gap-1.5 border-none p-0 text-gray-500 shadow-none;
-}
-
-.btn--link:hover {
-  @apply border-none text-primary-500;
   transition:
     border 0.2s ease-in-out,
     color 0.2s ease-in-out;
 }
 
+.btn--link:hover {
+  @apply border-none text-primary-500;
+}
+
 .btn--link .new-window-icon path,
 .btn--link .new-window-icon line {
   stroke: var(--color-gray-500);
+  transition: stroke 0.2s ease-in-out;
 }
 
 .btn--link:hover .new-window-icon path,
 .btn--link:hover .new-window-icon line {
   stroke: var(--color-primary-500);
-  transition: stroke 0.2s ease-in-out;
 }
 
 .btn--link .github-logo path {
   fill: var(--color-gray-500);
+  transition: fill 0.2s ease-in-out;
 }
 
 .btn--link:hover .github-logo path {
   fill: var(--color-primary-500);
-  transition: fill 0.2s ease-in-out;
 }
 
 .mac-btn {
   @apply flex justify-center items-center rounded-full p-[6px] h-full bg-primary-400 text-black font-bold leading-1 aspect-square cursor-pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .mac-btn:hover {
   @apply bg-primary-500;
-  transition: background-color 0.2s ease-in-out;
 }
 
 .mbl-only {
