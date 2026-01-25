@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import { Children } from 'react';
 import { altVariantSeparator, colsMap, variantMap } from '@/constants/markdown';
 import { getImageVariantClass } from '@/util/markdown';
+import CustomImage from '../CustomImage';
 
 /**
  * Renders an image with caption.
@@ -24,13 +24,15 @@ export function MarkdownImage({ src, alt, lang }) {
       className={`my-6 ${getImageVariantClass(variantStr)}`}
       data-variants={variantStr}
     >
-      <Image
+      <CustomImage
         src={src}
         alt={imgAlt}
         width={1200}
         height={800}
-        className="rounded-lg border object-contain w-full"
+        imgClass="cursor-zoom-in"
+        hasLightbox
       />
+
       {imgAlt && (
         <figcaption className="mt-2 text-sm text-gray-500 text-center">
           {imgAlt}
