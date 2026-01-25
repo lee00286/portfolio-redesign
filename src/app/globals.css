@@ -143,6 +143,10 @@ strong {
   @apply font-bold;
 }
 
+code {
+  @apply text-sm;
+}
+
 .eyebrow {
   @apply font-bold text-sm text-primary-500;
 }
@@ -169,6 +173,10 @@ strong {
   box-shadow:
     0 0 12px 0 rgba(240, 164, 0, 0.4),
     0 4px 12px 0 rgba(240, 164, 0, 0.4);
+  transition:
+    border 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .btn--primary:hover {
@@ -176,10 +184,6 @@ strong {
   box-shadow:
     0 0 12px 0 rgba(240, 164, 0, 0.5),
     0 4px 12px 0 rgba(240, 164, 0, 0.5);
-  transition:
-    border 0.2s ease-in-out,
-    background-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
 }
 
 .btn--nav {
@@ -187,11 +191,11 @@ strong {
   /* background-color: rgb(212, 142, 0, 0.3); */
   background-color: rgb(255, 182, 3, 0.6);
   box-shadow: none;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .btn--nav:hover {
   background-color: rgb(255, 182, 3, 0.8);
-  transition: background-color 0.2s ease-in-out;
 }
 
 .btn--nav .btn--sidebar {
@@ -213,48 +217,49 @@ strong {
 
 .btn--link {
   @apply gap-1.5 border-none p-0 text-gray-500 shadow-none;
-}
-
-.btn--link:hover {
-  @apply border-none text-primary-500;
   transition:
     border 0.2s ease-in-out,
     color 0.2s ease-in-out;
 }
 
+.btn--link:hover {
+  @apply border-none text-primary-500;
+}
+
 .btn--link .new-window-icon path,
 .btn--link .new-window-icon line {
   stroke: var(--color-gray-500);
+  transition: stroke 0.2s ease-in-out;
 }
 
 .btn--link:hover .new-window-icon path,
 .btn--link:hover .new-window-icon line {
   stroke: var(--color-primary-500);
-  transition: stroke 0.2s ease-in-out;
 }
 
 .btn--link .github-logo path {
   fill: var(--color-gray-500);
+  transition: fill 0.2s ease-in-out;
 }
 
 .btn--link:hover .github-logo path {
   fill: var(--color-primary-500);
-  transition: fill 0.2s ease-in-out;
 }
 
 .mac-btn {
   @apply flex justify-center items-center rounded-full p-[6px] h-full bg-primary-400 text-black font-bold leading-1 aspect-square cursor-pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .mac-btn:hover {
   @apply bg-primary-500;
-  transition: background-color 0.2s ease-in-out;
 }
 
 .mbl-only {
   @apply xxmd:!hidden;
 }
 
+/* Simple Components */
 .simple-section {
   @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
 }
@@ -279,6 +284,76 @@ strong {
   @apply border-b border-primary-500;
 }
 
+/* Details Section */
+.details-section {
+  @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
+}
+
+.details-markdown p code {
+  @apply rounded px-1 py-0.5 bg-yellow-200 font-semibold text-gray-500;
+}
+
+/* Images */
+.img-square {
+  @apply w-full;
+}
+
+.img-square img {
+  @apply aspect-square h-full object-cover;
+}
+
+.img-video {
+  @apply w-full;
+}
+
+.img-video img {
+  @apply aspect-video h-full object-cover;
+}
+
+.img-full {
+  @apply w-full;
+}
+
+.img-half {
+  @apply w-full md:w-1/2;
+}
+
+.img-third {
+  @apply md:w-1/3 sm:w-1/2 w-full;
+}
+
+.img-fourth {
+  @apply lg:w-1/4 md:w-1/3 sm:w-1/2 w-full;
+}
+
+/* Grid Images */
+.img-grid {
+  @apply grid gap-4 grid-cols-1;
+}
+
+.grid-1 {
+  @apply sm:grid-cols-1;
+}
+
+.grid-2 {
+  @apply sm:grid-cols-2;
+}
+
+.grid-3 {
+  @apply sm:grid-cols-3;
+}
+
+.grid-4 {
+  @apply sm:grid-cols-4;
+}
+
+.img-grid .img-half,
+.img-grid .img-third,
+.img-grid .img-fourth {
+  @apply !w-full;
+}
+
+/* Responsiveness */
 @media screen and (max-width: theme(--breakpoint-xxmd)) {
   .dskt-only {
     @apply !hidden;

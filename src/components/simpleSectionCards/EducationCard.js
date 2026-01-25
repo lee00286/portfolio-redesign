@@ -1,20 +1,11 @@
+import { getFilteredEducationData } from '@/util/helpers';
+
+const lang = 'en';
+
 function EducationCard({ data }) {
   if (!data) return <></>;
 
-  const lang = 'en';
-
-  const filteredData = {
-    logo: data.logo,
-    start_date: data.start_date || '',
-    end_date: data.end_date || '',
-    school: lang === 'ko' ? data.school_ko : data.school_en,
-    major: lang === 'ko' ? data.major_ko : data.major_en,
-    location: lang === 'ko' ? data.location_ko : data.location_en,
-    description: lang === 'ko' ? data.description_ko : data.description_en,
-    detail: lang === 'ko' ? data.detail_ko : data.detail_en
-    // created_at: data.created_at,
-    // updated_at: data.updated_at
-  };
+  const filteredData = getFilteredEducationData(data, lang);
 
   return (
     <div className="simple-section--card">
