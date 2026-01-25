@@ -1,4 +1,5 @@
 import { getFilteredExperienceData } from '@/util/helpers';
+import Link from 'next/link';
 
 const lang = 'en';
 
@@ -34,8 +35,13 @@ function ExperienceCard({ cardIndex, data }) {
 
         {(filteredData.position || filteredData.company_name) && (
           <h3>
-            {filteredData.position || ''}
-            {filteredData.company_name && ` - ${filteredData.company_name}`}
+            <Link
+              href={filteredData.id ? `/experiences/${filteredData.id}` : '#'}
+              className="text-primary-500 hover:text-primary-500 focus:text-primary-500 visited:text-primary-500 no-underline hover:underline focus:underline visited:no-underline"
+            >
+              {filteredData.position || ''}
+              {filteredData.company_name && ` - ${filteredData.company_name}`}
+            </Link>
           </h3>
         )}
 
