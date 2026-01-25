@@ -31,7 +31,7 @@ async function Details({ dbTableName = '', dbFilters = {}, dataId = '' }) {
   const data = getFilteredExperienceData(dbData[0]);
 
   return (
-    <section className="simple-section">
+    <section className="details-section">
       <div className="space-y-3">
         <div className="flex justify-between items-center gap-3 w-full">
           {(data.start_date || data.end_date) && (

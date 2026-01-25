@@ -143,6 +143,10 @@ strong {
   @apply font-bold;
 }
 
+code {
+  @apply text-sm;
+}
+
 .eyebrow {
   @apply font-bold text-sm text-primary-500;
 }
@@ -255,6 +259,7 @@ strong {
   @apply xxmd:!hidden;
 }
 
+/* Simple Components */
 .simple-section {
   @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
 }
@@ -279,6 +284,16 @@ strong {
   @apply border-b border-primary-500;
 }
 
+/* Details Section */
+.details-section {
+  @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
+}
+
+.details-markdown p code {
+  @apply rounded px-1 py-0.5 bg-yellow-200 font-semibold text-gray-500;
+}
+
+/* Responsiveness */
 @media screen and (max-width: theme(--breakpoint-xxmd)) {
   .dskt-only {
     @apply !hidden;
