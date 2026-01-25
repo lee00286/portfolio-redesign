@@ -293,6 +293,66 @@ code {
   @apply rounded px-1 py-0.5 bg-yellow-200 font-semibold text-gray-500;
 }
 
+/* Images */
+.img-square {
+  @apply w-full;
+}
+
+.img-square img {
+  @apply aspect-square h-full object-cover;
+}
+
+.img-video {
+  @apply w-full;
+}
+
+.img-video img {
+  @apply aspect-video h-full object-cover;
+}
+
+.img-full {
+  @apply w-full;
+}
+
+.img-half {
+  @apply w-full md:w-1/2;
+}
+
+.img-third {
+  @apply md:w-1/3 sm:w-1/2 w-full;
+}
+
+.img-fourth {
+  @apply lg:w-1/4 md:w-1/3 sm:w-1/2 w-full;
+}
+
+/* Grid Images */
+.img-grid {
+  @apply grid gap-4 grid-cols-1;
+}
+
+.grid-1 {
+  @apply sm:grid-cols-1;
+}
+
+.grid-2 {
+  @apply sm:grid-cols-2;
+}
+
+.grid-3 {
+  @apply sm:grid-cols-3;
+}
+
+.grid-4 {
+  @apply sm:grid-cols-4;
+}
+
+.img-grid .img-half,
+.img-grid .img-third,
+.img-grid .img-fourth {
+  @apply !w-full;
+}
+
 /* Responsiveness */
 @media screen and (max-width: theme(--breakpoint-xxmd)) {
   .dskt-only {

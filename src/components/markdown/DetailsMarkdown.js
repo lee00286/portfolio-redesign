@@ -1,4 +1,7 @@
 import ReactMarkdown from 'react-markdown';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
+import remarkDirective from 'remark-directive';
+import remarkImageGrid from '@/util/markdown';
 import {
   CodeBlock,
   H2,
@@ -10,7 +13,7 @@ import {
   Paragraph,
   UnorderedList
 } from './Typography';
-import { MarkdownImage } from './Media';
+import { ImageGrid, MarkdownImage } from './Media';
 
 const lang = 'en';
 
@@ -20,6 +23,15 @@ function DetailsMarkdown({ data }) {
   return (
     <article className="details-markdown">
       <ReactMarkdown
+        rehypePlugins={[
+          // Prevent images from being wrapped in a paragraph
+          rehypeUnwrapImages
+        ]}
+        remarkPlugins={[
+          remarkDirective,
+          // Handle image grids
+          remarkImageGrid
+        ]}
         components={{
           h1: ({ children }) => (
             // To make sure that the H1 in MD is rendered as H2 in the article
@@ -38,6 +50,7 @@ function DetailsMarkdown({ data }) {
           ol: ({ children }) => <OrderedList>{children}</OrderedList>,
           li: ({ children }) => <ListItem>{children}</ListItem>,
           img: (props) => <MarkdownImage {...props} lang={lang} />,
+          imageGrid: (props) => <ImageGrid {...props} />,
           code: ({ inline, className, children }) =>
             inline ? (
               <InlineCode>{children}</InlineCode>
