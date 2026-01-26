@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Geist, Geist_Mono } from 'next/font/google';
-import ComputerLayout from '@/components/computer/ComputerLayout';
-import './globals.css';
+import '@/app/globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -12,11 +11,6 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin']
 });
-
-export const metadata = {
-  title: 'Yena Lee Portfolio',
-  description: 'This is a portfolio website.'
-};
 
 export default function RootLayout({ children }) {
   return (
@@ -29,7 +23,8 @@ export default function RootLayout({ children }) {
             Skip to main content
           </Link>
         </header>
-        <ComputerLayout>{children}</ComputerLayout>
+
+        {children}
       </body>
     </html>
   );
