@@ -1,4 +1,4 @@
-import { getSupabaseData } from '@/lib/getSupbaseData';
+import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
 import { getFilteredExperienceData } from '@/util/helpers';
 import DetailsMarkdown from './markdown/DetailsMarkdown';
 

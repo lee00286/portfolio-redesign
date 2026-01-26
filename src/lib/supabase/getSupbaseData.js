@@ -1,8 +1,12 @@
 import { cache } from 'react';
-import { createSupabaseServer } from '@/lib/supabase';
+import { createSupabaseServer } from '@/lib/supabase/server';
 
 export const getServerData = cache(async (tableName, options = {}) => {
   const supabase = createSupabaseServer();
+
+  if (!supabase) {
+    throw new Error('Supabase server not initialized');
+  }
 
   const {
     select = '*',
