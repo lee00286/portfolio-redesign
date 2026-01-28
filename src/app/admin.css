@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+
+.admin h1,
+.admin .h1,
+.admin h2,
+.admin .h2,
+.admin h3,
+.admin .h3,
+.admin h4,
+.admin .h4,
+.admin h5,
+.admin .h5,
+.admin h6,
+.admin .h6 {
+  @apply text-black;
+}
+
+/* Fields */
+.admin-field-input {
+  @apply w-full rounded border p-3 text-sm;
+}
+
+/* Buttons */
+.btn {
+  @apply rounded px-4 py-2 font-bold cursor-pointer;
+  box-shadow: none;
+}
+
+.btn:disabled {
+  @apply cursor-not-allowed;
+}
+
+.btn-primary {
+  @apply bg-black text-white;
+}
+
+.btn-primary:disabled {
+  @apply bg-gray-800;
+}
+
+.btn-secondary {
+  @apply hover:bg-gray-300;
+}

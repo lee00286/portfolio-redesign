@@ -1,5 +1,3 @@
-import { variantMap } from '@/constants/markdown';
-
 export const getFilteredAboutData = (data, lang = 'en') => {
   if (!data) return {};
 
