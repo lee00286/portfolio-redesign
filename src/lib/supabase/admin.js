@@ -7,8 +7,8 @@ import {
 
 export const createAdminSupabaseServer = () => {
   if (!SUPABASE_URL || !SUPABASE_ADMIN_SERVICE_ROLE_KEY) {
-    throw new Error('Missing Supabase server env');
-    // return null;
+    // throw new Error('Missing Supabase server env');
+    return null;
   }
 
   return createClient(SUPABASE_URL, SUPABASE_ADMIN_SERVICE_ROLE_KEY, {
@@ -23,7 +23,13 @@ const getAdminServerData = cache(async (tableName, options = {}) => {
   const supabase = createAdminSupabaseServer();
 
   if (!supabase) {
-    throw new Error('Supabase server not initialized');
+    return {
+      data: [],
+      error: {
+        message: 'Admin API is not available in this environment.',
+        status: 403
+      }
+    };
   }
 
   const {
