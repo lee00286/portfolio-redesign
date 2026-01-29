@@ -15,9 +15,22 @@
   @apply text-black;
 }
 
+.error-text {
+  @apply !font-bold !text-red-500;
+}
+
 /* Fields */
-.admin-field-input {
+.admin-field-label {
+  @apply text-sm font-bold;
+}
+
+.admin-field-input,
+.admin-field-textarea {
   @apply w-full rounded border p-3 text-sm;
+}
+
+.textarea-autoresize {
+  @apply min-h-[120px] max-h-[70vh] resize-none overflow-hidden;
 }
 
 /* Buttons */
@@ -40,4 +53,13 @@
 
 .btn-secondary {
   @apply hover:bg-gray-300;
+}
+
+/* Editor */
+.editor .editor-row {
+  @apply flex flex-col md:flex-row justify-between items-stretch gap-3;
+}
+
+.editor .editor-row-col {
+  @apply flex-1;
 }
