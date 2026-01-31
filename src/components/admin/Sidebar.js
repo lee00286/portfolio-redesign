@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const NAV_ITEMS = [
-  { label: 'Dashboard', href: '/admin' },
+  { label: 'Dashboard', href: '/admin', exact: true },
   { label: 'About', href: '/admin/about' },
   { label: 'Educations', href: '/admin/educations' },
   { label: 'Experiences', href: '/admin/experiences' },
@@ -23,7 +23,9 @@ function Sidebar() {
     <aside className="w-48 border-r bg-white">
       <nav className="flex flex-col p-4 gap-1">
         {NAV_ITEMS.map((item) => {
-          const active = pathname === item.href;
+          const active = item.exact
+            ? pathname === item.href
+            : pathname.startsWith(item.href);
 
           return (
             <Link
