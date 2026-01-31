@@ -1,55 +1,13 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
+:root {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  --breakpoint-*: initial;
-  --breakpoint-xxxl: 2560px;
-  --breakpoint-xxl: 1440px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xxmd: 960px;
-  --breakpoint-xmd: 854px;
-  --breakpoint-md: 768px;
-  --breakpoint-xsm: 640px;
-  --breakpoint-sm: 480px;
-  --breakpoint-xs: 375px;
-  --breakpoint-xxs: 310px;
-
-  --breakpoint-desktop: var(--breakpoint-xxl);
-  --breakpoint-desktop-inner: var(--breakpoint-xl);
-
-  --color-primary-50: #fff9db;
-  --color-primary-100: #fff2b8;
-  --color-primary-200: #ffe984;
-  --color-primary-300: #fbd733;
-  --color-primary-400: #fcc906;
-  --color-primary-500: #ffb603;
-  --color-primary-600: #f0a300;
-  --color-primary-700: #d48e00;
-  --color-primary-800: #b97700;
-  --color-primary-900: #8f5900;
-
-  --color-white: #fff;
-  --color-black: #0a0a0a;
-  --color-gray-50: #ededed;
-  --color-gray-100: #f2eeec;
-  --color-gray-200: #f6f6f6;
-  --color-gray-300: #e7e6df;
-  --color-gray-500: #3b3f46;
-  --color-gray-600: #2a2e34;
-  --color-gray-700: #1e2328;
-  --color-gray-800: #171717;
-
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-base-primary: var(--color-primary-500);
-}
-
-:root {
-  --background: var(--color-primary-50);
-  --foreground: var(--color-gray-800);
+  --background: #fff9db; /* var(--color-primary-50); */
+  --foreground: #3b3f46; /* var(--color-gray-800); */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,7 +42,7 @@
 
   main,
   section {
-    @apply mx-auto my-0 p-5 max-w-[var(--breakpoint-desktop)];
+    @apply mx-auto my-0 p-5 max-w-desktop;
   }
 
   div,
@@ -103,22 +61,22 @@
 
   h1,
   .h1 {
-    @apply text-base-primary font-extrabold text-5xl leading-[3rem];
+    @apply text-primary-base font-extrabold text-5xl leading-[3rem];
   }
 
   h2,
   .h2 {
-    @apply text-base-primary font-bold text-4xl leading-[2.25rem];
+    @apply text-primary-base font-bold text-4xl leading-[2.25rem];
   }
 
   h3,
   .h3 {
-    @apply text-base-primary font-bold text-3xl leading-[2rem];
+    @apply text-primary-base font-bold text-3xl leading-[2rem];
   }
 
   h4,
   .h4 {
-    @apply text-base-primary font-bold text-2xl leading-[1.725rem];
+    @apply text-primary-base font-bold text-2xl leading-[1.725rem];
   }
 
   h5,
@@ -157,7 +115,7 @@
   }
 
   .btn {
-    @apply flex items-center gap-2 border rounded-md px-6 py-3 font-bold uppercase text-black text-center cursor-pointer;
+    @apply flex items-center gap-2 border border-gray-900 rounded-md px-6 py-3 font-bold uppercase text-black text-center cursor-pointer;
     text-decoration: none;
     box-shadow:
       0 2px 8px 0 rgba(0, 0, 0, 0.1),
@@ -239,16 +197,16 @@
   }
 
   .btn--link .github-logo path {
-    fill: var(--color-gray-500);
+    @apply fill-gray-500;
     transition: fill 0.2s ease-in-out;
   }
 
   .btn--link:hover .github-logo path {
-    fill: var(--color-primary-500);
+    @apply fill-primary-500;
   }
 
   .mac-btn {
-    @apply flex justify-center items-center rounded-full p-[6px] h-full bg-primary-400 text-black font-bold leading-1 aspect-square cursor-pointer;
+    @apply flex justify-center items-center rounded-full p-[6px] h-full bg-primary-400 text-black font-bold leading-[1] aspect-square cursor-pointer;
     transition: background-color 0.2s ease-in-out;
   }
 
@@ -353,43 +311,45 @@
   .img-grid .img-fourth {
     @apply !w-full;
   }
+}
 
-  /* Responsiveness */
-  @media screen and (max-width: theme(--breakpoint-xxmd)) {
-    .dskt-only {
-      @apply !hidden;
-    }
+/* Responsiveness */
+/* xxmd */
+@media screen and (max-width: 960px) {
+  .dskt-only {
+    @apply !hidden;
+  }
+}
+
+/* md */
+@media screen and (max-width: 768px) {
+  h1,
+  .h1 {
+    @apply text-4xl leading-[2.25rem];
   }
 
-  @media screen and (max-width: theme(--breakpoint-md)) {
-    h1,
-    .h1 {
-      @apply text-4xl leading-[2.25rem];
-    }
+  h2,
+  .h2 {
+    @apply text-3xl leading-[1.875rem];
+  }
 
-    h2,
-    .h2 {
-      @apply text-3xl leading-[1.875rem];
-    }
+  h3,
+  .h3 {
+    @apply text-2xl leading-[1.5rem];
+  }
 
-    h3,
-    .h3 {
-      @apply text-2xl leading-[1.5rem];
-    }
+  h4,
+  .h4 {
+    @apply text-xl leading-[1.25rem];
+  }
 
-    h4,
-    .h4 {
-      @apply text-xl leading-[1.25rem];
-    }
+  h5,
+  .h5 {
+    @apply text-lg leading-[1.125rem];
+  }
 
-    h5,
-    .h5 {
-      @apply text-lg leading-[1.125rem];
-    }
-
-    h6,
-    .h6 {
-      @apply text-base leading-[1rem];
-    }
+  h6,
+  .h6 {
+    @apply text-base leading-[1rem];
   }
 }

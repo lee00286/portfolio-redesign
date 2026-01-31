@@ -11,7 +11,7 @@ function EducationsList({ items }) {
         <li key={`education-${education.education_id}`}>
           <Link
             href={`/admin/educations/${education.education_id}`}
-            className="block rounded-lg border px-4 py-3 hover:bg-muted transition"
+            className="block rounded-lg border border-gray-900 px-4 py-3 hover:bg-muted transition"
           >
             <div className="flex justify-between items-center">
               <div className="space-y-1">

@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer components {
   .admin h1,
@@ -27,7 +29,7 @@
 
   .admin-field-input,
   .admin-field-textarea {
-    @apply w-full rounded border p-3 text-sm;
+    @apply w-full rounded border border-gray-900 p-3 text-sm;
   }
 
   .textarea-autoresize {
@@ -49,7 +51,7 @@
   }
 
   .btn-secondary {
-    @apply hover:bg-gray-300;
+    @apply border-gray-900 bg-white hover:bg-gray-300;
   }
 
   /* Editor */
