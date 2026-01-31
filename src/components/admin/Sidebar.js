@@ -20,7 +20,7 @@ function Sidebar() {
   }
 
   return (
-    <aside className="w-48 border-r bg-white">
+    <aside className="w-40 md:w-48 border-r border-gray-900 bg-white">
       <nav className="flex flex-col p-4 gap-1">
         {NAV_ITEMS.map((item) => {
           const active = item.exact

@@ -60,8 +60,10 @@ module.exports = {
         xxmd: '960px',
         xmd: '854px',
         md: '768px',
+        maxMd: { max: '767.98px' },
         xsm: '640px',
         sm: '480px',
+        maxSm: { max: '479.98px' },
         xs: '375px',
         xxs: '310px'
       },

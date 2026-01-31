@@ -11,17 +11,26 @@ function EducationsList({ items }) {
         <li key={`education-${education.education_id}`}>
           <Link
             href={`/admin/educations/${education.education_id}`}
-            className="block rounded-lg border border-gray-900 px-4 py-3 hover:bg-muted transition"
+            className="data-list-item"
           >
-            <div className="flex justify-between items-center">
+            <div className="flex maxMd:flex-col justify-between items-center maxMd:items-start gap-3">
               <div className="space-y-1">
-                <p className="!font-bold">
-                  {education.school_en || 'Untitled Education'}
-                </p>
+                <div className="flex justify-start items-center gap-2">
+                  <p className="!font-bold">
+                    {education.school_en || 'Untitled Education'}
+                  </p>
+                  {education.is_active ? (
+                    <span className="badge badge-success">Active</span>
+                  ) : (
+                    <span className="badge badge-error">Inactive</span>
+                  )}
+                </div>
                 <p className="!text-gray-600">{education.major_en || '—'}</p>
               </div>
 
-              <span className="btn btn-primary">Edit</span>
+              <span className="btn btn-primary maxMd:!py-0.5 maxMd:!text-sm">
+                Edit
+              </span>
             </div>
           </Link>
         </li>

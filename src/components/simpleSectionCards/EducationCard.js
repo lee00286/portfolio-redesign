@@ -7,6 +7,8 @@ function EducationCard({ data }) {
 
   const filteredData = getFilteredEducationData(data, lang);
 
+  if (filteredData.is_active === false) return <></>;
+
   return (
     <div className="simple-section--card">
       {filteredData.image_url && (

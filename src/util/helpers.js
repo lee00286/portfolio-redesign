@@ -25,7 +25,8 @@ export const getFilteredEducationData = (data, lang = 'en') => {
     major: lang === 'ko' ? data.major_ko : data.major_en,
     location: lang === 'ko' ? data.location_ko : data.location_en,
     description: lang === 'ko' ? data.description_ko : data.description_en,
-    detail: lang === 'ko' ? data.detail_md_ko : data.detail_md_en
+    detail: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
+    is_active: data.is_active
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };

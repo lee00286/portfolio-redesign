@@ -10,8 +10,8 @@ export default async function AdminLayout({ children }) {
         <header className="flex items-center justify-between border-b border-gray-900 py-4 px-6 bg-white">
           <h1 className="h2">Admin Dashboard</h1>
 
-          <div className="flex justify-end items-center">
-            <p>Local Admin</p>
+          <div className="flex justify-end items-center w-min">
+            <p className="md:whitespace-nowrap">Local Admin</p>
           </div>
         </header>
 

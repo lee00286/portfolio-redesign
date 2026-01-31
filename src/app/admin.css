@@ -36,6 +36,41 @@
     @apply min-h-[120px] max-h-[70vh] resize-none overflow-hidden;
   }
 
+  .admin-field-switch {
+    @apply relative block w-[44px] h-[24px];
+  }
+
+  .admin-field-switch-input {
+    @apply opacity-0 w-0 h-0;
+  }
+
+  .admin-field-switch-slider {
+    @apply absolute inset-0 rounded-[24px] bg-[#ccc] cursor-pointer;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+  }
+
+  .admin-field-switch-slider::before {
+    @apply absolute left-[4px] bottom-[4px] rounded-full w-[16px] h-[16px] bg-white;
+    content: '';
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+  }
+
+  .admin-field-switch-input:checked + .admin-field-switch-slider {
+    @apply bg-primary-500;
+  }
+
+  .admin-field-switch-input:focus + .admin-field-switch-slider {
+    box-shadow: 0 0 1px #ffb603;
+  }
+
+  .admin-field-switch-input:checked + .admin-field-switch-slider::before {
+    transform: translateX(20px);
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+  }
+
   /* Buttons */
   .btn {
     @apply rounded px-4 py-2 font-bold cursor-pointer;
@@ -65,5 +100,26 @@
 
   .editor .editor-row-col {
     @apply flex-1;
+  }
+
+  /* Data List */
+  .data-list-item {
+    @apply block rounded-lg border border-gray-900 px-4 py-3 hover:bg-muted transition;
+  }
+
+  .data-list-item:hover {
+    @apply bg-muted;
+  }
+
+  .badge {
+    @apply rounded-full px-2 py-0.5 font-bold text-xs text-white;
+  }
+
+  .badge-success {
+    @apply bg-green-500;
+  }
+
+  .badge-error {
+    @apply bg-red-500;
   }
 }

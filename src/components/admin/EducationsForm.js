@@ -19,7 +19,8 @@ const emptyData = {
   description_en: '',
   description_ko: '',
   detail_md_en: '',
-  detail_md_ko: ''
+  detail_md_ko: '',
+  is_active: false
 };
 
 function EducationsForm({ mode, initialData }) {
@@ -57,7 +58,12 @@ function EducationsForm({ mode, initialData }) {
   };
 
   const onChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, type, value, checked } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
   };
 
   const onValidCheck = () => {
@@ -199,6 +205,26 @@ function EducationsForm({ mode, initialData }) {
         </div>
       </div>
 
+      {/* Is Active */}
+      <div className="editor-row">
+        <div className="editor-row-col flex flex-row items-center gap-2">
+          <label htmlFor="is-active" className="admin-field-label">
+            Is Active?
+          </label>
+          <label className="admin-field-switch">
+            <input
+              id="is-active"
+              name="is_active"
+              type="checkbox"
+              checked={formData?.is_active}
+              onChange={onChange}
+              className="admin-field-switch-input"
+            />
+            <span className="admin-field-switch-slider"></span>
+          </label>
+        </div>
+      </div>
+
       {/* Education Name */}
       <div className="editor-row">
         <div className="editor-row-col">
@@ -240,7 +266,7 @@ function EducationsForm({ mode, initialData }) {
           <input
             id="location-en"
             name="location_en"
-            value={formData?.location_en}
+            value={formData?.location_en || ''}
             onChange={onChange}
             className="admin-field-input"
             placeholder="Write location (EN) here..."
@@ -253,7 +279,7 @@ function EducationsForm({ mode, initialData }) {
           <input
             id="location-ko"
             name="location_ko"
-            value={formData?.location_ko}
+            value={formData?.location_ko || ''}
             onChange={onChange}
             className="admin-field-input"
             placeholder="Write location (KO) here..."
@@ -270,7 +296,7 @@ function EducationsForm({ mode, initialData }) {
           <input
             id="major-en"
             name="major_en"
-            value={formData?.major_en}
+            value={formData?.major_en || ''}
             onChange={onChange}
             className="admin-field-input"
             placeholder="Write major (EN) here..."
@@ -283,7 +309,7 @@ function EducationsForm({ mode, initialData }) {
           <input
             id="major-ko"
             name="major_ko"
-            value={formData?.major_ko}
+            value={formData?.major_ko || ''}
             onChange={onChange}
             className="admin-field-input"
             placeholder="Write major (KO) here..."
@@ -301,7 +327,7 @@ function EducationsForm({ mode, initialData }) {
             id="start-date"
             name="start_date"
             type="date"
-            value={formData?.start_date}
+            value={formData?.start_date || ''}
             onChange={onChange}
             className="admin-field-input"
             placeholder="Write start date here..."
@@ -315,7 +341,7 @@ function EducationsForm({ mode, initialData }) {
             id="end-date"
             name="end_date"
             type="date"
-            value={formData?.end_date}
+            value={formData?.end_date || ''}
             onChange={onChange}
             className="admin-field-input"
             placeholder="Write end date here..."
@@ -333,7 +359,7 @@ function EducationsForm({ mode, initialData }) {
             id="description-en"
             name="description_en"
             ref={descriptionENRef}
-            value={formData?.description_en}
+            value={formData?.description_en || ''}
             onChange={onChange}
             className="admin-field-textarea textarea-autoresize"
             placeholder="Write description (EN) here..."
@@ -347,7 +373,7 @@ function EducationsForm({ mode, initialData }) {
             id="description-ko"
             name="description_ko"
             ref={descriptionKORef}
-            value={formData?.description_ko}
+            value={formData?.description_ko || ''}
             onChange={onChange}
             className="admin-field-textarea textarea-autoresize"
             placeholder="Write description (KO) here..."
@@ -365,7 +391,7 @@ function EducationsForm({ mode, initialData }) {
             id="detail-en"
             name="detail_md_en"
             ref={detailENRef}
-            value={formData?.detail_md_en}
+            value={formData?.detail_md_en || ''}
             onChange={onChange}
             className="admin-field-textarea textarea-autoresize"
             placeholder="Write detail (EN) here..."
@@ -379,7 +405,7 @@ function EducationsForm({ mode, initialData }) {
             id="detail-ko"
             name="detail_md_ko"
             ref={detailKORef}
-            value={formData?.detail_md_ko}
+            value={formData?.detail_md_ko || ''}
             onChange={onChange}
             className="admin-field-textarea textarea-autoresize"
             placeholder="Write detail (KO) here..."

@@ -18,7 +18,7 @@ export default async function AdminEducationListPage() {
 
   return (
     <section className="!p-0 w-full">
-      <div className="flex justify-between items-center mb-4 w-full">
+      <div className="flex maxSm:flex-col justify-between items-center maxSm:items-start gap-3 mb-4 w-full">
         <h2 className="h3 capitalize">{title}</h2>
         <Link href="/admin/educations/new" className="btn btn-secondary">
           + Add New
