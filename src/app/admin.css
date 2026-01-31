@@ -1,65 +1,67 @@
 @import 'tailwindcss';
 
-.admin h1,
-.admin .h1,
-.admin h2,
-.admin .h2,
-.admin h3,
-.admin .h3,
-.admin h4,
-.admin .h4,
-.admin h5,
-.admin .h5,
-.admin h6,
-.admin .h6 {
-  @apply text-black;
-}
+@layer components {
+  .admin h1,
+  .admin .h1,
+  .admin h2,
+  .admin .h2,
+  .admin h3,
+  .admin .h3,
+  .admin h4,
+  .admin .h4,
+  .admin h5,
+  .admin .h5,
+  .admin h6,
+  .admin .h6 {
+    @apply text-black;
+  }
 
-.error-text {
-  @apply !font-bold !text-red-500;
-}
+  .error-text {
+    @apply !font-bold !text-red-500;
+  }
 
-/* Fields */
-.admin-field-label {
-  @apply text-sm font-bold;
-}
+  /* Fields */
+  .admin-field-label {
+    @apply text-sm font-bold;
+  }
 
-.admin-field-input,
-.admin-field-textarea {
-  @apply w-full rounded border p-3 text-sm;
-}
+  .admin-field-input,
+  .admin-field-textarea {
+    @apply w-full rounded border p-3 text-sm;
+  }
 
-.textarea-autoresize {
-  @apply min-h-[120px] max-h-[70vh] resize-none overflow-hidden;
-}
+  .textarea-autoresize {
+    @apply min-h-[120px] max-h-[70vh] resize-none overflow-hidden;
+  }
 
-/* Buttons */
-.btn {
-  @apply rounded px-4 py-2 font-bold cursor-pointer;
-  box-shadow: none;
-}
+  /* Buttons */
+  .btn {
+    @apply rounded px-4 py-2 font-bold cursor-pointer;
+    box-shadow: none;
+  }
 
-.btn:disabled {
-  @apply cursor-not-allowed;
-}
+  .btn:disabled {
+    @apply !border-gray-400 !bg-gray-400 cursor-not-allowed;
+  }
 
-.btn-primary {
-  @apply bg-black text-white;
-}
+  .btn-primary {
+    @apply bg-black text-white;
+  }
 
-.btn-primary:disabled {
-  @apply bg-gray-800;
-}
+  .btn-secondary {
+    @apply hover:bg-gray-300;
+  }
 
-.btn-secondary {
-  @apply hover:bg-gray-300;
-}
+  /* Editor */
+  .editor {
+    @apply pb-6;
+  }
 
-/* Editor */
-.editor .editor-row {
-  @apply flex flex-col md:flex-row justify-between items-stretch gap-3;
-}
+  .editor .editor-row {
+    @apply flex flex-col md:flex-row justify-between items-stretch gap-3;
+  }
 
-.editor .editor-row-col {
-  @apply flex-1;
+  .editor .editor-row-col {
+    @apply flex-1;
+  }
 }

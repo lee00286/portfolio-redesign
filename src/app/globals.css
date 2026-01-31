@@ -74,320 +74,322 @@
   height: auto;
 }
 
-body {
-  @apply w-screen h-dvh max-h-dvh overflow-hidden;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-main,
-section {
-  @apply mx-auto my-0 p-5 max-w-[var(--breakpoint-desktop)];
-}
-
-div,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-ol,
-ul,
-li,
-p {
-  @apply font-sans;
-}
-
-h1,
-.h1 {
-  @apply text-base-primary font-extrabold text-5xl leading-[3rem];
-}
-
-h2,
-.h2 {
-  @apply text-base-primary font-bold text-4xl leading-[2.25rem];
-}
-
-h3,
-.h3 {
-  @apply text-base-primary font-bold text-3xl leading-[2rem];
-}
-
-h4,
-.h4 {
-  @apply text-base-primary font-bold text-2xl leading-[1.725rem];
-}
-
-h5,
-.h5 {
-  @apply text-black font-bold text-xl leading-[1.25rem];
-}
-
-h6,
-.h6 {
-  @apply text-black font-bold text-lg leading-[1.125rem];
-}
-
-ol,
-ul,
-li,
-p,
-.p {
-  @apply text-black font-normal text-base leading-[1.125rem];
-}
-
-b,
-strong {
-  @apply font-bold;
-}
-
-code {
-  @apply text-sm;
-}
-
-.eyebrow {
-  @apply font-bold text-sm text-primary-500;
-}
-
-.tech-stack {
-  @apply rounded-lg px-3 py-1 bg-primary-200 !text-sm text-center text-nowrap;
-}
-
-.btn {
-  @apply flex items-center gap-2 border rounded-md px-6 py-3 font-bold uppercase text-black text-center cursor-pointer;
-  text-decoration: none;
-  box-shadow:
-    0 2px 8px 0 rgba(0, 0, 0, 0.1),
-    0 6px 12px 0 rgba(0, 0, 0, 0.06);
-}
-
-.btn:hover {
-  text-decoration: none;
-}
-
-.btn--primary {
-  @apply border-primary-200 bg-primary-200 text-black;
-  text-decoration: none;
-  box-shadow:
-    0 0 12px 0 rgba(240, 164, 0, 0.4),
-    0 4px 12px 0 rgba(240, 164, 0, 0.4);
-  transition:
-    border 0.2s ease-in-out,
-    background-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
-}
-
-.btn--primary:hover {
-  @apply border-primary-300 bg-primary-300;
-  box-shadow:
-    0 0 12px 0 rgba(240, 164, 0, 0.5),
-    0 4px 12px 0 rgba(240, 164, 0, 0.5);
-}
-
-.btn--nav {
-  @apply flex-1 xxmd:flex-none justify-center xxmd:justify-start border-none rounded-md sm:rounded-xl border-b-primary-500 h-full xxmd:h-auto;
-  /* background-color: rgb(212, 142, 0, 0.3); */
-  background-color: rgb(255, 182, 3, 0.6);
-  box-shadow: none;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.btn--nav:hover {
-  background-color: rgb(255, 182, 3, 0.8);
-}
-
-.btn--nav .btn--sidebar {
-  @apply w-[20px] h-[20px];
-  max-width: unset;
-}
-
-.btn--nav .btn--sidebar-lg {
-  @apply w-[25px] h-[25px];
-}
-
-.btn--sidebar {
-  @apply w-full xxmd:w-[20px] h-full xxmd:h-[20px];
-}
-
-.btn--sidebar-lg {
-  @apply xxmd:w-[25px] xxmd:h-[25px];
-}
-
-.btn--link {
-  @apply gap-1.5 border-none p-0 text-gray-500 shadow-none;
-  transition:
-    border 0.2s ease-in-out,
-    color 0.2s ease-in-out;
-}
-
-.btn--link:hover {
-  @apply border-none text-primary-500;
-}
-
-.btn--link .new-window-icon path,
-.btn--link .new-window-icon line {
-  stroke: var(--color-gray-500);
-  transition: stroke 0.2s ease-in-out;
-}
-
-.btn--link:hover .new-window-icon path,
-.btn--link:hover .new-window-icon line {
-  stroke: var(--color-primary-500);
-}
-
-.btn--link .github-logo path {
-  fill: var(--color-gray-500);
-  transition: fill 0.2s ease-in-out;
-}
-
-.btn--link:hover .github-logo path {
-  fill: var(--color-primary-500);
-}
-
-.mac-btn {
-  @apply flex justify-center items-center rounded-full p-[6px] h-full bg-primary-400 text-black font-bold leading-1 aspect-square cursor-pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.mac-btn:hover {
-  @apply bg-primary-500;
-}
-
-.mbl-only {
-  @apply xxmd:!hidden;
-}
-
-/* Simple Components */
-.simple-section {
-  @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
-}
-
-.simple-section--container {
-  @apply flex flex-col gap-2 border-2 border-primary-500 rounded-lg px-3 sm:px-4 py-4 sm:py-5 w-full bg-[rgba(255,255,255,0.4)];
-}
-
-.simple-section--card {
-  @apply flex flex-col justify-start items-start gap-3 py-4 sm:py-5 w-full;
-}
-
-.simple-section--card:first-of-type {
-  @apply pt-0;
-}
-
-.simple-section--card:last-of-type {
-  @apply pb-0;
-}
-
-.simple-section--card:not(:last-of-type) {
-  @apply border-b border-primary-500;
-}
-
-/* Details Section */
-.details-section {
-  @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
-}
-
-.details-markdown p code {
-  @apply rounded px-1 py-0.5 bg-yellow-200 font-semibold text-gray-500;
-}
-
-/* Images */
-.img-square {
-  @apply w-full;
-}
-
-.img-square img {
-  @apply aspect-square h-full object-cover;
-}
-
-.img-video {
-  @apply w-full;
-}
-
-.img-video img {
-  @apply aspect-video h-full object-cover;
-}
-
-.img-full {
-  @apply w-full;
-}
-
-.img-half {
-  @apply w-full md:w-1/2;
-}
-
-.img-third {
-  @apply md:w-1/3 sm:w-1/2 w-full;
-}
-
-.img-fourth {
-  @apply lg:w-1/4 md:w-1/3 sm:w-1/2 w-full;
-}
-
-/* Grid Images */
-.img-grid {
-  @apply grid gap-4 grid-cols-1;
-}
-
-.grid-1 {
-  @apply sm:grid-cols-1;
-}
-
-.grid-2 {
-  @apply sm:grid-cols-2;
-}
-
-.grid-3 {
-  @apply sm:grid-cols-3;
-}
-
-.grid-4 {
-  @apply sm:grid-cols-4;
-}
-
-.img-grid .img-half,
-.img-grid .img-third,
-.img-grid .img-fourth {
-  @apply !w-full;
-}
-
-/* Responsiveness */
-@media screen and (max-width: theme(--breakpoint-xxmd)) {
-  .dskt-only {
-    @apply !hidden;
+@layer components {
+  body {
+    @apply w-screen h-dvh max-h-dvh overflow-hidden;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
   }
-}
 
-@media screen and (max-width: theme(--breakpoint-md)) {
+  main,
+  section {
+    @apply mx-auto my-0 p-5 max-w-[var(--breakpoint-desktop)];
+  }
+
+  div,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ol,
+  ul,
+  li,
+  p {
+    @apply font-sans;
+  }
+
   h1,
   .h1 {
-    @apply text-4xl leading-[2.25rem];
+    @apply text-base-primary font-extrabold text-5xl leading-[3rem];
   }
 
   h2,
   .h2 {
-    @apply text-3xl leading-[1.875rem];
+    @apply text-base-primary font-bold text-4xl leading-[2.25rem];
   }
 
   h3,
   .h3 {
-    @apply text-2xl leading-[1.5rem];
+    @apply text-base-primary font-bold text-3xl leading-[2rem];
   }
 
   h4,
   .h4 {
-    @apply text-xl leading-[1.25rem];
+    @apply text-base-primary font-bold text-2xl leading-[1.725rem];
   }
 
   h5,
   .h5 {
-    @apply text-lg leading-[1.125rem];
+    @apply text-black font-bold text-xl leading-[1.25rem];
   }
 
   h6,
   .h6 {
-    @apply text-base leading-[1rem];
+    @apply text-black font-bold text-lg leading-[1.125rem];
+  }
+
+  ol,
+  ul,
+  li,
+  p,
+  .p {
+    @apply text-black font-normal text-base leading-[1.125rem];
+  }
+
+  b,
+  strong {
+    @apply font-bold;
+  }
+
+  code {
+    @apply text-sm;
+  }
+
+  .eyebrow {
+    @apply font-bold text-sm text-primary-500;
+  }
+
+  .tech-stack {
+    @apply rounded-lg px-3 py-1 bg-primary-200 !text-sm text-center text-nowrap;
+  }
+
+  .btn {
+    @apply flex items-center gap-2 border rounded-md px-6 py-3 font-bold uppercase text-black text-center cursor-pointer;
+    text-decoration: none;
+    box-shadow:
+      0 2px 8px 0 rgba(0, 0, 0, 0.1),
+      0 6px 12px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .btn:hover {
+    text-decoration: none;
+  }
+
+  .btn--primary {
+    @apply border-primary-200 bg-primary-200 text-black;
+    text-decoration: none;
+    box-shadow:
+      0 0 12px 0 rgba(240, 164, 0, 0.4),
+      0 4px 12px 0 rgba(240, 164, 0, 0.4);
+    transition:
+      border 0.2s ease-in-out,
+      background-color 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+  }
+
+  .btn--primary:hover {
+    @apply border-primary-300 bg-primary-300;
+    box-shadow:
+      0 0 12px 0 rgba(240, 164, 0, 0.5),
+      0 4px 12px 0 rgba(240, 164, 0, 0.5);
+  }
+
+  .btn--nav {
+    @apply flex-1 xxmd:flex-none justify-center xxmd:justify-start border-none rounded-md sm:rounded-xl border-b-primary-500 h-full xxmd:h-auto;
+    /* background-color: rgb(212, 142, 0, 0.3); */
+    background-color: rgb(255, 182, 3, 0.6);
+    box-shadow: none;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .btn--nav:hover {
+    background-color: rgb(255, 182, 3, 0.8);
+  }
+
+  .btn--nav .btn--sidebar {
+    @apply w-[20px] h-[20px];
+    max-width: unset;
+  }
+
+  .btn--nav .btn--sidebar-lg {
+    @apply w-[25px] h-[25px];
+  }
+
+  .btn--sidebar {
+    @apply w-full xxmd:w-[20px] h-full xxmd:h-[20px];
+  }
+
+  .btn--sidebar-lg {
+    @apply xxmd:w-[25px] xxmd:h-[25px];
+  }
+
+  .btn--link {
+    @apply gap-1.5 border-none p-0 text-gray-500 shadow-none;
+    transition:
+      border 0.2s ease-in-out,
+      color 0.2s ease-in-out;
+  }
+
+  .btn--link:hover {
+    @apply border-none text-primary-500;
+  }
+
+  .btn--link .new-window-icon path,
+  .btn--link .new-window-icon line {
+    stroke: var(--color-gray-500);
+    transition: stroke 0.2s ease-in-out;
+  }
+
+  .btn--link:hover .new-window-icon path,
+  .btn--link:hover .new-window-icon line {
+    stroke: var(--color-primary-500);
+  }
+
+  .btn--link .github-logo path {
+    fill: var(--color-gray-500);
+    transition: fill 0.2s ease-in-out;
+  }
+
+  .btn--link:hover .github-logo path {
+    fill: var(--color-primary-500);
+  }
+
+  .mac-btn {
+    @apply flex justify-center items-center rounded-full p-[6px] h-full bg-primary-400 text-black font-bold leading-1 aspect-square cursor-pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .mac-btn:hover {
+    @apply bg-primary-500;
+  }
+
+  .mbl-only {
+    @apply xxmd:!hidden;
+  }
+
+  /* Simple Components */
+  .simple-section {
+    @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
+  }
+
+  .simple-section--container {
+    @apply flex flex-col gap-2 border-2 border-primary-500 rounded-lg px-3 sm:px-4 py-4 sm:py-5 w-full bg-[rgba(255,255,255,0.4)];
+  }
+
+  .simple-section--card {
+    @apply flex flex-col justify-start items-start gap-3 py-4 sm:py-5 w-full;
+  }
+
+  .simple-section--card:first-of-type {
+    @apply pt-0;
+  }
+
+  .simple-section--card:last-of-type {
+    @apply pb-0;
+  }
+
+  .simple-section--card:not(:last-of-type) {
+    @apply border-b border-primary-500;
+  }
+
+  /* Details Section */
+  .details-section {
+    @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
+  }
+
+  .details-markdown p code {
+    @apply rounded px-1 py-0.5 bg-yellow-200 font-semibold text-gray-500;
+  }
+
+  /* Images */
+  .img-square {
+    @apply w-full;
+  }
+
+  .img-square img {
+    @apply aspect-square h-full object-cover;
+  }
+
+  .img-video {
+    @apply w-full;
+  }
+
+  .img-video img {
+    @apply aspect-video h-full object-cover;
+  }
+
+  .img-full {
+    @apply w-full;
+  }
+
+  .img-half {
+    @apply w-full md:w-1/2;
+  }
+
+  .img-third {
+    @apply md:w-1/3 sm:w-1/2 w-full;
+  }
+
+  .img-fourth {
+    @apply lg:w-1/4 md:w-1/3 sm:w-1/2 w-full;
+  }
+
+  /* Grid Images */
+  .img-grid {
+    @apply grid gap-4 grid-cols-1;
+  }
+
+  .grid-1 {
+    @apply sm:grid-cols-1;
+  }
+
+  .grid-2 {
+    @apply sm:grid-cols-2;
+  }
+
+  .grid-3 {
+    @apply sm:grid-cols-3;
+  }
+
+  .grid-4 {
+    @apply sm:grid-cols-4;
+  }
+
+  .img-grid .img-half,
+  .img-grid .img-third,
+  .img-grid .img-fourth {
+    @apply !w-full;
+  }
+
+  /* Responsiveness */
+  @media screen and (max-width: theme(--breakpoint-xxmd)) {
+    .dskt-only {
+      @apply !hidden;
+    }
+  }
+
+  @media screen and (max-width: theme(--breakpoint-md)) {
+    h1,
+    .h1 {
+      @apply text-4xl leading-[2.25rem];
+    }
+
+    h2,
+    .h2 {
+      @apply text-3xl leading-[1.875rem];
+    }
+
+    h3,
+    .h3 {
+      @apply text-2xl leading-[1.5rem];
+    }
+
+    h4,
+    .h4 {
+      @apply text-xl leading-[1.25rem];
+    }
+
+    h5,
+    .h5 {
+      @apply text-lg leading-[1.125rem];
+    }
+
+    h6,
+    .h6 {
+      @apply text-base leading-[1rem];
+    }
   }
 }

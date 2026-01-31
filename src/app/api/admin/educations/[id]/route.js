@@ -1,14 +1,21 @@
 import { NextResponse } from 'next/server';
 import { createAdminSupabaseServer } from '@/lib/supabase/admin';
 
-export async function POST(req) {
+export async function PUT(req, ctx) {
   try {
-    const body = await req.json();
-    const { education_id, ...newData } = body;
+    // Get id from request
+    const { id } = await ctx.params;
 
-    if (!education_id) {
+    if (!id) {
+      return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
+    }
+
+    const body = await req.json();
+    const { education_id, ...updateData } = body;
+
+    if (Object.keys(updateData).length === 0) {
       return NextResponse.json(
-        { error: 'Education ID is required.' },
+        { error: 'No update data provided' },
         { status: 400 }
       );
     }
@@ -26,28 +33,26 @@ export async function POST(req) {
     const { data: exists } = await supabase
       .from('educations')
       .select('id')
-      .eq('education_id', education_id)
+      .eq('id', id)
       .maybeSingle();
 
-    if (exists) {
+    if (!exists) {
       return NextResponse.json(
-        { error: 'Education ID already exists' },
-        { status: 409 }
+        { error: 'Education data not found' },
+        { status: 404 }
       );
     }
 
-    // Create the education data
+    // Update the education data
     const { error, data } = await supabase
       .from('educations')
-      .insert({
-        education_id,
-        ...newData
-      })
+      .update(updateData)
+      .eq('id', id)
       .select()
       .single();
 
     if (error) {
-      console.error('[ADMIN EDUCATION CREATE ERROR]', error);
+      console.error('[ADMIN EDUCATION UPDATE ERROR]', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 

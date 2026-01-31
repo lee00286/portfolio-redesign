@@ -102,7 +102,9 @@ function EducationsForm({ mode, initialData }) {
     }
 
     // Update
-    const payload = { ...cleanUpAdminFormData(formData) };
+    const payload = {
+      ...cleanUpAdminFormData(formData)
+    };
 
     setBaseData((prev) => ({ ...prev, ...payload }));
 
@@ -115,11 +117,11 @@ function EducationsForm({ mode, initialData }) {
         body: JSON.stringify(payload)
       });
 
-      const result = await res.json();
-
       if (!res.ok) {
-        throw new Error(result.error || 'Save failed');
+        throw new Error(res.statusText || 'Save failed');
       }
+
+      const result = await res.json();
 
       setBaseData((prev) => ({ ...prev, ...result.data }));
 
@@ -159,11 +161,11 @@ function EducationsForm({ mode, initialData }) {
         body: JSON.stringify(payload)
       });
 
-      const result = await res.json();
-
       if (!res.ok) {
-        throw new Error(result.error || 'Create failed');
+        throw new Error(res.statusText || 'Create failed');
       }
+
+      const result = await res.json();
 
       setBaseData((prev) => ({ ...prev, ...result.data }));
 
@@ -179,7 +181,7 @@ function EducationsForm({ mode, initialData }) {
 
   return (
     <div className="editor space-y-4">
-      {/* Education Name */}
+      {/* Education ID */}
       <div className="editor-row">
         <div className="editor-row-col">
           <label htmlFor="education-id" className="admin-field-label">

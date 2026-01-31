@@ -15,7 +15,7 @@ export default async function AdminLayout({ children }) {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-scroll flex justify-start items-stretch !mx-0 !p-6 max-w-xl w-full">
+        <main className="flex-1 overflow-y-scroll flex justify-start items-stretch !mx-0 !p-6 max-w-7xl w-full">
           {children}
         </main>
       </div>
