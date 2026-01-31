@@ -20,6 +20,16 @@ export default async function AdminEducationPage({ params }) {
 
   const education = dbData?.[0] ?? null;
 
+  if (!education) {
+    return (
+      <p className="error-text">
+        Education data with ID{' '}
+        <code className="bg-red-100 text-red-500">{educationId}</code> not
+        found.
+      </p>
+    );
+  }
+
   return (
     <section className="!p-0 w-full">
       <div className="flex justify-start mb-4">

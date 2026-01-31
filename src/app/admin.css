@@ -22,6 +22,11 @@
     @apply !font-bold !text-red-500;
   }
 
+  code {
+    @apply rounded-sm px-1 bg-primary-200 text-sm text-black;
+    font-family: monospace;
+  }
+
   /* Fields */
   .admin-field-label {
     @apply text-sm font-bold;

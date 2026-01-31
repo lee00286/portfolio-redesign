@@ -63,6 +63,7 @@ function DetailsMarkdown({ data }) {
             ),
           pre: ({ children }) => <CodeBlock>{children}</CodeBlock>
         }}
+        skipHtml
       >
         {data.detail_md}
       </ReactMarkdown>
