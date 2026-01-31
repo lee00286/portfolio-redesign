@@ -37,11 +37,16 @@ const getAdminServerData = cache(async (tableName, options = {}) => {
     order = 'created_at',
     ascending = false,
     limit = 5,
-    filters = {}
+    filters = {},
+    softDelete = true
   } = options;
 
   try {
     let query = supabase.from(tableName).select(select);
+
+    if (softDelete) {
+      query = query.is('deleted_at', null);
+    }
 
     Object.entries(filters).forEach(([key, value]) => {
       query = query.eq(key, value);

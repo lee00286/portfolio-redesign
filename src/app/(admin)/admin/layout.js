@@ -1,4 +1,6 @@
+import { AdminModalProvider } from '@/contexts/AdminModalProvider';
 import Sidebar from '@/components/admin/Sidebar';
+import ConfirmModal from '@/components/admin/ConfirmModal';
 import '@/app/admin.css';
 
 export default async function AdminLayout({ children }) {
@@ -16,7 +18,11 @@ export default async function AdminLayout({ children }) {
         </header>
 
         <main className="flex-1 overflow-y-scroll flex justify-start items-stretch !mx-0 !p-6 max-w-7xl w-full">
-          {children}
+          <AdminModalProvider>
+            {children}
+
+            <ConfirmModal />
+          </AdminModalProvider>
         </main>
       </div>
     </div>

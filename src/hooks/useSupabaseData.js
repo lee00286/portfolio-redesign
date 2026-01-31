@@ -31,6 +31,7 @@ export function useSupabaseData(tableName, { options = {} }) {
         const { data, error } = await supabaseClient
           .from(tableName)
           .select(select)
+          .is('deleted_at', null)
           .order(order, { ascending })
           .limit(limit);
 

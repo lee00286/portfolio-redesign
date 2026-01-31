@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAutosizeTextarea } from '@/hooks/useAutosizeTextarea';
 import { ADMIN_FORM_MODE } from '@/constants/admin';
 import { cleanUpAdminFormData } from '@/util/helpers';
+import ConfirmModalButton from './ConfirmModalButton';
 
 const emptyData = {
   education_id: '',
@@ -27,6 +28,7 @@ function EducationsForm({ mode, initialData }) {
   const router = useRouter();
 
   const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Data
   const [formData, setFormData] = useState({ ...emptyData });
@@ -89,7 +91,7 @@ function EducationsForm({ mode, initialData }) {
   };
 
   const onUpdate = async () => {
-    if (isSaving) return;
+    if (isSaving || isDeleting) return;
 
     setIsSaving(true);
 
@@ -182,6 +184,35 @@ function EducationsForm({ mode, initialData }) {
       alert(err.message);
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const onDelete = async () => {
+    if (isSaving || isDeleting) return;
+
+    setIsDeleting(true);
+
+    try {
+      const res = await fetch(`/api/admin/educations/${initialData?.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error(res.statusText || 'Create failed');
+      }
+
+      const result = await res.json();
+
+      alert('Deleted successfully');
+      router.replace(`/admin/educations`);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -416,7 +447,7 @@ function EducationsForm({ mode, initialData }) {
       <div className="flex gap-3">
         <button
           onClick={onSave}
-          disabled={isSaving || !isUpdated}
+          disabled={isSaving || !isUpdated || isDeleting}
           className="btn btn-primary"
         >
           {isSaving ? 'Saving...' : 'Save'}
@@ -424,12 +455,29 @@ function EducationsForm({ mode, initialData }) {
 
         <button
           onClick={onReset}
-          disabled={isSaving}
+          disabled={isSaving || isDeleting}
           className="btn btn-secondary"
           style={{ transition: 'background-color 0.2s ease-in-out' }}
         >
           Reset
         </button>
+
+        {/* Soft Delete (Archive) Button */}
+        {mode === ADMIN_FORM_MODE.EDIT && (
+          <ConfirmModalButton
+            text="Archive"
+            disabled={isSaving || isDeleting}
+            data={{
+              title: 'Archive this education item?',
+              description:
+                'This item will be hidden from the public. You can restore it later.',
+              danger: true,
+              onConfirm: async () => await onDelete()
+            }}
+          >
+            Archive
+          </ConfirmModalButton>
+        )}
       </div>
     </div>
   );

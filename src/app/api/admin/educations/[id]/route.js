@@ -61,7 +61,69 @@ export async function PUT(req, ctx) {
       data
     });
   } catch (err) {
-    console.error('[ADMIN EDUCATION API ERROR]', err);
+    console.error('[ADMIN EDUCATION UPDATE API ERROR]', err);
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+  }
+}
+
+/**
+ * Soft Delete
+ */
+export async function DELETE(req, ctx) {
+  try {
+    // Get id from request
+    const { id } = await ctx.params;
+
+    if (!id) {
+      return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
+    }
+
+    const supabase = createAdminSupabaseServer();
+
+    if (!supabase) {
+      return NextResponse.json(
+        { error: 'Admin disabled in this environment' },
+        { status: 403 }
+      );
+    }
+
+    // Check if the education already exists
+    const { data: exists } = await supabase
+      .from('educations')
+      .select('id')
+      .eq('id', id)
+      .maybeSingle();
+
+    if (!exists) {
+      return NextResponse.json(
+        { error: 'Education data not found' },
+        { status: 404 }
+      );
+    }
+
+    // Update the education data
+    const deletedAt = new Date();
+    const { error, data } = await supabase
+      .from('educations')
+      .update({
+        deleted_at: deletedAt.toISOString(),
+        is_active: false
+      })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('[ADMIN EDUCATION SOFT DELETE ERROR]', error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      data
+    });
+  } catch (err) {
+    console.error('[ADMIN EDUCATION DELETE API ERROR]', err);
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
 }

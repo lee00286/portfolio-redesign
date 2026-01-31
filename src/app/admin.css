@@ -89,6 +89,14 @@
     @apply border-gray-900 bg-white hover:bg-gray-300;
   }
 
+  .btn-danger {
+    @apply border-red-500 bg-red-500 text-white;
+  }
+
+  .btn-danger:disabled {
+    @apply !border-red-300 !bg-red-300 text-black;
+  }
+
   /* Editor */
   .editor {
     @apply pb-6;

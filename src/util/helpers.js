@@ -27,6 +27,7 @@ export const getFilteredEducationData = (data, lang = 'en') => {
     description: lang === 'ko' ? data.description_ko : data.description_en,
     detail: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
     is_active: data.is_active
+    // delete_at: data.delete_at,
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };
