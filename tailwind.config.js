@@ -15,6 +15,24 @@ module.exports = {
     }
   ],
   theme: {
+    screens: {
+      // min-width
+      xxs: '310px',
+      xs: '375px',
+      sm: '480px',
+      xsm: '640px',
+      md: '768px',
+      xmd: '854px',
+      xxmd: '960px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1440px',
+      '3xl': '2560px',
+
+      // max-width
+      'sm-max': { max: '479.98px' },
+      'md-max': { max: '767.98px' }
+    },
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', 'Arial', 'Helvetica', 'sans-serif'],
@@ -51,21 +69,6 @@ module.exports = {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
         muted: 'rgba(0,0,0,0.05)'
-      },
-      screens: {
-        xxxl: '2560px',
-        xxl: '1440px',
-        xl: '1280px',
-        lg: '1024px',
-        xxmd: '960px',
-        xmd: '854px',
-        md: '768px',
-        maxMd: { max: '767.98px' },
-        xsm: '640px',
-        sm: '480px',
-        maxSm: { max: '479.98px' },
-        xs: '375px',
-        xxs: '310px'
       },
       maxWidth: {
         desktop: '1440px'

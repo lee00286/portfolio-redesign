@@ -13,7 +13,7 @@ function EducationsList({ items }) {
             href={`/admin/educations/${education.education_id}`}
             className="data-list-item"
           >
-            <div className="flex maxMd:flex-col justify-between items-center maxMd:items-start gap-3">
+            <div className="flex md-max:flex-col justify-between items-center md-max:items-start gap-3">
               <div className="space-y-1">
                 <div className="flex justify-start items-center gap-2">
                   <p className="!font-bold">
@@ -28,7 +28,7 @@ function EducationsList({ items }) {
                 <p className="!text-gray-600">{education.major_en || '—'}</p>
               </div>
 
-              <span className="btn btn-primary maxMd:!py-0.5 maxMd:!text-sm">
+              <span className="btn btn-primary md-max:!py-0.5 md-max:!text-sm">
                 Edit
               </span>
             </div>
