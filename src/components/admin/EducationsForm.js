@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAutosizeTextarea } from '@/hooks/useAutosizeTextarea';
 import { ADMIN_BANNER_TYPE, ADMIN_FORM_MODE } from '@/constants/admin';
 import { cleanUpAdminFormData } from '@/util/helpers';
 import ConfirmModalButton from './ConfirmModalButton';
 import AdminInfoBanner from './AdminInfoBanner';
+import FormInput from './form/FormInput';
+import FormSwitch from './form/FormSwitch';
+import FormTextarea from './form/FormTextarea';
 
 const emptyData = {
   education_id: '',
@@ -34,12 +36,6 @@ function EducationsForm({ mode, initialData }) {
   // Data
   const [formData, setFormData] = useState({ ...emptyData });
   const [baseData, setBaseData] = useState({ ...emptyData });
-
-  // Autosize textareas
-  const descriptionENRef = useAutosizeTextarea(formData?.description_en);
-  const descriptionKORef = useAutosizeTextarea(formData?.description_ko);
-  const detailENRef = useAutosizeTextarea(formData?.detail_md_en);
-  const detailKORef = useAutosizeTextarea(formData?.detail_md_ko);
 
   const isUpdated =
     mode === ADMIN_FORM_MODE.CREATE
@@ -267,17 +263,15 @@ function EducationsForm({ mode, initialData }) {
         {/* Education ID */}
         <div className="editor-row">
           <div className="editor-row-col">
-            <label htmlFor="education-id" className="admin-field-label">
-              Education ID
-            </label>
-            <input
-              id="education-id"
+            <FormInput
+              inputId="education-id"
               name="education_id"
+              label="Education ID"
               value={formData?.education_id}
               onChange={onChange}
-              className="admin-field-input"
               placeholder="Write Education ID here..."
               disabled={mode === ADMIN_FORM_MODE.EDIT}
+              required
             />
           </div>
         </div>
@@ -285,49 +279,39 @@ function EducationsForm({ mode, initialData }) {
         {/* Is Active */}
         <div className="editor-row">
           <div className="editor-row-col flex flex-row items-center gap-2">
-            <label htmlFor="is-active" className="admin-field-label">
-              Is Active?
-            </label>
-            <label className="admin-field-switch">
-              <input
-                id="is-active"
-                name="is_active"
-                type="checkbox"
-                checked={formData?.is_active}
-                onChange={onChange}
-                className="admin-field-switch-input"
-              />
-              <span className="admin-field-switch-slider"></span>
-            </label>
+            <FormSwitch
+              switchId="is-active"
+              name="is_active"
+              label="Is Active?"
+              checked={formData?.is_active}
+              onChange={onChange}
+              required
+            />
           </div>
         </div>
 
         {/* Education Name */}
         <div className="editor-row">
           <div className="editor-row-col">
-            <label htmlFor="school-en" className="admin-field-label">
-              Education Name (EN)
-            </label>
-            <input
-              id="school-en"
+            <FormInput
+              inputId="school-en"
               name="school_en"
+              label="Education Name (EN)"
               value={formData?.school_en}
-              onChange={onChange}
-              className="admin-field-input"
               placeholder="Write education name (EN) here..."
+              onChange={onChange}
+              required
             />
           </div>
           <div className="editor-row-col">
-            <label htmlFor="school-ko" className="admin-field-label">
-              Education Name (KO)
-            </label>
-            <input
-              id="school-ko"
+            <FormInput
+              inputId="school-ko"
               name="school_ko"
-              value={formData?.school_ko}
-              onChange={onChange}
-              className="admin-field-input"
+              label="Education Name (KO)"
+              value={formData?.school_en}
               placeholder="Write education name (KO) here..."
+              onChange={onChange}
+              required
             />
           </div>
         </div>
@@ -337,29 +321,23 @@ function EducationsForm({ mode, initialData }) {
         {/* Location */}
         <div className="editor-row">
           <div className="editor-row-col">
-            <label htmlFor="location-en" className="admin-field-label">
-              Location (EN)
-            </label>
-            <input
-              id="location-en"
+            <FormInput
+              inputId="location-en"
               name="location_en"
-              value={formData?.location_en || ''}
-              onChange={onChange}
-              className="admin-field-input"
+              label="Location (EN)"
+              value={formData?.location_en}
               placeholder="Write location (EN) here..."
+              onChange={onChange}
             />
           </div>
           <div className="editor-row-col">
-            <label htmlFor="location-ko" className="admin-field-label">
-              Location (KO)
-            </label>
-            <input
-              id="location-ko"
+            <FormInput
+              inputId="location-ko"
               name="location_ko"
-              value={formData?.location_ko || ''}
-              onChange={onChange}
-              className="admin-field-input"
+              label="Location (KO)"
+              value={formData?.location_ko}
               placeholder="Write location (KO) here..."
+              onChange={onChange}
             />
           </div>
         </div>
@@ -367,29 +345,23 @@ function EducationsForm({ mode, initialData }) {
         {/* Major */}
         <div className="editor-row">
           <div className="editor-row-col">
-            <label htmlFor="major-en" className="admin-field-label">
-              Major (EN)
-            </label>
-            <input
-              id="major-en"
+            <FormInput
+              inputId="major-en"
               name="major_en"
-              value={formData?.major_en || ''}
+              label="Major/Program (EN)"
+              value={formData?.major_en}
+              placeholder="Write major or program (EN) here..."
               onChange={onChange}
-              className="admin-field-input"
-              placeholder="Write major (EN) here..."
             />
           </div>
           <div className="editor-row-col">
-            <label htmlFor="major-ko" className="admin-field-label">
-              Major (KO)
-            </label>
-            <input
-              id="major-ko"
+            <FormInput
+              inputId="major-ko"
               name="major_ko"
-              value={formData?.major_ko || ''}
+              label="Major/Program (KO)"
+              value={formData?.major_ko}
+              placeholder="Write major or program (KO) here..."
               onChange={onChange}
-              className="admin-field-input"
-              placeholder="Write major (KO) here..."
             />
           </div>
         </div>
@@ -397,31 +369,24 @@ function EducationsForm({ mode, initialData }) {
         {/* Dates */}
         <div className="editor-row">
           <div className="editor-row-col">
-            <label htmlFor="start-date" className="admin-field-label">
-              Education Start Date
-            </label>
-            <input
-              id="start-date"
+            <FormInput
+              inputId="start-date"
               name="start_date"
               type="date"
-              value={formData?.start_date || ''}
+              label="Education Start Date"
+              value={formData?.start_date}
               onChange={onChange}
-              className="admin-field-input"
-              placeholder="Write start date here..."
+              requied
             />
           </div>
           <div className="editor-row-col">
-            <label htmlFor="end-date" className="admin-field-label">
-              Education End Date (optional)
-            </label>
-            <input
-              id="end-date"
+            <FormInput
+              inputId="end-date"
               name="end_date"
               type="date"
-              value={formData?.end_date || ''}
+              label="Education End Date (will say 'Present' if empty)"
+              value={formData?.start_date}
               onChange={onChange}
-              className="admin-field-input"
-              placeholder="Write end date here..."
             />
           </div>
         </div>
@@ -429,31 +394,25 @@ function EducationsForm({ mode, initialData }) {
         {/* Description */}
         <div className="editor-row">
           <div className="editor-row-col">
-            <label htmlFor="description-en" className="admin-field-label">
-              Description (EN)
-            </label>
-            <textarea
-              id="description-en"
+            <FormTextarea
+              textareaId="description-en"
               name="description_en"
-              ref={descriptionENRef}
-              value={formData?.description_en || ''}
-              onChange={onChange}
-              className="admin-field-textarea textarea-autoresize"
+              label="Description (EN)"
+              value={formData?.description_en}
               placeholder="Write description (EN) here..."
+              onChange={onChange}
+              autoResize
             />
           </div>
           <div className="editor-row-col">
-            <label htmlFor="description-ko" className="admin-field-label">
-              Description (KO)
-            </label>
-            <textarea
-              id="description-ko"
+            <FormTextarea
+              textareaId="description-ko"
               name="description_ko"
-              ref={descriptionKORef}
-              value={formData?.description_ko || ''}
-              onChange={onChange}
-              className="admin-field-textarea textarea-autoresize"
+              label="Description (KO)"
+              value={formData?.description_ko}
               placeholder="Write description (KO) here..."
+              onChange={onChange}
+              autoResize
             />
           </div>
         </div>
@@ -461,31 +420,25 @@ function EducationsForm({ mode, initialData }) {
         {/* Detail */}
         <div className="editor-row">
           <div className="editor-row-col">
-            <label htmlFor="detail-en" className="admin-field-label">
-              Detail (EN)
-            </label>
-            <textarea
-              id="detail-en"
+            <FormTextarea
+              textareaId="detail-en"
               name="detail_md_en"
-              ref={detailENRef}
-              value={formData?.detail_md_en || ''}
-              onChange={onChange}
-              className="admin-field-textarea textarea-autoresize"
+              label="Detail (EN)"
+              value={formData?.detail_md_ko}
               placeholder="Write detail (EN) here..."
+              onChange={onChange}
+              autoResize
             />
           </div>
           <div className="editor-row-col">
-            <label htmlFor="detail-ko" className="admin-field-label">
-              Detail (KO)
-            </label>
-            <textarea
-              id="detail-ko"
+            <FormTextarea
+              textareaId="detail-ko"
               name="detail_md_ko"
-              ref={detailKORef}
-              value={formData?.detail_md_ko || ''}
-              onChange={onChange}
-              className="admin-field-textarea textarea-autoresize"
+              label="Detail (KO)"
+              value={formData?.detail_md_ko}
               placeholder="Write detail (KO) here..."
+              onChange={onChange}
+              autoResize
             />
           </div>
         </div>
