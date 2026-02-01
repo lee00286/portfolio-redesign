@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createAdminSupabaseServer } from '@/lib/supabase/admin';
 
-export async function PUT(req, ctx) {
+export async function PUT(req, { params }) {
   try {
     // Get id from request
-    const { id } = await ctx.params;
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
@@ -29,7 +29,7 @@ export async function PUT(req, ctx) {
       );
     }
 
-    // Check if the education already exists
+    // Check if the education exists
     const { data: exists } = await supabase
       .from('educations')
       .select('id')
@@ -67,12 +67,12 @@ export async function PUT(req, ctx) {
 }
 
 /**
- * Soft Delete
+ * Restore
  */
-export async function DELETE(req, ctx) {
+export async function PATCH(req, { params }) {
   try {
     // Get id from request
-    const { id } = await ctx.params;
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
@@ -87,7 +87,69 @@ export async function DELETE(req, ctx) {
       );
     }
 
-    // Check if the education already exists
+    // Check if the education exists
+    const { data: exists } = await supabase
+      .from('educations')
+      .select('id')
+      .eq('id', id)
+      .not('deleted_at', 'is', null)
+      .maybeSingle();
+
+    if (!exists) {
+      return NextResponse.json(
+        { error: 'Archived education data not found' },
+        { status: 404 }
+      );
+    }
+
+    // Update the education data
+    const { error, data } = await supabase
+      .from('educations')
+      .update({
+        deleted_at: null,
+        is_active: false
+      })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('[ADMIN EDUCATION RESTORE ERROR]', error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      data
+    });
+  } catch (err) {
+    console.error('[ADMIN EDUCATION RESTORE API ERROR]', err);
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+  }
+}
+
+/**
+ * Soft Delete
+ */
+export async function DELETE(req, { params }) {
+  try {
+    // Get id from request
+    const { id } = await params;
+
+    if (!id) {
+      return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
+    }
+
+    const supabase = createAdminSupabaseServer();
+
+    if (!supabase) {
+      return NextResponse.json(
+        { error: 'Admin disabled in this environment' },
+        { status: 403 }
+      );
+    }
+
+    // Check if the education exists
     const { data: exists } = await supabase
       .from('educations')
       .select('id')

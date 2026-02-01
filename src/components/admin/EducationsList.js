@@ -2,7 +2,13 @@ import Link from 'next/link';
 
 function EducationsList({ items }) {
   if (!items || items.length === 0) {
-    return <p className="error-text">No education entries found.</p>;
+    return (
+      <p className="error-text">
+        {education.deleted_at
+          ? 'No archived education entries found.'
+          : 'No education entries found.'}
+      </p>
+    );
   }
 
   return (
@@ -19,17 +25,26 @@ function EducationsList({ items }) {
                   <p className="!font-bold">
                     {education.school_en || 'Untitled Education'}
                   </p>
-                  {education.is_active ? (
+                  {education.deleted_at ? (
+                    <span className="badge badge-warning">Archived</span>
+                  ) : education.is_active ? (
                     <span className="badge badge-success">Active</span>
                   ) : (
                     <span className="badge badge-error">Inactive</span>
                   )}
                 </div>
                 <p className="!text-gray-600">{education.major_en || '—'}</p>
+
+                {education.deleted_at && (
+                  <p className="text-xs text-gray-400">
+                    Archived at{' '}
+                    {new Date(education.deleted_at).toLocaleDateString()}
+                  </p>
+                )}
               </div>
 
               <span className="btn btn-primary md-max:!py-0.5 md-max:!text-sm">
-                Edit
+                {education.deleted_at ? 'View' : 'Edit'}
               </span>
             </div>
           </Link>

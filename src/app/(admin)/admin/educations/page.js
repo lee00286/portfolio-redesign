@@ -7,7 +7,8 @@ const title = 'educations';
 export default async function AdminEducationListPage() {
   const { dbData, error } = await getAdminSupabaseData(title, {
     order: 'start_date',
-    ascending: false
+    ascending: false,
+    skipSoftDelete: false
   });
 
   if (error) {
@@ -15,6 +16,10 @@ export default async function AdminEducationListPage() {
   }
 
   const educations = dbData ?? [];
+  const activeEducations =
+    educations?.filter((education) => !education.deleted_at) ?? [];
+  const archivedEducations =
+    educations?.filter((education) => !!education.deleted_at) ?? [];
 
   return (
     <section className="!p-0 w-full">
@@ -25,7 +30,21 @@ export default async function AdminEducationListPage() {
         </Link>
       </div>
 
-      <EducationsList items={educations} />
+      {/* Active Educations */}
+      <EducationsList items={activeEducations} />
+
+      {/* Archived Educations */}
+      {archivedEducations.length > 0 && (
+        <details className="mt-8">
+          <summary className="cursor-pointer font-bold text-sm text-gray-600">
+            Archived ({archivedEducations.length})
+          </summary>
+
+          <div className="mt-3">
+            <EducationsList items={archivedEducations} />
+          </div>
+        </details>
+      )}
     </section>
   );
 }

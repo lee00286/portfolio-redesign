@@ -14,13 +14,13 @@ export const getServerData = cache(async (tableName, options = {}) => {
     ascending = false,
     limit = 5,
     filters = {},
-    softDelete = true
+    skipSoftDelete = true
   } = options;
 
   try {
     let query = supabase.from(tableName).select(select);
 
-    if (softDelete) {
+    if (skipSoftDelete) {
       query = query.is('deleted_at', null);
     }
 

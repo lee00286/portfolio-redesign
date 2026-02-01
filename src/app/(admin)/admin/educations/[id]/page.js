@@ -11,6 +11,7 @@ export default async function AdminEducationPage({ params }) {
 
   const { dbData, error } = await getAdminSupabaseData(dbTitle, {
     limit: 1,
+    skipSoftDelete: false,
     filters: { education_id: educationId }
   });
 

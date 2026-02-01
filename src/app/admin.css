@@ -135,4 +135,8 @@
   .badge-error {
     @apply bg-red-500;
   }
+
+  .badge-warning {
+    @apply bg-orange-500;
+  }
 }

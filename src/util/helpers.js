@@ -25,7 +25,7 @@ export const getFilteredEducationData = (data, lang = 'en') => {
     major: lang === 'ko' ? data.major_ko : data.major_en,
     location: lang === 'ko' ? data.location_ko : data.location_en,
     description: lang === 'ko' ? data.description_ko : data.description_en,
-    detail: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
+    detail_md: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
     is_active: data.is_active
     // delete_at: data.delete_at,
     // created_at: data.created_at,
@@ -49,9 +49,9 @@ export const getFilteredExperienceData = (data, lang = 'en') => {
       lang === 'ko' ? data.pos_description_ko : data.pos_description_en,
     location: lang === 'ko' ? data.location_ko : data.location_en,
     description: lang === 'ko' ? data.description_ko : data.description_en,
-    detail: lang === 'ko' ? data.detail_ko : data.detail_en,
     tech_stack: data.tech_stack || '',
-    detail_md: lang === 'ko' ? data.detail_md_ko : data.detail_md_en
+    detail_md: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
+    is_active: data.is_active
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };
@@ -68,10 +68,11 @@ export const getFilteredProjectData = (data, lang = 'en') => {
     position: lang === 'ko' ? data.pos_title_ko : data.pos_title_en,
     location: lang === 'ko' ? data.location_ko : data.location_en,
     description: lang === 'ko' ? data.description_ko : data.description_en,
-    detail: lang === 'ko' ? data.detail_ko : data.detail_en,
+    detail_md: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
     tech_stack: data.tech_stack || '',
     github: data.github || '',
-    url: data.url || ''
+    url: data.url || '',
+    is_active: data.is_active
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };
