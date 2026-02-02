@@ -9,6 +9,7 @@ import AdminInfoBanner from './AdminInfoBanner';
 import FormInput from './form/FormInput';
 import FormSwitch from './form/FormSwitch';
 import FormTextarea from './form/FormTextarea';
+import FormImage from './form/FormImage';
 
 const emptyData = {
   education_id: '',
@@ -16,6 +17,7 @@ const emptyData = {
   school_ko: '',
   location_en: '',
   location_ko: '',
+  logo: null,
   major_en: '',
   major_ko: '',
   start_date: '',
@@ -30,8 +32,12 @@ const emptyData = {
 function EducationsForm({ mode, initialData }) {
   const router = useRouter();
 
+  const [isFetching, setIsFetching] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [hasPendingImage, setHasPendingImage] = useState(false);
+  const [resetKey, setResetKey] = useState(0); // Reset key to trigger resets on local image uploads
 
   // Data
   const [formData, setFormData] = useState({ ...emptyData });
@@ -43,17 +49,23 @@ function EducationsForm({ mode, initialData }) {
       : JSON.stringify(formData) !== JSON.stringify(baseData);
 
   useEffect(() => {
+    if (mode === ADMIN_FORM_MODE.CREATE) {
+      return;
+    }
+
+    setIsFetching(true);
+
     if (initialData) {
       setBaseData(initialData);
       setFormData(initialData);
-    } else {
-      setBaseData(emptyData);
-      setFormData(emptyData);
+      setIsFetching(false);
     }
-  }, [initialData]);
+  }, [initialData, mode]);
 
   const onReset = () => {
     setFormData(baseData);
+    setResetKey((prev) => prev + 1);
+    setHasPendingImage(false);
   };
 
   const onChange = (e) => {
@@ -88,7 +100,7 @@ function EducationsForm({ mode, initialData }) {
   };
 
   const onUpdate = async () => {
-    if (isSaving || isDeleting) return;
+    if (isSaving || isUploading || isDeleting || hasPendingImage) return;
 
     setIsSaving(true);
 
@@ -131,6 +143,9 @@ function EducationsForm({ mode, initialData }) {
       setBaseData((prev) => ({ ...prev, ...result.data }));
 
       alert('Saved successfully');
+
+      router.replace(`/admin/educations/${result.data.education_id}`);
+      onReset();
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -140,7 +155,7 @@ function EducationsForm({ mode, initialData }) {
   };
 
   const onCreate = async () => {
-    if (isSaving) return;
+    if (isSaving || isUploading || hasPendingImage) return;
 
     setIsSaving(true);
 
@@ -175,7 +190,9 @@ function EducationsForm({ mode, initialData }) {
       setBaseData((prev) => ({ ...prev, ...result.data }));
 
       alert('Created successfully');
+
       router.replace(`/admin/educations/${result.data.education_id}`);
+      onReset();
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -185,7 +202,7 @@ function EducationsForm({ mode, initialData }) {
   };
 
   const onDelete = async () => {
-    if (isSaving || isDeleting) return;
+    if (isSaving || isUploading || isDeleting) return;
 
     setIsDeleting(true);
 
@@ -204,6 +221,7 @@ function EducationsForm({ mode, initialData }) {
       const result = await res.json();
 
       alert('Deleted successfully');
+
       router.replace(`/admin/educations`);
     } catch (err) {
       console.error(err);
@@ -214,7 +232,7 @@ function EducationsForm({ mode, initialData }) {
   };
 
   const onRestore = async () => {
-    if (isSaving || isDeleting) return;
+    if (isSaving || isUploading || isDeleting) return;
 
     setIsSaving(true);
 
@@ -235,7 +253,9 @@ function EducationsForm({ mode, initialData }) {
       setBaseData((prev) => ({ ...prev, ...result.data }));
 
       alert('Restored successfully');
+
       router.replace(`/admin/educations/${result.data.education_id}`);
+      onReset();
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -255,7 +275,7 @@ function EducationsForm({ mode, initialData }) {
           action={{
             label: 'Restore',
             onClick: onRestore,
-            disabled: isSaving || isDeleting
+            disabled: isSaving || isUploading || isDeleting
           }}
         />
       )}
@@ -270,7 +290,7 @@ function EducationsForm({ mode, initialData }) {
               value={formData?.education_id}
               onChange={onChange}
               placeholder="Write Education ID here..."
-              disabled={mode === ADMIN_FORM_MODE.EDIT}
+              disabled={isFetching || mode === ADMIN_FORM_MODE.EDIT}
               required
             />
           </div>
@@ -284,6 +304,7 @@ function EducationsForm({ mode, initialData }) {
               name="is_active"
               label="Is Active?"
               checked={formData?.is_active}
+              disabled={isFetching}
               onChange={onChange}
               required
             />
@@ -299,6 +320,7 @@ function EducationsForm({ mode, initialData }) {
               label="Education Name (EN)"
               value={formData?.school_en}
               placeholder="Write education name (EN) here..."
+              disabled={isFetching}
               onChange={onChange}
               required
             />
@@ -308,8 +330,9 @@ function EducationsForm({ mode, initialData }) {
               inputId="school-ko"
               name="school_ko"
               label="Education Name (KO)"
-              value={formData?.school_en}
+              value={formData?.school_ko}
               placeholder="Write education name (KO) here..."
+              disabled={isFetching}
               onChange={onChange}
               required
             />
@@ -317,6 +340,25 @@ function EducationsForm({ mode, initialData }) {
         </div>
 
         {/* Logo */}
+        <div className="editor-row">
+          <div className="editor-row-col space-y-1">
+            <FormImage
+              inputId="logo"
+              name="logo"
+              label="Logo image"
+              formLabel="New logo image"
+              currImage={formData?.logo}
+              resetKey={resetKey}
+              disabled={isFetching}
+              uploadPath="educations/logo"
+              setIsUploading={setIsUploading}
+              setHasPendingImage={setHasPendingImage}
+              onChange={(imgId) =>
+                setFormData((prev) => ({ ...prev, logo: imgId || null }))
+              }
+            />
+          </div>
+        </div>
 
         {/* Location */}
         <div className="editor-row">
@@ -327,6 +369,7 @@ function EducationsForm({ mode, initialData }) {
               label="Location (EN)"
               value={formData?.location_en}
               placeholder="Write location (EN) here..."
+              disabled={isFetching}
               onChange={onChange}
             />
           </div>
@@ -337,6 +380,7 @@ function EducationsForm({ mode, initialData }) {
               label="Location (KO)"
               value={formData?.location_ko}
               placeholder="Write location (KO) here..."
+              disabled={isFetching}
               onChange={onChange}
             />
           </div>
@@ -351,6 +395,7 @@ function EducationsForm({ mode, initialData }) {
               label="Major/Program (EN)"
               value={formData?.major_en}
               placeholder="Write major or program (EN) here..."
+              disabled={isFetching}
               onChange={onChange}
             />
           </div>
@@ -361,6 +406,7 @@ function EducationsForm({ mode, initialData }) {
               label="Major/Program (KO)"
               value={formData?.major_ko}
               placeholder="Write major or program (KO) here..."
+              disabled={isFetching}
               onChange={onChange}
             />
           </div>
@@ -375,6 +421,7 @@ function EducationsForm({ mode, initialData }) {
               type="date"
               label="Education Start Date"
               value={formData?.start_date}
+              disabled={isFetching}
               onChange={onChange}
               requied
             />
@@ -385,7 +432,8 @@ function EducationsForm({ mode, initialData }) {
               name="end_date"
               type="date"
               label="Education End Date (will say 'Present' if empty)"
-              value={formData?.start_date}
+              value={formData?.end_date}
+              disabled={isFetching}
               onChange={onChange}
             />
           </div>
@@ -400,6 +448,7 @@ function EducationsForm({ mode, initialData }) {
               label="Description (EN)"
               value={formData?.description_en}
               placeholder="Write description (EN) here..."
+              disabled={isFetching}
               onChange={onChange}
               autoResize
             />
@@ -411,6 +460,7 @@ function EducationsForm({ mode, initialData }) {
               label="Description (KO)"
               value={formData?.description_ko}
               placeholder="Write description (KO) here..."
+              disabled={isFetching}
               onChange={onChange}
               autoResize
             />
@@ -424,8 +474,9 @@ function EducationsForm({ mode, initialData }) {
               textareaId="detail-en"
               name="detail_md_en"
               label="Detail (EN)"
-              value={formData?.detail_md_ko}
+              value={formData?.detail_md_en}
               placeholder="Write detail (EN) here..."
+              disabled={isFetching}
               onChange={onChange}
               autoResize
             />
@@ -437,6 +488,7 @@ function EducationsForm({ mode, initialData }) {
               label="Detail (KO)"
               value={formData?.detail_md_ko}
               placeholder="Write detail (KO) here..."
+              disabled={isFetching}
               onChange={onChange}
               autoResize
             />
@@ -446,7 +498,14 @@ function EducationsForm({ mode, initialData }) {
         <div className="flex gap-3">
           <button
             onClick={onSave}
-            disabled={isSaving || !isUpdated || isDeleting}
+            disabled={
+              isFetching ||
+              isSaving ||
+              !isUpdated ||
+              isUploading ||
+              isDeleting ||
+              hasPendingImage
+            }
             className="btn btn-primary"
           >
             {isSaving ? 'Saving...' : 'Save'}
@@ -454,7 +513,7 @@ function EducationsForm({ mode, initialData }) {
 
           <button
             onClick={onReset}
-            disabled={isSaving || isDeleting}
+            disabled={isFetching || isSaving || isUploading || isDeleting}
             className="btn btn-secondary"
             style={{ transition: 'background-color 0.2s ease-in-out' }}
           >
@@ -465,7 +524,7 @@ function EducationsForm({ mode, initialData }) {
           {mode === ADMIN_FORM_MODE.EDIT && (
             <ConfirmModalButton
               text="Archive"
-              disabled={isSaving || isDeleting}
+              disabled={isFetching || isSaving || isUploading || isDeleting}
               data={{
                 title: 'Archive this education item?',
                 description:
@@ -478,6 +537,13 @@ function EducationsForm({ mode, initialData }) {
             </ConfirmModalButton>
           )}
         </div>
+
+        {hasPendingImage && (
+          <p className="font-bold text-red-500">
+            Please finish uploading the image or cancel the selected image
+            before saving.
+          </p>
+        )}
       </div>
     </>
   );

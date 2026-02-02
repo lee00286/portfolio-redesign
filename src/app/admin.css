@@ -33,12 +33,37 @@
   }
 
   .admin-field-input,
+  .admin-field-file-input,
   .admin-field-textarea {
     @apply w-full rounded border border-gray-900 p-3 text-sm;
   }
 
+  .admin-field-file-input {
+    @apply bg-white;
+  }
+
   .textarea-autoresize {
     @apply min-h-[120px] max-h-[70vh] resize-none overflow-hidden;
+  }
+
+  .admin-field-label-switch {
+    @apply relative flex justify-start items-stretch gap-0;
+  }
+
+  .admin-field-label-switch .btn {
+    @apply border-primary-500 border-2 hover:bg-primary-200 !py-1 !text-sm;
+  }
+
+  .admin-field-label-switch .btn:first-of-type {
+    @apply rounded-r-none;
+  }
+
+  .admin-field-label-switch .btn:last-of-type {
+    @apply rounded-l-none border-l-0;
+  }
+
+  .admin-field-label-switch .btn.is-active {
+    @apply bg-primary-500;
   }
 
   .admin-field-switch {
@@ -80,6 +105,9 @@
   .btn {
     @apply rounded px-4 py-2 font-bold cursor-pointer;
     box-shadow: none;
+    transition:
+      border 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
   }
 
   .btn:disabled {
@@ -95,7 +123,7 @@
   }
 
   .btn-danger {
-    @apply border-red-500 bg-red-500 text-white;
+    @apply border-red-500 hover:border-red-700 bg-red-500 hover:bg-red-700 text-white;
   }
 
   .btn-danger:disabled {

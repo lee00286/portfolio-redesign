@@ -10,6 +10,7 @@ export default async function AdminEducationPage({ params }) {
   const { id: educationId } = await params;
 
   const { dbData, error } = await getAdminSupabaseData(dbTitle, {
+    select: '*, logo:images (*)',
     limit: 1,
     skipSoftDelete: false,
     filters: { education_id: educationId }

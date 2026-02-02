@@ -25,6 +25,7 @@ module.exports = {
       xmd: '854px',
       xxmd: '960px',
       lg: '1024px',
+      xlg: '1170px',
       xl: '1280px',
       '2xl': '1440px',
       '3xl': '2560px',
@@ -35,8 +36,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)', 'Arial', 'Helvetica', 'sans-serif'],
-        mono: ['var(--font-mono)', 'monospace']
+        sans: ['Arial', 'Helvetica', 'sans-serif'],
+        mono: ['monospace']
       },
       colors: {
         primary: {

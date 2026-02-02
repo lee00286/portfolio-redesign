@@ -5,6 +5,7 @@ function FormSwitch({
   name,
   label,
   checked = false,
+  disabled = false,
   onChange,
   required
 }) {
@@ -22,6 +23,7 @@ function FormSwitch({
           name={name || switchId}
           type="checkbox"
           checked={checked}
+          disabled={disabled}
           onChange={onChange || null}
           className="admin-field-switch-input"
         />
