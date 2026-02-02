@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { useAutosizeTextarea } from '@/hooks/useAutosizeTextarea';
 
 function FormTextarea({
@@ -15,9 +15,7 @@ function FormTextarea({
   required
 }) {
   // Ref for autoResize
-  const textareaRef = autoResize
-    ? useAutosizeTextarea(value || '')
-    : useRef(null);
+  const textareaRef = useAutosizeTextarea(value || '');
 
   if (!textareaId) return <></>;
 
@@ -30,7 +28,7 @@ function FormTextarea({
       <textarea
         id={textareaId}
         name={name || textareaId}
-        ref={textareaRef}
+        ref={autoResize ? textareaRef : null}
         value={value || ''}
         onChange={onChange || null}
         className={`admin-field-textarea ${autoResize ? 'textarea-autoresize' : ''}`}
