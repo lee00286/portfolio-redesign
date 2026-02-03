@@ -119,3 +119,38 @@ export const cleanUpAdminFormData = (rawFormData, options = {}) => {
 
   return newFormData;
 };
+
+export function validateFormBySchema({ schema, mode, formData }) {
+  for (const [field, rule] of Object.entries(schema)) {
+    const value = formData?.[field];
+
+    // Mode-specific fields
+    if (rule.requiredOn && !rule.requiredOn.includes(mode)) {
+      continue;
+    }
+
+    // Required fields
+    if (rule.required) {
+      const isEmpty =
+        value === null ||
+        value === undefined ||
+        (typeof value === 'string' && !value.trim());
+
+      if (isEmpty) {
+        alert(`${rule.label || field} is required`);
+        return false;
+      }
+    }
+
+    // Other validation rules
+    if (rule.validate) {
+      const result = rule.validate(value, formData);
+      if (result !== true) {
+        alert(result || `${rule.label || field} is invalid`);
+        return false;
+      }
+    }
+  }
+
+  return true;
+}

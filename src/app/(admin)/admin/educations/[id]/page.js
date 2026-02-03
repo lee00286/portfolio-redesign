@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { getAdminSupabaseData } from '@/lib/supabase/admin';
-import { ADMIN_FORM_MODE } from '@/constants/admin';
-import EducationsForm from '@/components/admin/EducationsForm';
+import EducationsFormWrapper from '@/components/admin/EducationsFormWrapper';
 
 const dbTitle = 'educations';
 const title = 'education';
@@ -47,7 +46,7 @@ export default async function AdminEducationPage({ params }) {
         <span className="capitalize">{title} ID</span>: {educationId}
       </h2>
 
-      <EducationsForm mode={ADMIN_FORM_MODE.EDIT} initialData={education} />
+      <EducationsFormWrapper education={education} />
     </section>
   );
 }

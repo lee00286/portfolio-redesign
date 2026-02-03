@@ -26,7 +26,8 @@ function FormImage({
   setIsUploading,
   setHasPendingImage
 }) {
-  const [state, setState] = useState({ // actual saved value is controlled by parent via onChange
+  const [state, setState] = useState({
+    // actual saved value is controlled by parent via onChange
     original: currImage, // UI-only state
     selected: null, // UI-only state
     isChanging: false
