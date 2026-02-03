@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ADMIN_FORM_MODE } from '@/constants/admin';
-import EducationsForm from '@/components/admin/EducationsForm';
+import EducationsFormWrapper from '@/components/admin/EducationsFormWrapper';
 
 const title = 'education';
 
@@ -20,7 +20,7 @@ export default async function AdminEducationNew({ params }) {
         Create a new <span className="capitalize">{title}</span> data
       </h2>
 
-      <EducationsForm mode={ADMIN_FORM_MODE.CREATE} />
+      <EducationsFormWrapper mode={ADMIN_FORM_MODE.CREATE} />
     </section>
   );
 }

@@ -34,6 +34,8 @@ export default async function AdminEducationListPage() {
       <ListView
         entityName="educations"
         uniqueKey="education_id"
+        headingKey="school_en"
+        subheadingKey="major_en"
         items={activeEducations}
       />
 
@@ -48,6 +50,8 @@ export default async function AdminEducationListPage() {
             <ListView
               entityName="educations"
               uniqueKey="education_id"
+              headingKey="school_en"
+              subheadingKey="major_en"
               items={archivedEducations}
               isArchived
             />

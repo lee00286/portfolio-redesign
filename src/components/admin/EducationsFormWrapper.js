@@ -43,12 +43,12 @@ const validationSchema = {
   }
 };
 
-function EducationsFormWrapper({ education }) {
+function EducationsFormWrapper({ mode = ADMIN_FORM_MODE.EDIT, education }) {
   return (
     <FormLogicWrapper
       entityName="educations"
       uniqueKey="education_id"
-      mode={ADMIN_FORM_MODE.EDIT}
+      mode={mode}
       initialData={education}
       emptyData={emptyData}
       validationSchema={validationSchema}

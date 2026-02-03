@@ -3,6 +3,8 @@ import Link from 'next/link';
 function ListView({
   entityName = '',
   uniqueKey = '',
+  headingKey = '',
+  subheadingKey = '',
   items,
   isArchived = false
 }) {
@@ -28,7 +30,7 @@ function ListView({
               <div className="space-y-1">
                 <div className="flex justify-start items-center gap-2">
                   <p className="!font-bold">
-                    {item.school_en || 'Untitled item'}
+                    {(headingKey && item[headingKey]) || 'Untitled item'}
                   </p>
                   {item.deleted_at ? (
                     <span className="badge badge-warning">Archived</span>
@@ -38,7 +40,9 @@ function ListView({
                     <span className="badge badge-error">Inactive</span>
                   )}
                 </div>
-                <p className="!text-gray-600">{item.major_en || '—'}</p>
+                <p className="!text-gray-600">
+                  {(subheadingKey && item[subheadingKey]) || '—'}
+                </p>
 
                 {item.deleted_at && (
                   <p className="text-xs text-gray-400">

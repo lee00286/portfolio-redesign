@@ -9,7 +9,7 @@ import AdminInfoBanner from './AdminInfoBanner';
 function FormLogicWrapper({
   entityName = '',
   uniqueKey = '',
-  mode,
+  mode = ADMIN_FORM_MODE.EDIT,
   initialData,
   emptyData = {},
   validationSchema = {},
