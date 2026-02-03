@@ -117,11 +117,19 @@ export const cleanUpAdminFormData = (rawFormData, options = {}) => {
     newFormData.end_date = normalizeDate(newFormData.end_date);
   }
 
+  if ('logo' in newFormData) {
+    if (typeof newFormData.logo === 'object') {
+      newFormData.logo = newFormData.logo.id;
+    }
+  }
+
   return newFormData;
 };
 
-export function validateFormBySchema({ schema, mode, formData }) {
-  for (const [field, rule] of Object.entries(schema)) {
+export function validateFormBySchema({ validationSchema, mode, formData }) {
+  if (!validationSchema) return false;
+
+  for (const [field, rule] of Object.entries(validationSchema)) {
     const value = formData?.[field];
 
     // Mode-specific fields
@@ -131,10 +139,16 @@ export function validateFormBySchema({ schema, mode, formData }) {
 
     // Required fields
     if (rule.required) {
-      const isEmpty =
-        value === null ||
-        value === undefined ||
-        (typeof value === 'string' && !value.trim());
+      let isEmpty = false;
+
+      if (rule.type === 'array') {
+        isEmpty = !Array.isArray(value) || value.length === 0;
+      } else {
+        isEmpty =
+          value === null ||
+          value === undefined ||
+          (typeof value === 'string' && !value.trim());
+      }
 
       if (isEmpty) {
         alert(`${rule.label || field} is required`);
