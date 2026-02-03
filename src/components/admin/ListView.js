@@ -1,50 +1,54 @@
 import Link from 'next/link';
 
-function EducationsList({ items }) {
+function ListView({
+  entityName = '',
+  uniqueKey = '',
+  items,
+  isArchived = false
+}) {
+  if (!entityName || !uniqueKey) return <></>;
+
   if (!items || items.length === 0) {
     return (
       <p className="error-text">
-        {education.deleted_at
-          ? 'No archived education entries found.'
-          : 'No education entries found.'}
+        {isArchived ? 'No archived entries found.' : 'No entries found.'}
       </p>
     );
   }
 
   return (
     <ul className="space-y-2">
-      {items.map((education) => (
-        <li key={`education-${education.education_id}`}>
+      {items.map((item) => (
+        <li key={`item-${item[uniqueKey]}`}>
           <Link
-            href={`/admin/educations/${education.education_id}`}
+            href={`/admin/${entityName}/${item[uniqueKey]}`}
             className="data-list-item"
           >
             <div className="flex md-max:flex-col justify-between items-center md-max:items-start gap-3">
               <div className="space-y-1">
                 <div className="flex justify-start items-center gap-2">
                   <p className="!font-bold">
-                    {education.school_en || 'Untitled Education'}
+                    {item.school_en || 'Untitled item'}
                   </p>
-                  {education.deleted_at ? (
+                  {item.deleted_at ? (
                     <span className="badge badge-warning">Archived</span>
-                  ) : education.is_active ? (
+                  ) : item.is_active ? (
                     <span className="badge badge-success">Active</span>
                   ) : (
                     <span className="badge badge-error">Inactive</span>
                   )}
                 </div>
-                <p className="!text-gray-600">{education.major_en || '—'}</p>
+                <p className="!text-gray-600">{item.major_en || '—'}</p>
 
-                {education.deleted_at && (
+                {item.deleted_at && (
                   <p className="text-xs text-gray-400">
-                    Archived at{' '}
-                    {new Date(education.deleted_at).toLocaleDateString()}
+                    Archived at {new Date(item.deleted_at).toLocaleDateString()}
                   </p>
                 )}
               </div>
 
               <span className="btn btn-primary md-max:!py-0.5 md-max:!text-sm">
-                {education.deleted_at ? 'View' : 'Edit'}
+                {item.deleted_at ? 'View' : 'Edit'}
               </span>
             </div>
           </Link>
@@ -54,4 +58,4 @@ function EducationsList({ items }) {
   );
 }
 
-export default EducationsList;
+export default ListView;

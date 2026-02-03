@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getAdminSupabaseData } from '@/lib/supabase/admin';
-import EducationsList from '@/components/admin/EducationsList';
+import ListView from '@/components/admin/ListView';
 
 const title = 'educations';
 
@@ -31,7 +31,11 @@ export default async function AdminEducationListPage() {
       </div>
 
       {/* Active Educations */}
-      <EducationsList items={activeEducations} />
+      <ListView
+        entityName="educations"
+        uniqueKey="education_id"
+        items={activeEducations}
+      />
 
       {/* Archived Educations */}
       {archivedEducations.length > 0 && (
@@ -41,7 +45,12 @@ export default async function AdminEducationListPage() {
           </summary>
 
           <div className="mt-3">
-            <EducationsList items={archivedEducations} />
+            <ListView
+              entityName="educations"
+              uniqueKey="education_id"
+              items={archivedEducations}
+              isArchived
+            />
           </div>
         </details>
       )}
