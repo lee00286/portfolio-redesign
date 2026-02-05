@@ -61,6 +61,7 @@ export const getFilteredProjectData = (data, lang = 'en') => {
   if (!data) return {};
 
   return {
+    id: data.project_id,
     logo: data.logo,
     start_date: data.start_date || '',
     end_date: data.end_date || '',
@@ -119,9 +120,19 @@ export const cleanUpAdminFormData = (rawFormData, options = {}) => {
 
   if ('logo' in newFormData) {
     if (typeof newFormData.logo === 'object') {
-      newFormData.logo = newFormData.logo.id;
+      newFormData.logo = newFormData.logo?.id || null;
     }
   }
+
+  const ARRAY_FIELDS = ['tech_stack', 'tags'];
+
+  ARRAY_FIELDS.forEach((key) => {
+    if (!(key in newFormData)) return;
+
+    if (!Array.isArray(newFormData[key])) {
+      newFormData[key] = [];
+    }
+  });
 
   return newFormData;
 };

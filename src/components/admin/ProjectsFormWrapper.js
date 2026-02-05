@@ -3,44 +3,42 @@
 import React from 'react';
 import { ADMIN_FORM_MODE } from '@/constants/admin';
 import FormLogicWrapper from './FormLogicWrapper';
-import ExperiencesForm from './ExperiencesForm';
+import ProjectsForm from './ProjectsForm';
 
 const emptyData = {
-  experience_id: '',
-  company_name_en: '',
-  company_name_ko: '',
+  project_id: '',
+  title_en: '',
+  title_ko: '',
   logo: null,
   location_en: '',
   location_ko: '',
-  company_description_en: '',
-  company_description_ko: '',
   start_date: '',
   end_date: '',
   pos_title_en: '',
   pos_title_ko: '',
-  pos_description_en: '',
-  pos_description_ko: '',
   tech_stack: [],
   description_en: '',
   description_ko: '',
   detail_md_en: '',
   detail_md_ko: '',
+  url: '',
+  github: '',
   is_active: false
 };
 
 const validationSchema = {
-  experience_id: {
+  project_id: {
     required: true,
     requiredOn: [ADMIN_FORM_MODE.CREATE],
-    label: 'Experience ID'
+    label: 'Project ID'
   },
-  company_name_en: {
+  title_en: {
     required: true,
-    label: 'Company Name (EN)'
+    label: 'Project Title (EN)'
   },
-  company_name_ko: {
+  title_ko: {
     required: true,
-    label: 'Company Name (KO)'
+    label: 'Project Title (KO)'
   },
   start_date: {
     required: true,
@@ -52,18 +50,18 @@ const validationSchema = {
   }
 };
 
-function ExperiencesFormWrapper({ mode = ADMIN_FORM_MODE.EDIT, experience }) {
+function ProjectsFormWrapper({ mode = ADMIN_FORM_MODE.EDIT, project }) {
   return (
     <FormLogicWrapper
-      entityName="experiences"
-      uniqueKey="experience_id"
+      entityName="projects"
+      uniqueKey="project_id"
       mode={mode}
-      initialData={experience}
+      initialData={project}
       emptyData={emptyData}
       validationSchema={validationSchema}
-      render={(form) => <ExperiencesForm {...form} />}
+      render={(form) => <ProjectsForm {...form} />}
     />
   );
 }
 
-export default ExperiencesFormWrapper;
+export default ProjectsFormWrapper;
