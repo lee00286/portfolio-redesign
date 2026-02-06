@@ -113,7 +113,7 @@ function FormImageUpload({
         {label || name}
         {required && <span className="text-red-500">*</span>}
       </p>
-      <div className="admin-field-input">
+      <div className="admin-field-input space-y-4">
         <div className="editor-row">
           <div className="editor-row-col">
             <label htmlFor={inputId} className="admin-field-label">

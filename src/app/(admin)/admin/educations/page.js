@@ -37,6 +37,7 @@ export default async function AdminEducationListPage() {
         headingKey="school_en"
         subheadingKey="major_en"
         items={activeEducations}
+        checkIsActive
       />
 
       {/* Archived Educations */}
@@ -54,6 +55,7 @@ export default async function AdminEducationListPage() {
               subheadingKey="major_en"
               items={archivedEducations}
               isArchived
+              checkIsActive
             />
           </div>
         </details>

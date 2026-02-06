@@ -101,6 +101,10 @@
     -ms-transform: translateX(20px);
   }
 
+  .admin-form-image-create.editor > .admin-field-input {
+    @apply border-none p-0;
+  }
+
   /* Buttons */
   .btn {
     @apply rounded px-4 py-2 font-bold cursor-pointer;
@@ -166,5 +170,38 @@
 
   .badge-warning {
     @apply bg-orange-500;
+  }
+
+  /* Data Grid */
+  .data-grid-item {
+    @apply flex justify-center items-center rounded-lg border border-gray-900 hover:bg-muted aspect-square transition overflow-hidden;
+  }
+
+  .data-grid-item:hover {
+    @apply bg-muted;
+  }
+
+  .data-grid-item img {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .data-grid-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .badge {
+    @apply rounded-full px-2 py-0.5 font-bold text-xs text-white;
+  }
+
+  .data-grid-item.grid-success {
+    @apply border-green-500;
+  }
+
+  .data-grid-item.grid-error {
+    @apply border-red-500;
+  }
+
+  .data-grid-item.grid-warning {
+    @apply border-orange-500;
   }
 }

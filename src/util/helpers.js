@@ -179,3 +179,12 @@ export function validateFormBySchema({ validationSchema, mode, formData }) {
 
   return true;
 }
+
+// Supabase - Extract the storage path from the image URL
+export const extractStoragePath = (imageUrl) => {
+  const marker = '/storage/v1/object/public/';
+  const idx = imageUrl.indexOf(marker);
+  if (idx === -1) return null;
+
+  return imageUrl.slice(idx + marker.length);
+};

@@ -13,6 +13,7 @@ function FormLogicWrapper({
   initialData,
   emptyData = {},
   validationSchema = {},
+  editorClass = '',
   render
 }) {
   const router = useRouter();
@@ -251,7 +252,7 @@ function FormLogicWrapper({
           }}
         />
       )}
-      <div className="editor space-y-4">
+      <div className={`editor space-y-4 ${editorClass ? editorClass : ''}`}>
         {render({
           mode,
           isFetching,

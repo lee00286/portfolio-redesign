@@ -37,6 +37,7 @@ export default async function AdminProjectListPage() {
         headingKey="title_en"
         subheadingKey="pos_title_en"
         items={activeProjects}
+        checkIsActive
       />
 
       {/* Archived Projects */}
@@ -54,6 +55,7 @@ export default async function AdminProjectListPage() {
               subheadingKey="pos_title_en"
               items={archivedProjects}
               isArchived
+              checkIsActive
             />
           </div>
         </details>

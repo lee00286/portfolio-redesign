@@ -50,7 +50,6 @@ function FormMediaSelector({ label, onSelect, required = false }) {
         {required && <span className="text-red-500">*</span>}
       </p>
       {/* Media Library */}
-
       <div className="admin-field-input">
         <div className="editor-row">
           <div className="editor-row-col">

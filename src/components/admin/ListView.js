@@ -6,7 +6,8 @@ function ListView({
   headingKey = '',
   subheadingKey = '',
   items,
-  isArchived = false
+  isArchived = false,
+  checkIsActive = false
 }) {
   if (!entityName || !uniqueKey) return <></>;
 
@@ -34,10 +35,14 @@ function ListView({
                   </p>
                   {item.deleted_at ? (
                     <span className="badge badge-warning">Archived</span>
-                  ) : item.is_active ? (
-                    <span className="badge badge-success">Active</span>
+                  ) : checkIsActive ? (
+                    item.is_active ? (
+                      <span className="badge badge-success">Active</span>
+                    ) : (
+                      <span className="badge badge-error">Inactive</span>
+                    )
                   ) : (
-                    <span className="badge badge-error">Inactive</span>
+                    <></>
                   )}
                 </div>
                 <p className="!text-gray-600">

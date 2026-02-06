@@ -37,6 +37,7 @@ export default async function AdminExperienceListPage() {
         headingKey="company_name_en"
         subheadingKey="pos_title_en"
         items={activeExperiences}
+        checkIsActive
       />
 
       {/* Archived Experiences */}
@@ -54,6 +55,7 @@ export default async function AdminExperienceListPage() {
               subheadingKey="pos_title_en"
               items={archivedExperiences}
               isArchived
+              checkIsActive
             />
           </div>
         </details>
