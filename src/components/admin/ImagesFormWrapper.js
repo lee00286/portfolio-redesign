@@ -28,7 +28,7 @@ const validationSchema = {
   }
 };
 
-function ImagesFormWrapper({ mode = ADMIN_FORM_MODE.EDIT, image }) {
+function ImagesFormWrapper({ mode = ADMIN_FORM_MODE.EDIT, image, imageUsage }) {
   return (
     <FormLogicWrapper
       entityName="images"
@@ -37,6 +37,7 @@ function ImagesFormWrapper({ mode = ADMIN_FORM_MODE.EDIT, image }) {
       initialData={image}
       emptyData={emptyData}
       validationSchema={validationSchema}
+      imageUsage={imageUsage}
       editorClass="admin-form-image-create"
       render={(form) => <ImagesForm {...form} />}
     />

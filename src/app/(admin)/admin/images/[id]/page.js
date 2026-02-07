@@ -1,5 +1,8 @@
 import Link from 'next/link';
-import { getAdminSupabaseData } from '@/lib/supabase/admin';
+import {
+  getAdminImageUsageMap,
+  getAdminSupabaseData
+} from '@/lib/supabase/admin';
 import ImagesFormWrapper from '@/components/admin/ImagesFormWrapper';
 
 const dbTitle = 'images';
@@ -30,6 +33,12 @@ export default async function AdminImagePage({ params }) {
     );
   }
 
+  const usageMap = await getAdminImageUsageMap([imageId]);
+
+  if (usageMap?.error) {
+    return <p className="error-text">Failed to load image usage map</p>;
+  }
+
   return (
     <section className="!p-0 w-full">
       <div className="flex justify-start mb-4">
@@ -45,7 +54,7 @@ export default async function AdminImagePage({ params }) {
         <span className="capitalize">{title} ID</span>: {imageId}
       </h2>
 
-      <ImagesFormWrapper image={image} />
+      <ImagesFormWrapper image={image} imageUsage={usageMap?.[imageId] ?? {}} />
     </section>
   );
 }

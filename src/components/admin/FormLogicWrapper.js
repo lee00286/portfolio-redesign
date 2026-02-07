@@ -13,6 +13,7 @@ function FormLogicWrapper({
   initialData,
   emptyData = {},
   validationSchema = {},
+  imageUsage = {},
   editorClass = '',
   render
 }) {
@@ -263,6 +264,7 @@ function FormLogicWrapper({
           formData,
           setFormData,
           validationSchema,
+          imageUsage,
           isUpdated,
           resetKey,
           hasPendingImage,

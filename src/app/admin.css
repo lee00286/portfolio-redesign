@@ -131,7 +131,7 @@
   }
 
   .btn-danger:disabled {
-    @apply !border-red-300 !bg-red-300 text-black;
+    @apply !border-red-300 !bg-red-300 text-gray-600;
   }
 
   /* Editor */
@@ -174,7 +174,7 @@
 
   /* Data Grid */
   .data-grid-item {
-    @apply flex justify-center items-center rounded-lg border border-gray-900 hover:bg-muted aspect-square transition overflow-hidden;
+    @apply relative flex justify-center items-center rounded-lg border border-[1.5px] border-gray-700 hover:bg-muted aspect-square transition overflow-hidden;
   }
 
   .data-grid-item:hover {
@@ -182,6 +182,7 @@
   }
 
   .data-grid-item img {
+    @apply z-[1] relative;
     transition: transform 0.2s ease-in-out;
   }
 
@@ -203,5 +204,19 @@
 
   .data-grid-item.grid-warning {
     @apply border-orange-500;
+  }
+
+  .tooltip {
+    @apply relative cursor-pointer;
+  }
+
+  .tooltip-text {
+    @apply z-[1] absolute top-0 left-0 rounded-lg px-2 py-1 bg-[rgba(0,0,0,0.8)] text-white text-xs text-left whitespace-nowrap;
+    visibility: hidden;
+    transition: visibility 0.2s ease-in-out;
+  }
+
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
   }
 }

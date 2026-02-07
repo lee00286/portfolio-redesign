@@ -14,6 +14,7 @@ function ImagesForm({
   formData,
   setFormData = () => {},
   validationSchema = {},
+  imageUsage = {},
   hasPendingImage = false,
   setHasPendingImage = () => {},
   isUpdated,
@@ -59,6 +60,31 @@ function ImagesForm({
     </>
   ) : mode === ADMIN_FORM_MODE.EDIT ? (
     <>
+      {/* Image Usage */}
+      <div className="editor-row">
+        <div className="editor-row-col">
+          {imageUsage?.count > 0 && imageUsage?.entities?.length > 0 ? (
+            <>
+              <p className="font-bold text-gray-500 text-sm">
+                This image is used in {imageUsage.count} other{' '}
+                {imageUsage.entities.length > 1 ? 'entities' : 'entity'}:
+              </p>
+              <ul className="mt-1 list-disc pl-4">
+                {imageUsage.entities.map((entity) => (
+                  <li key={entity} className="font-bold text-gray-500 text-sm">
+                    {entity}
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p className="font-bold text-gray-500 text-sm">
+              This image is not used in any other entity.
+            </p>
+          )}
+        </div>
+      </div>
+
       {/* Image URL */}
       <div className="editor-row">
         <div className="editor-row-col">
@@ -161,7 +187,13 @@ function ImagesForm({
         {mode === ADMIN_FORM_MODE.EDIT && (
           <ConfirmModalButton
             text="Delete Permanently"
-            disabled={isFetching || isSaving || isUploading || isDeleting}
+            disabled={
+              isFetching ||
+              isSaving ||
+              isUploading ||
+              isDeleting ||
+              imageUsage?.count > 0
+            }
             data={{
               title: 'Delete this image permanently?',
               description:
@@ -174,6 +206,14 @@ function ImagesForm({
           </ConfirmModalButton>
         )}
       </div>
+
+      {mode === ADMIN_FORM_MODE.EDIT && imageUsage?.count > 0 && (
+        <p className="error-text">
+          This image is used in {imageUsage.count} other{' '}
+          {imageUsage.entities.length > 1 ? 'entities' : 'entity'}. Please
+          delete it from the other entities before deleting it permanently.
+        </p>
+      )}
     </>
   ) : (
     <></>

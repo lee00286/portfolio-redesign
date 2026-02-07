@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import React from 'react';
 
 function GridView({
   entityName = '',
   uniqueKey = '',
   items,
-  isArchived = false
+  isArchived = false,
+  usageMap = {}
 }) {
   if (!entityName || !uniqueKey) return <></>;
 
@@ -22,8 +24,30 @@ function GridView({
         <div key={`item-${item[uniqueKey]}`}>
           <Link
             href={`/admin/${entityName}/${item[uniqueKey]}`}
-            className="data-grid-item"
+            className={`
+              data-grid-item ${
+                usageMap?.[item.id]?.count > 0 ? 'grid-warning' : ''
+              }
+            `}
           >
+            {usageMap?.[item.id]?.count > 0 && (
+              <span className="tooltip z-[2] absolute top-2 left-2 badge badge-warning">
+                In Use
+                <span className="tooltip-text">
+                  <strong>Use Count</strong>: {usageMap[item.id].count}
+                  <br />
+                  <strong>Used In</strong>:
+                  <br />
+                  {usageMap[item.id].entities.map((entity, index) => (
+                    <React.Fragment key={entity}>
+                      {index > 0 && <br />}
+                      -&nbsp;{entity}
+                    </React.Fragment>
+                  ))}
+                </span>
+              </span>
+            )}
+
             {item.image_url && (
               <img
                 src={item.image_url}
