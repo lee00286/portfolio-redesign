@@ -8,7 +8,7 @@ export async function POST(req) {
 
     if (!education_id) {
       return NextResponse.json(
-        { error: 'Education ID is required.' },
+        { error: 'education_id is required.' },
         { status: 400 }
       );
     }

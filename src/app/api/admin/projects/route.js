@@ -8,7 +8,7 @@ export async function POST(req) {
 
     if (!project_id) {
       return NextResponse.json(
-        { error: 'Project ID is required.' },
+        { error: 'project_id is required.' },
         { status: 400 }
       );
     }

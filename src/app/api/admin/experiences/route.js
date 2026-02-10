@@ -8,7 +8,7 @@ export async function POST(req) {
 
     if (!experience_id) {
       return NextResponse.json(
-        { error: 'Experience ID is required.' },
+        { error: 'experience_id is required.' },
         { status: 400 }
       );
     }

@@ -7,7 +7,10 @@ export async function POST(req) {
     const { id, ...updateData } = body;
 
     if (!id) {
-      return NextResponse.json({ error: 'Missing about id' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'About ID is required' },
+        { status: 400 }
+      );
     }
 
     if (Object.keys(updateData).length === 0) {
@@ -18,6 +21,13 @@ export async function POST(req) {
     }
 
     const supabase = createAdminSupabaseServer();
+
+    if (!supabase) {
+      return NextResponse.json(
+        { error: 'Admin disabled in this environment' },
+        { status: 403 }
+      );
+    }
 
     const { error, data } = await supabase
       .from('about')

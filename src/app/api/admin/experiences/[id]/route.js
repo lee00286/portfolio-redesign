@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createAdminSupabaseServer } from '@/lib/supabase/admin';
+import { updateExperienceById } from '@/lib/admin/updateData';
 
 export async function PUT(req, { params }) {
   try {
@@ -7,13 +8,15 @@ export async function PUT(req, { params }) {
     const { id } = await params;
 
     if (!id) {
-      return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Experience ID is required' },
+        { status: 400 }
+      );
     }
 
     const body = await req.json();
-    const { experience_id, ...updateData } = body;
 
-    if (Object.keys(updateData).length === 0) {
+    if (!body || Object.keys(body)?.length === 0) {
       return NextResponse.json(
         { error: 'No update data provided' },
         { status: 400 }
@@ -44,9 +47,13 @@ export async function PUT(req, { params }) {
     }
 
     // Update the experience data
+    if (body?.['experience_id']) {
+      delete body['experience_id'];
+    }
+
     const { error, data } = await supabase
       .from('experiences')
-      .update(updateData)
+      .update(body)
       .eq('id', id)
       .select()
       .single();
@@ -75,7 +82,10 @@ export async function PATCH(req, { params }) {
     const { id } = await params;
 
     if (!id) {
-      return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Experience ID is required' },
+        { status: 400 }
+      );
     }
 
     const supabase = createAdminSupabaseServer();
@@ -87,40 +97,14 @@ export async function PATCH(req, { params }) {
       );
     }
 
-    // Check if the experience exists
-    const { data: exists } = await supabase
-      .from('experiences')
-      .select('id')
-      .eq('id', id)
-      .not('deleted_at', 'is', null)
-      .maybeSingle();
-
-    if (!exists) {
-      return NextResponse.json(
-        { error: 'Archived experience data not found' },
-        { status: 404 }
-      );
-    }
-
-    // Update the experience data
-    const { error, data } = await supabase
-      .from('experiences')
-      .update({
+    return updateExperienceById({
+      supabase,
+      id,
+      updateData: {
         deleted_at: null,
         is_active: false
-      })
-      .eq('id', id)
-      .select()
-      .single();
-
-    if (error) {
-      console.error('[ADMIN EXPERIENCE RESTORE ERROR]', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json({
-      success: true,
-      data
+      },
+      notFoundMessage: 'Archived experience data not found'
     });
   } catch (err) {
     console.error('[ADMIN EXPERIENCE RESTORE API ERROR]', err);
@@ -137,7 +121,10 @@ export async function DELETE(req, { params }) {
     const { id } = await params;
 
     if (!id) {
-      return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Experience ID is required' },
+        { status: 400 }
+      );
     }
 
     const supabase = createAdminSupabaseServer();
@@ -149,40 +136,14 @@ export async function DELETE(req, { params }) {
       );
     }
 
-    // Check if the experience exists
-    const { data: exists } = await supabase
-      .from('experiences')
-      .select('id')
-      .eq('id', id)
-      .maybeSingle();
-
-    if (!exists) {
-      return NextResponse.json(
-        { error: 'Experience data not found' },
-        { status: 404 }
-      );
-    }
-
-    // Update the experience data
-    const deletedAt = new Date();
-    const { error, data } = await supabase
-      .from('experiences')
-      .update({
-        deleted_at: deletedAt.toISOString(),
+    return updateExperienceById({
+      supabase,
+      id,
+      updateData: {
+        deleted_at: new Date().toISOString(),
         is_active: false
-      })
-      .eq('id', id)
-      .select()
-      .single();
-
-    if (error) {
-      console.error('[ADMIN EXPERIENCE SOFT DELETE ERROR]', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json({
-      success: true,
-      data
+      },
+      notFoundMessage: 'Experience data not found'
     });
   } catch (err) {
     console.error('[ADMIN EXPERIENCE DELETE API ERROR]', err);
