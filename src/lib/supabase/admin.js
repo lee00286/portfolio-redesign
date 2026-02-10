@@ -98,37 +98,49 @@ export async function getAdminImageUsageMap(imageIds) {
       ]);
 
     // Create image usage map
-    const usageMap = {};
-
-    imageIds.forEach((id) => {
-      usageMap[id] = { count: 0, entities: [] };
+    return buildImageUsageMap(imageIds, {
+      educations,
+      experiences,
+      projects
     });
-
-    const registerImageUsage = (rows, entity) => {
-      if (!Array.isArray(rows) || rows?.length === 0) return;
-
-      rows?.forEach((row) => {
-        if (!row.logo) return;
-
-        if (!usageMap[row.logo]) {
-          usageMap[row.logo] = { count: 0, entities: [] };
-        }
-
-        usageMap[row.logo].count++;
-
-        if (!usageMap[row.logo].entities.includes(entity)) {
-          usageMap[row.logo].entities.push(entity);
-        }
-      });
-    };
-
-    registerImageUsage(educations, 'educations');
-    registerImageUsage(experiences, 'experiences');
-    registerImageUsage(projects, 'projects');
-
-    return usageMap;
   } catch (error) {
     console.error('Unexpected server data fetch error:', error);
     return { error };
   }
+}
+
+export function buildImageUsageMap(imageIds, entityRowsMap) {
+  if (!Array.isArray(imageIds) || imageIds?.length === 0) {
+    return {};
+  }
+
+  if (!entityRowsMap || Object.keys(entityRowsMap)?.length === 0) {
+    return {};
+  }
+
+  const usageMap = {};
+
+  imageIds.forEach((id) => {
+    usageMap[id] = { count: 0, entities: [] };
+  });
+
+  Object.entries(entityRowsMap).forEach(([entity, rows]) => {
+    if (!Array.isArray(rows) || rows?.length === 0) return;
+
+    rows.forEach((row) => {
+      if (!row?.logo) return;
+
+      if (!usageMap[row.logo]) {
+        usageMap[row.logo] = { count: 0, entities: [] };
+      }
+
+      usageMap[row.logo].count++;
+
+      if (!usageMap[row.logo].entities.includes(entity)) {
+        usageMap[row.logo].entities.push(entity);
+      }
+    });
+  });
+
+  return usageMap;
 }

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint -- --fix --ext .mjs,.js,.ts,.jsx,.tsx,.css,.json",
-    "format": "prettier --write --config .prettierrc '**/*.{mjs,js,ts,jsx,tsx,css,json}' '!.next'"
+    "format": "prettier --write --config .prettierrc '**/*.{mjs,js,ts,jsx,tsx,css,json}' '!.next'",
+    "test": "jest"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.10.0",
@@ -22,12 +23,21 @@
     "remark-directive": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.29.0",
     "@eslint/eslintrc": "^3",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/jest": "^30.0.0",
     "autoprefixer": "^10.4.24",
+    "babel-jest": "^30.2.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "^3.4.19",
+    "ts-node": "^10.9.2"
   }
 }

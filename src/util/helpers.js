@@ -2,12 +2,13 @@ import { ADMIN_FORM_MODE } from '@/constants/admin';
 
 export const getFilteredAboutData = (data, lang = 'en') => {
   if (!data) return {};
+  if (!Object.keys(data)?.length) return {};
 
   return {
-    name: lang === 'ko' ? data.name_ko : data.name_en,
-    position: lang === 'ko' ? data.pos_title_ko : data.pos_title_en,
-    summary: lang === 'ko' ? data.summary_ko : data.summary_en,
-    detail: lang === 'ko' ? data.detail_ko : data.detail_en
+    name: (lang === 'ko' ? data.name_ko : data.name_en) || '',
+    position: (lang === 'ko' ? data.pos_title_ko : data.pos_title_en) || '',
+    summary: (lang === 'ko' ? data.summary_ko : data.summary_en) || '',
+    detail: (lang === 'ko' ? data.detail_ko : data.detail_en) || ''
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };
@@ -15,18 +16,20 @@ export const getFilteredAboutData = (data, lang = 'en') => {
 
 export const getFilteredEducationData = (data, lang = 'en') => {
   if (!data) return {};
+  if (!Object.keys(data)?.length) return {};
 
   return {
-    id: data.education_id,
-    logo: data.logo,
+    id: data.education_id || '',
+    logo: data.logo || '',
     start_date: data.start_date || '',
     end_date: data.end_date || '',
-    school: lang === 'ko' ? data.school_ko : data.school_en,
-    major: lang === 'ko' ? data.major_ko : data.major_en,
-    location: lang === 'ko' ? data.location_ko : data.location_en,
-    description: lang === 'ko' ? data.description_ko : data.description_en,
-    detail_md: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
-    is_active: data.is_active
+    school: (lang === 'ko' ? data.school_ko : data.school_en) || '',
+    location: (lang === 'ko' ? data.location_ko : data.location_en) || '',
+    major: (lang === 'ko' ? data.major_ko : data.major_en) || '',
+    description:
+      (lang === 'ko' ? data.description_ko : data.description_en) || '',
+    detail_md: (lang === 'ko' ? data.detail_md_ko : data.detail_md_en) || '',
+    is_active: data.is_active ?? false
     // delete_at: data.delete_at,
     // created_at: data.created_at,
     // updated_at: data.updated_at
@@ -35,23 +38,28 @@ export const getFilteredEducationData = (data, lang = 'en') => {
 
 export const getFilteredExperienceData = (data, lang = 'en') => {
   if (!data) return {};
+  if (!Object.keys(data)?.length) return {};
 
   return {
-    id: data.experience_id,
-    logo: data.logo,
+    id: data.experience_id || '',
+    logo: data.logo || '',
     start_date: data.start_date || '',
     end_date: data.end_date || '',
-    company_name: lang === 'ko' ? data.company_name_ko : data.company_name_en,
+    company_name:
+      (lang === 'ko' ? data.company_name_ko : data.company_name_en) || '',
     company_description:
-      lang === 'ko' ? data.company_description_ko : data.company_description_en,
-    position: lang === 'ko' ? data.pos_title_ko : data.pos_title_en,
+      (lang === 'ko'
+        ? data.company_description_ko
+        : data.company_description_en) || '',
+    location: (lang === 'ko' ? data.location_ko : data.location_en) || '',
+    position: (lang === 'ko' ? data.pos_title_ko : data.pos_title_en) || '',
     pos_description:
-      lang === 'ko' ? data.pos_description_ko : data.pos_description_en,
-    location: lang === 'ko' ? data.location_ko : data.location_en,
-    description: lang === 'ko' ? data.description_ko : data.description_en,
-    tech_stack: data.tech_stack || '',
-    detail_md: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
-    is_active: data.is_active
+      (lang === 'ko' ? data.pos_description_ko : data.pos_description_en) || '',
+    description:
+      (lang === 'ko' ? data.description_ko : data.description_en) || '',
+    tech_stack: Array.isArray(data.tech_stack) ? data.tech_stack : [],
+    detail_md: (lang === 'ko' ? data.detail_md_ko : data.detail_md_en) || '',
+    is_active: data.is_active ?? false
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };
@@ -59,21 +67,23 @@ export const getFilteredExperienceData = (data, lang = 'en') => {
 
 export const getFilteredProjectData = (data, lang = 'en') => {
   if (!data) return {};
+  if (!Object.keys(data)?.length) return {};
 
   return {
-    id: data.project_id,
-    logo: data.logo,
+    id: data.project_id || '',
+    logo: data.logo || '',
     start_date: data.start_date || '',
     end_date: data.end_date || '',
-    title: lang === 'ko' ? data.title_ko : data.title_en,
-    position: lang === 'ko' ? data.pos_title_ko : data.pos_title_en,
-    location: lang === 'ko' ? data.location_ko : data.location_en,
-    description: lang === 'ko' ? data.description_ko : data.description_en,
-    detail_md: lang === 'ko' ? data.detail_md_ko : data.detail_md_en,
-    tech_stack: data.tech_stack || '',
+    title: (lang === 'ko' ? data.title_ko : data.title_en) || '',
+    location: (lang === 'ko' ? data.location_ko : data.location_en) || '',
+    position: (lang === 'ko' ? data.pos_title_ko : data.pos_title_en) || '',
+    description:
+      (lang === 'ko' ? data.description_ko : data.description_en) || '',
+    detail_md: (lang === 'ko' ? data.detail_md_ko : data.detail_md_en) || '',
+    tech_stack: Array.isArray(data.tech_stack) ? data.tech_stack : [],
     github: data.github || '',
     url: data.url || '',
-    is_active: data.is_active
+    is_active: data.is_active ?? false
     // created_at: data.created_at,
     // updated_at: data.updated_at
   };
@@ -92,8 +102,14 @@ const cleanUpTableUniqueId = (rawUniqueId) => {
   return newUniqueId;
 };
 
-const normalizeDate = (v) =>
-  typeof v === 'string' && v.trim() === '' ? null : v;
+const normalizeDate = (v) => {
+  if (v instanceof Date) {
+    return v;
+  }
+
+  const date = new Date(v);
+  return isNaN(date.getTime()) ? null : v;
+};
 
 export const cleanUpAdminFormData = (rawFormData, options = {}) => {
   const { uniqueIdKey, mode = ADMIN_FORM_MODE.EDIT } = options;
@@ -105,7 +121,7 @@ export const cleanUpAdminFormData = (rawFormData, options = {}) => {
   if (
     mode === ADMIN_FORM_MODE.CREATE &&
     uniqueIdKey &&
-    newFormData?.[uniqueIdKey]
+    uniqueIdKey in newFormData
   ) {
     newFormData[uniqueIdKey] = cleanUpTableUniqueId(newFormData[uniqueIdKey]);
   }
@@ -124,7 +140,7 @@ export const cleanUpAdminFormData = (rawFormData, options = {}) => {
     }
   }
 
-  const ARRAY_FIELDS = ['tech_stack', 'tags'];
+  const ARRAY_FIELDS = ['tech_stack'];
 
   ARRAY_FIELDS.forEach((key) => {
     if (!(key in newFormData)) return;
@@ -182,8 +198,11 @@ export function validateFormBySchema({ validationSchema, mode, formData }) {
 
 // Supabase - Extract the storage path from the image URL
 export const extractStoragePath = (imageUrl) => {
+  if (!imageUrl || typeof imageUrl !== 'string') return null;
+
   const marker = '/storage/v1/object/public/';
-  const idx = imageUrl.indexOf(marker);
+  const idx = imageUrl?.indexOf(marker);
+
   if (idx === -1) return null;
 
   return imageUrl.slice(idx + marker.length);
