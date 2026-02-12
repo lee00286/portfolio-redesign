@@ -1,38 +1,52 @@
-# portfolio-redesign
+# Portfolio Web App
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Personal portfolio web application built with **Next.js App Router** and **Supabase**.
 
-## Getting Started
+## Project Goals
 
-First, run the development server:
+This project focuses on moving away from a static, hard-coded portfolio and building a dynamic system where content is managed through a custom internal dashboard. This allows a clear separation between data and presentation, while keeping the overall architecture minimal.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Another goal was to keep the site as accessible as possible, following the principles of [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) and [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project prioritizes **data flow over abstraction**. Architectural decisions, from using the App Router to accessing the database directly, were made to keep the system fast, maintainable, and easy to deploy.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Language**: JavaScript
+- **Framework**: Next.js (App Router)
+- **Styling**: TailwindCSS v3
+- **Database / Storage**: Supabase (PostgreSQL + Storage)
+- **Deployment**: Vercel
 
-## Learn More
+## Project Architecture
 
-To learn more about Next.js, take a look at the following resources:
+The app lives in a single codebase and handles both public and internal admin dashboard.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Public Pages
+- Uses **Next.js Server Components** to fetch data directly from Supabase, reducing client-side JavaScript and improving SEO
+- Responsive image handling via Supabase Storage and Next.js image optimization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Internal Admin Dashboard
+- Used for managing portfolio content and assets
+- Built as **part of the same app** rather than as a separate service, to keep the codebase simple and maintainable
+- Admin server-side logic is kept separate for security purposes
+- Access is restricted to authorized environments
+- Admin authentication is handled through a hashed token stored in an HTTP-only cookie
+- Basic security headers are applied to `/admin/*` and `/api/admin/*` routes
 
-## Deploy on Vercel
+## Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Unit tests are written using [Jest](https://jestjs.io/). The unit tests focus on the logic validation and state transitions rather than covering the entire codebase and visual rendering.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The project includes unit tests to cover:
+
+- Admin authentication utilities (token generation and verification)
+- Admin API routes (POST, PUT, PATCH, DELETE)
+- Error handling paths (400, 403, 404, 500)
+- Supabase interaction logic with controlled mock chains
+
+## Technical Notes
+- Utilized Next.js **Server Components** instead of a separate REST API layer for internal data access
+- Admin-level write and storage operations run server-side using the **Supabase Service Role**
+- Shared server-side utilities are extracted where they can be reused
+- Detailed contents are written in **Markdown** and rendered using `react-markdown` to improve the content editing and display experience

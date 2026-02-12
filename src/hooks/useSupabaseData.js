@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import createSupabaseClient from '@/lib/supabase';
+import createSupabaseClient from '@/lib/supabase/client';
 
 export function useSupabaseData(tableName, { options = {} }) {
   const [fetchedData, setFetchedData] = useState([]);
@@ -31,6 +31,7 @@ export function useSupabaseData(tableName, { options = {} }) {
         const { data, error } = await supabaseClient
           .from(tableName)
           .select(select)
+          .is('deleted_at', null)
           .order(order, { ascending })
           .limit(limit);
 

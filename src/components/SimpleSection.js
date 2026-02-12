@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSupabaseData } from '@/lib/getSupbaseData';
+import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
 import AboutCard from './simpleSectionCards/AboutCard';
 import EducationCard from './simpleSectionCards/EducationCard';
 import ExperienceCard from './simpleSectionCards/ExperienceCard';

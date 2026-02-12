@@ -1,19 +1,28 @@
 import { cache } from 'react';
-import { createSupabaseServer } from '@/lib/supabase';
+import { createSupabaseServer } from '@/lib/supabase/server';
 
 export const getServerData = cache(async (tableName, options = {}) => {
   const supabase = createSupabaseServer();
+
+  if (!supabase) {
+    throw new Error('Supabase server not initialized');
+  }
 
   const {
     select = '*',
     order = 'created_at',
     ascending = false,
     limit = 5,
-    filters = {}
+    filters = {},
+    skipSoftDelete = true
   } = options;
 
   try {
     let query = supabase.from(tableName).select(select);
+
+    if (skipSoftDelete) {
+      query = query.is('deleted_at', null);
+    }
 
     Object.entries(filters).forEach(([key, value]) => {
       query = query.eq(key, value);

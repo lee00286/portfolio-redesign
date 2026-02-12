@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .admin h1,
+  .admin .h1,
+  .admin h2,
+  .admin .h2,
+  .admin h3,
+  .admin .h3,
+  .admin h4,
+  .admin .h4,
+  .admin h5,
+  .admin .h5,
+  .admin h6,
+  .admin .h6 {
+    @apply text-black;
+  }
+
+  .error-text {
+    @apply !font-bold !text-red-500;
+  }
+
+  code {
+    @apply rounded-sm px-1 bg-primary-200 text-sm text-black;
+    font-family: monospace;
+  }
+
+  /* Fields */
+  .admin-field-label {
+    @apply text-sm font-bold;
+  }
+
+  .admin-field-input,
+  .admin-field-file-input,
+  .admin-field-textarea {
+    @apply w-full rounded border border-gray-900 p-3 text-sm;
+  }
+
+  .admin-field-file-input {
+    @apply bg-white;
+  }
+
+  .textarea-autoresize {
+    @apply min-h-[120px] max-h-[70vh] resize-none overflow-hidden;
+  }
+
+  .admin-field-label-switch {
+    @apply relative flex justify-start items-stretch gap-0;
+  }
+
+  .admin-field-label-switch .btn {
+    @apply border-primary-500 border-2 hover:bg-primary-200 !py-1 !text-sm;
+  }
+
+  .admin-field-label-switch .btn:first-of-type {
+    @apply rounded-r-none;
+  }
+
+  .admin-field-label-switch .btn:last-of-type {
+    @apply rounded-l-none border-l-0;
+  }
+
+  .admin-field-label-switch .btn.is-active {
+    @apply bg-primary-500;
+  }
+
+  .admin-field-switch {
+    @apply relative block w-[44px] h-[24px];
+  }
+
+  .admin-field-switch-input {
+    @apply opacity-0 w-0 h-0;
+  }
+
+  .admin-field-switch-slider {
+    @apply absolute inset-0 rounded-[24px] bg-[#ccc] cursor-pointer;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+  }
+
+  .admin-field-switch-slider::before {
+    @apply absolute left-[4px] bottom-[4px] rounded-full w-[16px] h-[16px] bg-white;
+    content: '';
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+  }
+
+  .admin-field-switch-input:checked + .admin-field-switch-slider {
+    @apply bg-primary-500;
+  }
+
+  .admin-field-switch-input:focus + .admin-field-switch-slider {
+    box-shadow: 0 0 1px #ffb603;
+  }
+
+  .admin-field-switch-input:checked + .admin-field-switch-slider::before {
+    transform: translateX(20px);
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+  }
+
+  .admin-form-image-create.editor > .admin-field-input {
+    @apply border-none p-0;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply rounded px-4 py-2 font-bold cursor-pointer;
+    box-shadow: none;
+    transition:
+      border 0.2s ease-in-out,
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out;
+  }
+
+  .btn:disabled {
+    @apply !border-gray-400 !bg-gray-400 cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-black text-white;
+  }
+
+  .btn-secondary {
+    @apply border-gray-900 bg-white hover:bg-gray-300;
+  }
+
+  .btn-danger {
+    @apply border-red-500 hover:border-red-700 bg-red-500 hover:bg-red-700 text-white;
+  }
+
+  .btn-danger-inverse {
+    @apply border-red-500 hover:border-red-700 bg-white hover:bg-white text-red-500 hover:text-red-700;
+  }
+
+  .btn-danger:disabled {
+    @apply !border-red-300 !bg-red-300 text-gray-600;
+  }
+
+  /* Editor */
+  .editor {
+    @apply pb-6;
+  }
+
+  .editor .editor-row {
+    @apply flex flex-col md:flex-row justify-between items-stretch gap-3;
+  }
+
+  .editor .editor-row-col {
+    @apply flex-1;
+  }
+
+  /* Data List */
+  .data-list-item {
+    @apply block rounded-lg border border-gray-900 px-4 py-3 hover:bg-muted transition;
+  }
+
+  .data-list-item:hover {
+    @apply bg-muted;
+  }
+
+  .badge {
+    @apply rounded-full px-2 py-0.5 font-bold text-xs text-white;
+  }
+
+  .badge-success {
+    @apply bg-green-500;
+  }
+
+  .badge-error {
+    @apply bg-red-500;
+  }
+
+  .badge-warning {
+    @apply bg-orange-500;
+  }
+
+  /* Data Grid */
+  .data-grid-item {
+    @apply relative flex justify-center items-center rounded-lg border border-[1.5px] border-gray-700 hover:bg-muted aspect-square transition overflow-hidden;
+  }
+
+  .data-grid-item:hover {
+    @apply bg-muted;
+  }
+
+  .data-grid-item img {
+    @apply z-[1] relative;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .data-grid-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .badge {
+    @apply rounded-full px-2 py-0.5 font-bold text-xs text-white;
+  }
+
+  .data-grid-item.grid-success {
+    @apply border-green-500;
+  }
+
+  .data-grid-item.grid-error {
+    @apply border-red-500;
+  }
+
+  .data-grid-item.grid-warning {
+    @apply border-orange-500;
+  }
+
+  .tooltip {
+    @apply relative cursor-pointer;
+  }
+
+  .tooltip-text {
+    @apply z-[1] absolute top-0 left-0 rounded-lg px-2 py-1 bg-[rgba(0,0,0,0.8)] text-white text-xs text-left whitespace-nowrap;
+    visibility: hidden;
+    transition: visibility 0.2s ease-in-out;
+  }
+
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+  }
+}

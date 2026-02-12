@@ -8,8 +8,8 @@ import ScreenLayout from './ScreenLayout';
  */
 function ComputerLayout({ children }) {
   return (
-    <div className="flex justify-center items-center px-0 sm:px-4 xsm:px-8 lg:px-18 py-8 lg:py-18 w-full h-full">
-      <div className="relative mx-auto my-0 max-w-[var(--breakpoint-desktop)] w-full h-full xxmd:h-auto xxmd:aspect-[4/3] xl:aspect-[16/10] bg-primary-600 rounded-2xl border-4 mb-[20px] md:mb-[40px] xxmd:mb-[50px] border-primary-500 p-4 xs:p-6 shadow-inner">
+    <div className="flex justify-center items-center px-0 sm:px-4 xsm:px-8 lg:px-[72px] py-8 lg:py-[72px] w-full h-full">
+      <div className="relative mx-auto my-0 max-w-desktop w-full h-full xxmd:h-auto xxmd:aspect-[4/3] xl:aspect-[16/10] bg-primary-600 rounded-2xl border-4 border-primary-500 mb-[20px] md:mb-[40px] xxmd:mb-[50px] p-4 xs:p-6 shadow-inner">
         {/* Computer Monitor */}
         <div className="relative flex justify-center items-center m-auto rounded-md sm:rounded-xl w-full h-full bg-[#3676C4] shadow-inner">
           <ScreenLayout>{children}</ScreenLayout>
