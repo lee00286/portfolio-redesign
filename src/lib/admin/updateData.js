@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 export async function updateEducationById({
   supabase,
   id,
@@ -12,10 +14,7 @@ export async function updateEducationById({
     .maybeSingle();
 
   if (!existing) {
-    return {
-      status: 404,
-      body: { error: notFoundMessage }
-    };
+    return NextResponse.json({ error: notFoundMessage }, { status: 404 });
   }
 
   // Update the education data
@@ -27,16 +26,13 @@ export async function updateEducationById({
     .single();
 
   if (error) {
-    return {
-      status: 500,
-      body: { error: error.message }
-    };
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return {
-    status: 200,
-    body: { data }
-  };
+  return NextResponse.json({
+    success: true,
+    data
+  });
 }
 
 export async function updateExperienceById({
@@ -53,10 +49,7 @@ export async function updateExperienceById({
     .maybeSingle();
 
   if (!existing) {
-    return {
-      status: 404,
-      body: { error: notFoundMessage }
-    };
+    return NextResponse.json({ error: notFoundMessage }, { status: 404 });
   }
 
   // Update the experience data
@@ -68,16 +61,13 @@ export async function updateExperienceById({
     .single();
 
   if (error) {
-    return {
-      status: 500,
-      body: { error: error.message }
-    };
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return {
-    status: 200,
-    body: { data }
-  };
+  return NextResponse.json({
+    success: true,
+    data
+  });
 }
 
 export async function updateProjectById({
@@ -94,10 +84,7 @@ export async function updateProjectById({
     .maybeSingle();
 
   if (!existing) {
-    return {
-      status: 404,
-      body: { error: notFoundMessage }
-    };
+    return NextResponse.json({ error: notFoundMessage }, { status: 404 });
   }
 
   // Update the project data
@@ -109,14 +96,11 @@ export async function updateProjectById({
     .single();
 
   if (error) {
-    return {
-      status: 500,
-      body: { error: error.message }
-    };
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return {
-    status: 200,
-    body: { data }
-  };
+  return NextResponse.json({
+    success: true,
+    data
+  });
 }

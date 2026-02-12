@@ -30,6 +30,17 @@ describe('POST /login', () => {
     process.env = ORIGINAL_ENV;
   });
 
+  it('returns 401 if ADMIN_PASSWORD is not set', async () => {
+    delete process.env.ADMIN_PASSWORD;
+
+    const res = await POST({
+      json: async () => ({ password: 'any-password' })
+    });
+
+    expect(res.status).toBe(401);
+    expect(res.body.error).toBe('Invalid password');
+  });
+
   it('returns 401 if password is missing', async () => {
     const res = await POST({ json: async () => ({}) });
 
@@ -63,5 +74,16 @@ describe('POST /login', () => {
         path: '/'
       })
     );
+  });
+
+  it('returns 400 on malformed request body', async () => {
+    const res = await POST({
+      json: async () => {
+        throw new Error('Unexpected end of JSON input');
+      }
+    });
+
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('Invalid request');
   });
 });

@@ -37,7 +37,7 @@ export async function POST(req) {
     });
 
     const registerImageUsage = (rows, entity) => {
-      if (!Array.isArray(rows) || !rows?.length === 0) return;
+      if (!Array.isArray(rows) || rows?.length === 0) return;
 
       rows?.forEach((row) => {
         if (!row.logo) return;
