@@ -13,7 +13,7 @@ const createSupabaseMock = (initialData = {}) => {
   let row = { ...initialData };
 
   const chain = {
-    // 체이닝 메서드들: 항상 자기 자신(mock)을 반환
+    // Chaining methods: Allways return mock object
     from: jest.fn().mockReturnThis(),
     select: jest.fn().mockReturnThis(),
     eq: jest.fn().mockReturnThis(),
