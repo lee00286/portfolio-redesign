@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import ConfirmModalButton from './ConfirmModalButton';
 
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/admin', exact: true },
@@ -14,14 +15,20 @@ const NAV_ITEMS = [
 
 function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
 
   if (pathname === '/admin/login') {
     return null;
   }
 
+  const handleLogout = async () => {
+    await fetch('/api/admin/logout', { method: 'POST' });
+    router.push('/admin/login');
+  };
+
   return (
-    <aside className="w-40 md:w-48 border-r border-gray-900 bg-white">
-      <nav className="flex flex-col p-4 gap-1">
+    <aside className="w-40 md:w-48 border-r border-gray-900 bg-white flex flex-col">
+      <nav className="flex flex-col p-4 gap-1 flex-1">
         {NAV_ITEMS.map((item) => {
           const active = item.exact
             ? pathname === item.href
@@ -46,6 +53,18 @@ function Sidebar() {
           );
         })}
       </nav>
+      <div className="p-4 border-t border-black">
+        <ConfirmModalButton
+          text="Logout"
+          data={{
+            title: 'Are you sure?',
+            description: 'This will log you out of the admin dashboard.',
+            danger: true,
+            onConfirm: handleLogout
+          }}
+          buttonClass="btn btn-danger-inverse flex justify-center items-center w-full text-center text-sm"
+        />
+      </div>
     </aside>
   );
 }
