@@ -89,6 +89,30 @@ export const getFilteredProjectData = (data, lang = 'en') => {
   };
 };
 
+export const handleSupabaseError = (error, dbTableName) => {
+  if (!error) return '';
+
+  const status = error.status ?? null;
+
+  if (status >= 500) {
+    return 'Service temporarily unavailable. Please try again later.';
+  }
+
+  if (status === 404) {
+    return `No ${dbTableName} records found.`;
+  }
+
+  if (status === 401 || status === 403) {
+    return 'You do not have permission to access this resource.';
+  }
+
+  if (status >= 400) {
+    return 'Request failed. Please check your input and try again.';
+  }
+
+  return 'An unexpected error occurred.';
+};
+
 const cleanUpTableUniqueId = (rawUniqueId) => {
   if (!rawUniqueId || typeof rawUniqueId !== 'string') return '';
 

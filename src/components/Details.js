@@ -1,5 +1,5 @@
 import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
-import { getFilteredExperienceData } from '@/util/helpers';
+import { getFilteredExperienceData, handleSupabaseError } from '@/util/helpers';
 import DetailsMarkdown from './markdown/DetailsMarkdown';
 
 async function Details({ dbTableName = '', dbFilters = {}, dataId = '' }) {
@@ -13,8 +13,8 @@ async function Details({ dbTableName = '', dbFilters = {}, dataId = '' }) {
 
   if (error) {
     return (
-      <p className="!font-bold !text-red-600">
-        {error ?? `Failed to load ${dataId} data.`}
+      <p className="!font-medium !text-red-500 !text-sm">
+        {handleSupabaseError(error, dataId)}
       </p>
     );
   }

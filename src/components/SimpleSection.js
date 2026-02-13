@@ -1,5 +1,6 @@
 import React from 'react';
 import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
+import { handleSupabaseError } from '@/util/helpers';
 import AboutCard from './simpleSectionCards/AboutCard';
 import EducationCard from './simpleSectionCards/EducationCard';
 import ExperienceCard from './simpleSectionCards/ExperienceCard';
@@ -52,7 +53,7 @@ async function SimpleSection({
         </p>
       ) : (
         <p className="!font-bold !text-red-600">
-          {error ?? `Failed to load ${dbTableName} data.`}
+          {handleSupabaseError(error, dbTableName)}
         </p>
       )}
     </section>
