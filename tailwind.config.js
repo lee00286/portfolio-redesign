@@ -36,8 +36,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Arial', 'Helvetica', 'sans-serif'],
-        mono: ['monospace']
+        sans: ['var(--font-geist-sans)', 'Arial', 'Helvetica', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'monospace']
       },
       colors: {
         primary: {
