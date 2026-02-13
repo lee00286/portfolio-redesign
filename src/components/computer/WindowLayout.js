@@ -7,11 +7,14 @@ import TitleBar from './TitleBar';
  */
 function WindowLayout({ children }) {
   return (
-    <div className="px-0 sm:px-5 xxmd:px-8 py-0 sm:py-6 h-full overflow-hidden">
+    <div className="px-0 sm:px-5 xxmd:px-7 py-0 sm:py-5 h-full overflow-hidden">
       {/* Window */}
       <div
         id="window"
-        className="rounded-0 sm:rounded-xl w-full h-full bg-yellow-50"
+        className="rounded-0 sm:rounded-xl w-full h-full bg-gray-50"
+        style={{
+          boxShadow: '0 4px 24px rgba(0,0,0,0.15), 0 1px 4px rgba(0,0,0,0.1)'
+        }}
       >
         {/* Window Title Bar */}
         <TitleBar />

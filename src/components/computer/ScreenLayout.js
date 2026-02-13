@@ -1,3 +1,4 @@
+import MenuBarClock from '@/components/computer/MenuBarClock';
 import SideBar from '@/components/computer/SideBar';
 
 /**
@@ -14,13 +15,24 @@ function ScreenLayout({ children }) {
       className="flex flex-col justify-start items-center p-0 w-full h-full"
     >
       {/* Menu Bar */}
-      <div className="z-[20] flex justify-between items-center rounded-tl-sm md:rounded-tl-xl rounded-tr-md sm:rounded-tr-xl px-4 py-2 w-full h-[40px] bg-white opacity-50">
-        <p className="!font-bold !text-xl"></p>
-        <p className="!font-bold">TIME</p>
+      <div
+        className="z-[20] flex justify-between items-center rounded-tl-lg rounded-tr-lg px-4 py-[6px] w-full h-[32px]"
+        style={{
+          backgroundColor: 'rgba(30, 35, 40, 0.55)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)'
+        }}
+      >
+        <p className="!font-semibold !text-xs !text-white/80">
+          <span aria-label="Duck emoji">𓅿</span>
+          &nbsp;&nbsp;
+          <span>Portfolio</span>
+        </p>
+        <MenuBarClock />
       </div>
 
       {/* Desktop */}
-      <div className="z-[10] grid grid-rows-[auto_8%] xsm:grid-rows-[auto_10%] xxmd:grid-rows-none xxmd:grid-cols-[28%_auto] rounded-tl-md sm:rounded-tl-xl xxmd:rounded-tl-none rounded-tr-md sm:rounded-tr-xl xxmd:rounded-tr-none xxmd:rounded-bl-xl xxmd:rounded-br-xl w-full h-[calc(100%-40px)]">
+      <div className="z-[10] grid grid-rows-[auto_8%] xsm:grid-rows-[auto_10%] xxmd:grid-rows-none xxmd:grid-cols-[26%_auto] xxmd:rounded-bl-lg xxmd:rounded-br-lg w-full h-[calc(100%-32px)]">
         {/* Left Screen (Sidebar) */}
         <SideBar />
 
