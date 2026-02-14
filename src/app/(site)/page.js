@@ -1,4 +1,5 @@
 import WindowLayout from '@/components/computer/WindowLayout';
+import ScrollHashObserver from '@/components/ScrollHashObserver';
 import SimpleSection from '@/components/SimpleSection';
 
 const sections = [
@@ -31,7 +32,12 @@ const sections = [
 export default function Home() {
   return (
     <WindowLayout>
-      <div className="px-4 sm:px-5 py-3 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-auto">
+      <div
+        data-scroll-container
+        className="px-4 sm:px-5 py-3 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-auto"
+      >
+        <ScrollHashObserver />
+
         <SimpleSection
           dbTableName="about"
           mobileOnly={true}

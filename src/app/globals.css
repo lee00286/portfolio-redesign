@@ -210,12 +210,24 @@
   }
 
   .mac-btn {
-    @apply flex justify-center items-center rounded-full p-[6px] h-full bg-primary-400 text-black font-bold leading-[1] aspect-square cursor-pointer;
-    transition: background-color 0.2s ease-in-out;
+    @apply flex justify-center items-center rounded-full p-[5px] h-full aspect-square cursor-pointer;
+    transition: opacity 0.15s ease;
   }
 
   .mac-btn:hover {
-    @apply bg-primary-500;
+    opacity: 0.8;
+  }
+
+  .mac-btn--close {
+    @apply bg-[#ff5f57];
+  }
+
+  .mac-btn--min {
+    @apply bg-[#febc2e];
+  }
+
+  .mac-btn--max {
+    @apply bg-[#28c840];
   }
 
   .mbl-only {
