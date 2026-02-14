@@ -3,10 +3,16 @@ import Link from 'next/link';
 
 const lang = 'en';
 
+/**
+ * Displays experience data.
+ * Skips rendering if the entry is marked inactive.
+ */
 function ExperienceCard({ cardIndex, data }) {
   if (!data) return <></>;
 
   const filteredData = getFilteredExperienceData(data, lang);
+
+  if (filteredData.is_active === false) return <></>;
 
   return (
     <div className="simple-section--card">
@@ -14,30 +20,29 @@ function ExperienceCard({ cardIndex, data }) {
         <img
           src={filteredData.image_url}
           alt={filteredData.company_name}
-          className="w-full h-48 object-cover rounded"
+          className="rounded-lg w-full h-48 object-cover"
         />
       )}
 
       <div className="w-full">
-        <div className="flex justify-between items-center gap-3 mb-2 w-full">
-          {(filteredData.start_date || filteredData.end_date) && (
-            <p className="eyebrow">
-              <span className="text-nowrap">
-                {filteredData.start_date || 'Unknown'}
-              </span>{' '}
-              &mdash;&nbsp;
-              <span className="text-nowrap">
-                {filteredData.end_date || 'Present'}
-              </span>
-            </p>
-          )}
-        </div>
+        {(filteredData.start_date || filteredData.end_date) && (
+          <p className="eyebrow mb-1.5">
+            <span className="text-nowrap">
+              {filteredData.start_date || 'Unknown'}
+            </span>{' '}
+            &mdash;&nbsp;
+            <span className="text-nowrap">
+              {filteredData.end_date || 'Present'}
+            </span>
+          </p>
+        )}
 
         {(filteredData.position || filteredData.company_name) && (
           <h3>
             <Link
               href={filteredData.id ? `/experiences/${filteredData.id}` : '#'}
-              className="text-primary-500 hover:text-primary-500 focus:text-primary-500 visited:text-primary-500 no-underline hover:underline focus:underline visited:no-underline"
+              className="text-primary-base no-underline hover:underline focus:underline"
+              style={{ transition: 'color 0.15s ease' }}
             >
               {filteredData.position || ''}
               {filteredData.company_name && ` - ${filteredData.company_name}`}
@@ -46,17 +51,19 @@ function ExperienceCard({ cardIndex, data }) {
         )}
 
         {filteredData.location && (
-          <p className="mt-1 !text-gray-400 !font-bold !text-sm">
+          <p className="mt-1 !text-gray-500 !font-medium !text-sm">
             {filteredData.location}
           </p>
         )}
       </div>
 
-      {filteredData.description && <p>{filteredData.description}</p>}
+      {filteredData.description && (
+        <p className="!text-gray-700">{filteredData.description}</p>
+      )}
 
       {Array.isArray(filteredData.tech_stack) &&
         filteredData.tech_stack.length > 0 && (
-          <div className="flex flex-wrap justify-start items-center gap-2 mt-2 w-full">
+          <div className="flex flex-wrap justify-start items-center gap-1.5 mt-1 w-full">
             {filteredData.tech_stack.map((stack, index) => (
               <p
                 key={`experience-${cardIndex}-tech-stack-${index}`}

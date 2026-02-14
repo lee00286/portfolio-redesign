@@ -34,7 +34,7 @@
     @apply w-screen h-dvh max-h-dvh overflow-hidden;
     background: var(--background);
     color: var(--foreground);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   }
 
   main,
@@ -58,32 +58,32 @@
 
   h1,
   .h1 {
-    @apply text-primary-base font-extrabold text-5xl leading-[3rem];
+    @apply text-primary-base font-bold text-4xl leading-[2.75rem] tracking-tight;
   }
 
   h2,
   .h2 {
-    @apply text-primary-base font-bold text-4xl leading-[2.25rem];
+    @apply text-primary-base font-bold text-3xl leading-[2.25rem] tracking-tight;
   }
 
   h3,
   .h3 {
-    @apply text-primary-base font-bold text-3xl leading-[2rem];
+    @apply text-primary-base font-semibold text-2xl leading-[1.875rem];
   }
 
   h4,
   .h4 {
-    @apply text-primary-base font-bold text-2xl leading-[1.725rem];
+    @apply text-primary-base font-semibold text-xl leading-[1.5rem];
   }
 
   h5,
   .h5 {
-    @apply text-black font-bold text-xl leading-[1.25rem];
+    @apply text-black font-semibold text-lg leading-[1.375rem];
   }
 
   h6,
   .h6 {
-    @apply text-black font-bold text-lg leading-[1.125rem];
+    @apply text-black font-semibold text-base leading-[1.25rem];
   }
 
   ol,
@@ -91,7 +91,7 @@
   li,
   p,
   .p {
-    @apply text-black font-normal text-base leading-[1.125rem];
+    @apply text-black font-normal text-[0.9375rem] leading-[1.5rem];
   }
 
   b,
@@ -104,42 +104,49 @@
   }
 
   .eyebrow {
-    @apply font-bold text-sm text-primary-500;
+    @apply font-mono font-medium text-xs text-primary-700 tracking-wide uppercase;
   }
 
   .tech-stack {
-    @apply rounded-lg px-3 py-1 bg-primary-200 !text-sm text-center text-nowrap;
+    @apply rounded-md px-2.5 py-0.5 bg-primary-50 border border-primary-200 !text-xs font-medium text-primary-800 text-center text-nowrap;
+    transition: background-color 0.15s ease;
   }
 
+  .tech-stack:hover {
+    @apply bg-primary-100;
+  }
+
+  /* Buttons */
   .btn {
-    @apply flex items-center gap-2 border border-gray-900 rounded-md px-6 py-3 font-bold uppercase text-black text-center cursor-pointer;
+    @apply flex items-center gap-2 border border-gray-300 rounded-lg px-5 py-2.5 font-medium text-sm text-black text-center cursor-pointer;
     text-decoration: none;
-    box-shadow:
-      0 2px 8px 0 rgba(0, 0, 0, 0.1),
-      0 6px 12px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease,
+      box-shadow 0.15s ease,
+      transform 0.15s ease;
   }
 
   .btn:hover {
     text-decoration: none;
+    @apply border-gray-400;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.08);
   }
 
   .btn--primary {
-    @apply border-primary-200 bg-primary-200 text-black;
+    @apply border-primary-400 bg-primary-100 text-black font-semibold;
     text-decoration: none;
-    box-shadow:
-      0 0 12px 0 rgba(240, 164, 0, 0.4),
-      0 4px 12px 0 rgba(240, 164, 0, 0.4);
+    box-shadow: 0 1px 4px 0 rgba(240, 164, 0, 0.15);
     transition:
-      border 0.2s ease-in-out,
-      background-color 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out;
+      border-color 0.15s ease,
+      background-color 0.15s ease,
+      box-shadow 0.15s ease;
   }
 
   .btn--primary:hover {
-    @apply border-primary-300 bg-primary-300;
-    box-shadow:
-      0 0 12px 0 rgba(240, 164, 0, 0.5),
-      0 4px 12px 0 rgba(240, 164, 0, 0.5);
+    @apply border-primary-500 bg-primary-200;
+    box-shadow: 0 2px 8px 0 rgba(240, 164, 0, 0.25);
   }
 
   .btn--nav {
@@ -175,33 +182,31 @@
 
   .btn--link {
     @apply gap-1.5 border-none p-0 text-gray-500 shadow-none;
-    transition:
-      border 0.2s ease-in-out,
-      color 0.2s ease-in-out;
+    transition: color 0.15s ease;
   }
 
   .btn--link:hover {
-    @apply border-none text-primary-500;
+    @apply border-none text-primary-700;
   }
 
   .btn--link .new-window-icon path,
   .btn--link .new-window-icon line {
     stroke: var(--color-gray-500);
-    transition: stroke 0.2s ease-in-out;
+    transition: stroke 0.15s ease;
   }
 
   .btn--link:hover .new-window-icon path,
   .btn--link:hover .new-window-icon line {
-    stroke: var(--color-primary-500);
+    stroke: var(--color-primary-700);
   }
 
   .btn--link .github-logo path {
     @apply fill-gray-500;
-    transition: fill 0.2s ease-in-out;
+    transition: fill 0.15s ease;
   }
 
   .btn--link:hover .github-logo path {
-    @apply fill-primary-500;
+    @apply fill-primary-700;
   }
 
   .mac-btn {
@@ -223,7 +228,7 @@
   }
 
   .simple-section--header {
-    @apply flex items-center gap-3 pl-1;
+    @apply flex items-stretch gap-3 pl-1;
   }
 
   .simple-section--header h2 {
@@ -339,31 +344,31 @@
 @media screen and (max-width: 768px) {
   h1,
   .h1 {
-    @apply text-4xl leading-[2.25rem];
+    @apply text-3xl leading-[2.25rem];
   }
 
   h2,
   .h2 {
-    @apply text-3xl leading-[1.875rem];
+    @apply text-2xl leading-[1.875rem];
   }
 
   h3,
   .h3 {
-    @apply text-2xl leading-[1.5rem];
+    @apply text-xl leading-[1.5rem];
   }
 
   h4,
   .h4 {
-    @apply text-xl leading-[1.25rem];
+    @apply text-lg leading-[1.25rem];
   }
 
   h5,
   .h5 {
-    @apply text-lg leading-[1.125rem];
+    @apply text-base leading-[1.125rem];
   }
 
   h6,
   .h6 {
-    @apply text-base leading-[1rem];
+    @apply text-sm leading-[1rem];
   }
 }

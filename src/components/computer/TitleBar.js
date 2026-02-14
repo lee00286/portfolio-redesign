@@ -15,7 +15,7 @@ function TitleBar() {
   const currPath = pathsArr?.length > 1 ? `/#${pathsArr[1]}` : '/';
 
   return (
-    <div className="z-[20] flex justify-between items-center sm:rounded-tl-xl sm:rounded-tr-xl px-4 py-2 w-full h-[40px] bg-yellow-200">
+    <div className="z-[20] flex items-center gap-3 sm:rounded-tl-xl sm:rounded-tr-xl border-b border-primary-200 py-2 px-4 w-full h-[40px] bg-primary-100">
       <div className="flex justify-start items-center gap-2">
         <Link href={currPath} className="mac-btn">
           <Image

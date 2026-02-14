@@ -11,7 +11,7 @@ function WindowLayout({ children }) {
       {/* Window */}
       <div
         id="window"
-        className="rounded-0 sm:rounded-xl w-full h-full bg-gray-50"
+        className="rounded-0 sm:rounded-xl border-[0.1px] border-[rgba(255,255,255,0.01)] w-full h-full bg-gray-50"
         style={{
           boxShadow: '0 4px 24px rgba(0,0,0,0.15), 0 1px 4px rgba(0,0,0,0.1)'
         }}

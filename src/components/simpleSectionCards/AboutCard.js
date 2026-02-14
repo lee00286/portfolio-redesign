@@ -38,7 +38,7 @@ function AboutCard({ data }) {
       </div>
 
       {filteredData.summary && (
-        <p className="!text-gray-600 !text-sm !leading-relaxed">
+        <p className="!text-gray-700 !text-sm !leading-relaxed">
           {filteredData.summary}
         </p>
       )}

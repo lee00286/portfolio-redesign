@@ -6,6 +6,9 @@ import EducationCard from './simpleSectionCards/EducationCard';
 import ExperienceCard from './simpleSectionCards/ExperienceCard';
 import ProjectCard from './simpleSectionCards/ProjectCard';
 
+/**
+ * Fetches data for a database table name and returns the card components.
+ */
 async function SimpleSection({
   title = '',
   description = '',
@@ -23,9 +26,16 @@ async function SimpleSection({
       className={`simple-section ${desktopOnly ? 'dskt-only' : ''} ${mobileOnly ? 'mbl-only' : ''} ${sectionClass ? sectionClass : ''}`}
     >
       {(title || description) && (
-        <div className="simple-section--container items-center text-center">
-          {title && <h2>{title}</h2>}
-          {description && <p>{description}</p>}
+        <div className="simple-section--header">
+          <div
+            className="mt-1.5 mb-1 rounded-full w-[3px] h-auto bg-primary-500"
+            aria-hidden="true"
+            role="presentation"
+          />
+          <div>
+            {title && <h2>{title}</h2>}
+            {description && <p>{description}</p>}
+          </div>
         </div>
       )}
 
@@ -48,11 +58,11 @@ async function SimpleSection({
           )}
         </div>
       ) : Array.isArray(dbData) && dbData.length === 0 ? (
-        <p className="!font-bold !text-blue-600">
-          <span className="capitalize">{dbTableName}</span> list is empty.
+        <p className="!font-medium !text-gray-700 !text-sm">
+          No {dbTableName} to display.
         </p>
       ) : (
-        <p className="!font-bold !text-red-600">
+        <p className="!font-medium !text-red-500 !text-sm">
           {handleSupabaseError(error, dbTableName)}
         </p>
       )}
