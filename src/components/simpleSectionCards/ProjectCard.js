@@ -38,7 +38,7 @@ function ProjectCard({ cardIndex, data }) {
               </span>
             </p>
 
-            <div className="flex justify-end items-center gap-2.5 md:gap-3">
+            <div className="hidden xsm:flex justify-end items-center gap-2.5 md:gap-3">
               {filteredData.url && (
                 <a
                   href={filteredData.url}
@@ -46,7 +46,7 @@ function ProjectCard({ cardIndex, data }) {
                   rel="noopener"
                   className="btn btn--link !text-xs"
                 >
-                  <span className="hidden md:block">Demo</span>
+                  <span className="block">Demo</span>
                   <NewWindowIcon />
                 </a>
               )}
@@ -57,7 +57,7 @@ function ProjectCard({ cardIndex, data }) {
                   rel="noopener"
                   className="btn btn--link !text-xs"
                 >
-                  <span className="hidden md:block">GitHub</span>
+                  <span className="block">GitHub</span>
                   <GitHubLogo />
                 </a>
               )}
@@ -96,6 +96,31 @@ function ProjectCard({ cardIndex, data }) {
             ))}
           </div>
         )}
+
+      <div className="flex xsm:hidden justify-start items-center gap-3 mt-1.5 border-t border-gray-200 pt-3 w-full">
+        {filteredData.url && (
+          <a
+            href={filteredData.url}
+            target="_blank"
+            rel="noopener"
+            className="btn btn--link !text-xs"
+          >
+            <span className="block">Demo</span>
+            <NewWindowIcon />
+          </a>
+        )}
+        {filteredData.github && (
+          <a
+            href={filteredData.github}
+            target="_blank"
+            rel="noopener"
+            className="btn btn--link !text-xs"
+          >
+            <span className="block">GitHub</span>
+            <GitHubLogo />
+          </a>
+        )}
+      </div>
     </div>
   );
 }

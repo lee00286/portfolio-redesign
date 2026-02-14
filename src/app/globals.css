@@ -181,7 +181,7 @@
   }
 
   .btn--link {
-    @apply gap-1.5 border-none p-0 text-gray-500 shadow-none;
+    @apply gap-1.5 border-none p-0 text-gray-500 !shadow-none;
     transition: color 0.15s ease;
   }
 
@@ -191,13 +191,13 @@
 
   .btn--link .new-window-icon path,
   .btn--link .new-window-icon line {
-    stroke: var(--color-gray-500);
+    @apply stroke-gray-700;
     transition: stroke 0.15s ease;
   }
 
   .btn--link:hover .new-window-icon path,
   .btn--link:hover .new-window-icon line {
-    stroke: var(--color-primary-700);
+    @apply stroke-primary-700;
   }
 
   .btn--link .github-logo path {
