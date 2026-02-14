@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #fff9db; /* var(--color-primary-50); */
-  --foreground: #3b3f46; /* var(--color-gray-800); */
+  --background: #fafaf8;
+  --foreground: #1e2328;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -143,32 +143,34 @@
   }
 
   .btn--nav {
-    @apply flex-1 xxmd:flex-none justify-center xxmd:justify-start border-none rounded-md sm:rounded-xl border-b-primary-500 h-full xxmd:h-auto;
-    /* background-color: rgb(212, 142, 0, 0.3); */
-    background-color: rgb(255, 182, 3, 0.6);
+    @apply flex-1 xxmd:flex-none justify-center xxmd:justify-start border-none rounded-lg h-full xxmd:h-auto;
+    background-color: rgba(255, 255, 255, 0.6);
     box-shadow: none;
-    transition: background-color 0.2s ease-in-out;
+    transition:
+      background-color 0.15s ease,
+      transform 0.15s ease;
   }
 
   .btn--nav:hover {
-    background-color: rgb(255, 182, 3, 0.8);
+    background-color: rgba(255, 255, 255, 0.75);
+    transform: translateY(-1px);
   }
 
   .btn--nav .btn--sidebar {
-    @apply w-[20px] h-[20px];
+    @apply w-[18px] h-[18px];
     max-width: unset;
   }
 
   .btn--nav .btn--sidebar-lg {
-    @apply w-[25px] h-[25px];
+    @apply w-[22px] h-[22px];
   }
 
   .btn--sidebar {
-    @apply w-full xxmd:w-[20px] h-full xxmd:h-[20px];
+    @apply w-full xxmd:w-[18px] h-full xxmd:h-[18px];
   }
 
   .btn--sidebar-lg {
-    @apply xxmd:w-[25px] xxmd:h-[25px];
+    @apply xxmd:w-[22px] xxmd:h-[22px];
   }
 
   .btn--link {
@@ -217,15 +219,30 @@
 
   /* Simple Components */
   .simple-section {
-    @apply flex flex-col gap-5 px-0 sm:px-3 py-6 w-full;
+    @apply flex flex-col gap-4 px-0 sm:px-2 py-5 w-full;
+  }
+
+  .simple-section--header {
+    @apply flex items-center gap-3 pl-1;
+  }
+
+  .simple-section--header h2 {
+    @apply !text-2xl;
+  }
+
+  .simple-section--header p {
+    @apply !text-gray-500 !text-sm;
   }
 
   .simple-section--container {
-    @apply flex flex-col gap-2 border-2 border-primary-500 rounded-lg px-3 sm:px-4 py-4 sm:py-5 w-full bg-[rgba(255,255,255,0.4)];
+    @apply flex flex-col gap-1 rounded-xl px-4 sm:px-5 py-4 sm:py-5 w-full bg-white/80;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
   }
 
   .simple-section--card {
-    @apply flex flex-col justify-start items-start gap-3 py-4 sm:py-5 w-full;
+    @apply flex flex-col justify-start items-start gap-2.5 py-4 sm:py-5 w-full;
+    transition: background-color 0.15s ease;
   }
 
   .simple-section--card:first-of-type {
@@ -237,7 +254,7 @@
   }
 
   .simple-section--card:not(:last-of-type) {
-    @apply border-b border-primary-500;
+    @apply border-b border-gray-200;
   }
 
   /* Details Section */

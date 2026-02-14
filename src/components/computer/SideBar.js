@@ -30,18 +30,24 @@ const sections = [
 ];
 
 /**
- * Sidebar of the computer screen. Used as navigation on mobile.
- * @param {*} children
+ * Sidebar of the computer screen.
+ * Dislpays navigation menus.
  * @returns
  */
 function SideBar() {
   return (
-    <aside className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 rounded-bl-md sm:rounded-bl-xl rounded-br-md sm:rounded-br-xl xxmd:rounded-br-none px-4 sm:px-5 py-2.5 xxmd:py-6 bg-primary-200">
+    <aside
+      className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 xxmd:rounded-bl-lg px-4 sm:px-5 py-2.5 xxmd:py-5 bg-[rgba(255,255,255,0.2)]"
+      style={{
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)'
+      }}
+    >
       <SimpleSection
         dbTableName="about"
         desktopOnly={true}
-        sectionClass="!mb-4 !p-0"
-        sectionContainerClass="!bg-[rgba(255,255,255,0.6)]"
+        sectionClass="!mb-3 !p-0"
+        sectionContainerClass="!bg-[rgba(255,255,255,0.7)]"
       />
 
       {Array.isArray(sections) &&
@@ -62,7 +68,9 @@ function SideBar() {
               height={section.height ?? 20}
               className={`btn--sidebar ${section.sidebarClass ? section.sidebarClass : ''}`}
             />
-            <span className="hidden md:inline-block">{section.title}</span>
+            <span className="hidden md:inline-block !text-sm font-medium">
+              {section.title}
+            </span>
           </Link>
         ))}
     </aside>

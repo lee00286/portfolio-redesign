@@ -31,11 +31,11 @@ const sections = [
 export default function Home() {
   return (
     <WindowLayout>
-      <div className="px-4 py-2 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-scroll">
+      <div className="px-4 sm:px-5 py-3 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-auto">
         <SimpleSection
           dbTableName="about"
           mobileOnly={true}
-          sectionContainerClass="!bg-[rgba(255,255,255,0.8)]"
+          sectionContainerClass="!bg-[rgba(255,255,255,0.9)]"
         />
 
         {Array.isArray(sections) &&

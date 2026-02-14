@@ -3,6 +3,10 @@ import { getFilteredAboutData } from '@/util/helpers';
 
 const lang = 'en';
 
+/**
+ * Displays the "About" data from the database.
+ * Used in both the sidebar (desktop) and main content area (mobile).
+ */
 function AboutCard({ data }) {
   if (!data) return <></>;
 
@@ -15,7 +19,11 @@ function AboutCard({ data }) {
           <h1 className="h3">
             <Link
               href="/"
-              className="text-primary-500 hover:text-primary-500 focus:text-primary-500 visited:text-primary-500 no-underline hover:underline focus:underline visited:no-underline"
+              className="text-primary-base no-underline"
+              style={{
+                textShadow: '0px 1px 2px rgb(251 215 51 / 0.3)',
+                transition: 'color 0.15s ease'
+              }}
             >
               {filteredData.name}
             </Link>
@@ -23,13 +31,17 @@ function AboutCard({ data }) {
         )}
 
         {filteredData.position && (
-          <p className="mt-1 !text-yellow-400 !font-bold">
+          <p className="mt-1.5 !font-[600] !text-primary-600 !text-sm">
             {filteredData.position}
           </p>
         )}
       </div>
 
-      {filteredData.summary && <p>{filteredData.summary}</p>}
+      {filteredData.summary && (
+        <p className="!text-gray-600 !text-sm !leading-relaxed">
+          {filteredData.summary}
+        </p>
+      )}
     </div>
   );
 }

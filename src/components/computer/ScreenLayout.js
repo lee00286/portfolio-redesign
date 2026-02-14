@@ -32,7 +32,7 @@ function ScreenLayout({ children }) {
       </div>
 
       {/* Desktop */}
-      <div className="z-[10] grid grid-rows-[auto_8%] xsm:grid-rows-[auto_10%] xxmd:grid-rows-none xxmd:grid-cols-[26%_auto] xxmd:rounded-bl-lg xxmd:rounded-br-lg w-full h-[calc(100%-32px)]">
+      <div className="z-[10] grid grid-rows-[auto_7%] xsm:grid-rows-[auto_6%] xxmd:grid-rows-none xxmd:grid-cols-[26%_auto] xxmd:rounded-bl-lg xxmd:rounded-br-lg w-full h-[calc(100%-32px)]">
         {/* Left Screen (Sidebar) */}
         <SideBar />
 
