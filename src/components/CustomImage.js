@@ -27,7 +27,7 @@ function CustomImage({
       alt={alt}
       width={width || 1200}
       height={height || 800}
-      className={`rounded-lg border border-gray-600 object-contain w-full ${imgClass ? imgClass : ''}`}
+      className={`rounded-lg border border-gray-200 object-contain w-full ${imgClass ? imgClass : ''}`}
       onClick={onClick}
     />
   );

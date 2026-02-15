@@ -1,6 +1,7 @@
 import WindowLayout from '@/components/computer/WindowLayout';
 import ScrollHashObserver from '@/components/ScrollHashObserver';
 import SimpleSection from '@/components/SimpleSection';
+import { experiencesQueryOptions } from '@/constants/supabase';
 
 const sections = [
   {
@@ -52,6 +53,11 @@ export default function Home() {
               title={section.title}
               description={section.description}
               dbTableName={section.dbTableName}
+              queryOptions={
+                section.dbTableName === 'experiences'
+                  ? experiencesQueryOptions
+                  : null
+              }
             />
           ))}
       </div>

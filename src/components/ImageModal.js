@@ -74,7 +74,8 @@ function ImageModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center sm:rounded-b-xl"
+      style={{ backdropFilter: 'blur(2px)' }}
       onClick={onClose}
     >
       <div
@@ -82,10 +83,20 @@ function ImageModal() {
         className="relative max-w-[90%] max-h-[90%]"
         onClick={(e) => e?.stopPropagation()}
       >
-        <img src={modalData.src} alt={modalData.alt} />
+        <img
+          src={modalData.src}
+          alt={modalData.alt}
+          className="rounded-lg"
+          style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.4)' }}
+        />
         <button
-          className="absolute -top-1 right-0 -translate-y-[100%] font-bold text-white text-xl cursor-pointer"
+          className="absolute -top-2 -right-2 flex items-center justify-center w-7 h-7 rounded-full bg-white/90 text-gray-700 text-sm font-semibold cursor-pointer"
+          style={{
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            transition: 'background-color 0.15s ease'
+          }}
           onClick={onClose}
+          aria-label="Close image"
         >
           ✕
         </button>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
 import { handleSupabaseError } from '@/util/helpers';
+import { simpleSectionDefaultQueryOptions } from '@/constants/supabase';
 import AboutCard from './simpleSectionCards/AboutCard';
 import EducationCard from './simpleSectionCards/EducationCard';
 import ExperienceCard from './simpleSectionCards/ExperienceCard';
@@ -16,9 +17,16 @@ async function SimpleSection({
   desktopOnly = false,
   mobileOnly = false,
   sectionClass = '',
-  sectionContainerClass = ''
+  sectionContainerClass = '',
+  queryOptions = simpleSectionDefaultQueryOptions
 }) {
-  const { dbData, error } = await getSupabaseData(dbTableName);
+  const options = queryOptions
+    ? Object.keys(queryOptions)?.length > 0
+      ? queryOptions
+      : simpleSectionDefaultQueryOptions
+    : simpleSectionDefaultQueryOptions;
+
+  const { dbData, error } = await getSupabaseData(dbTableName, options);
 
   return (
     <section

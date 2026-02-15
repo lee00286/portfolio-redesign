@@ -5,3 +5,19 @@ export const SUPABASE_SERVICE_ROLE_KEY =
   process.env.SUPABASE_SERVICE_ROLE_KEY ?? '';
 export const SUPABASE_ADMIN_SERVICE_ROLE_KEY =
   process.env.SUPABASE_ADMIN_SERVICE_ROLE_KEY ?? '';
+
+export const simpleSectionDefaultQueryOptions = {
+  select: '*',
+  order: 'created_at',
+  ascending: false,
+  limit: 5,
+  skipSoftDelete: true
+};
+
+export const experiencesQueryOptions = {
+  select: '*',
+  order: 'start_date',
+  ascending: false,
+  limit: 5,
+  skipSoftDelete: true
+};
