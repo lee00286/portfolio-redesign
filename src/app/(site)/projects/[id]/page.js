@@ -56,7 +56,7 @@ function renderProjectSections(data, logoUrl) {
 
       {data?.detail_md && (
         <>
-          <hr className="my-4 border-gray-300" />
+          <hr />
           <DetailsMarkdown data={data} />
         </>
       )}

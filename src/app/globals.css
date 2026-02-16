@@ -279,6 +279,10 @@
     @apply flex flex-col gap-4 px-0 sm:px-3 py-5 w-full;
   }
 
+  .details-section hr {
+    @apply my-2 border-gray-300/50;
+  }
+
   .details-markdown p code {
     @apply rounded px-1.5 py-0.5 bg-primary-50 font-mono font-medium text-primary-800 text-sm;
     border: 1px solid rgba(240, 164, 0, 0.15);

@@ -30,20 +30,23 @@ function renderExperienceSections(data, logoUrl) {
       )}
 
       {data.pos_description && (
-        <DetailsSection title="About Position" subtitle={data.position}>
+        <DetailsSection
+          title={lang === 'ko' ? '직무 소개' : 'About Position'}
+          subtitle={data.position}
+        >
           <p className="!text-gray-700">{data.pos_description}</p>
         </DetailsSection>
       )}
 
       {data.description && (
-        <DetailsSection title="About Work">
+        <DetailsSection title={lang === 'ko' ? '업무 내용' : 'About Work'}>
           <p className="!text-gray-700">{data.description}</p>
         </DetailsSection>
       )}
 
       {data?.detail_md && (
         <>
-          <hr className="my-4 border-gray-300" />
+          <hr />
           <DetailsMarkdown data={data} />
         </>
       )}

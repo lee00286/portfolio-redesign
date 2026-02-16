@@ -4,7 +4,7 @@
 function DetailsSection({ title, subtitle, logoUrl, logoAlt, children }) {
   return (
     <>
-      <hr className="my-4 border-gray-300" />
+      <hr />
       <div>
         {title && <h2 className="mt-0 mb-4 !text-2xl">{title}</h2>}
         {subtitle && <h3 className="mt-0 mb-3 !text-xl">{subtitle}</h3>}
