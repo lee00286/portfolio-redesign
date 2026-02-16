@@ -2,8 +2,6 @@
  * Renders a titled content section.
  */
 function DetailsSection({ title, subtitle, logoUrl, logoAlt, children }) {
-  if (!children) return null;
-
   return (
     <>
       <hr className="my-4 border-gray-300" />
@@ -14,10 +12,10 @@ function DetailsSection({ title, subtitle, logoUrl, logoAlt, children }) {
           <img
             src={logoUrl}
             alt={logoAlt || ''}
-            className="rounded-lg w-full max-h-48 object-cover mb-4"
+            className="rounded-lg w-full max-h-48 max-w-[70%] md:max-w-[50%] object-cover mb-4"
           />
         )}
-        {children}
+        {children ?? <></>}
       </div>
     </>
   );

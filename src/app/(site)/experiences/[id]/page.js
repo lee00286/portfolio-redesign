@@ -7,6 +7,8 @@ import DetailsSection from '@/components/details/DetailsSection';
 import DetailsMarkdown from '@/components/markdown/DetailsMarkdown';
 import ImageModal from '@/components/ImageModal';
 
+const lang = 'en';
+
 function renderExperienceSections(data, logoUrl) {
   const title = [data.position, data.company_name].filter(Boolean).join(' - ');
 
@@ -18,7 +20,7 @@ function renderExperienceSections(data, logoUrl) {
 
       {data.company_description && (
         <DetailsSection
-          title="About Company"
+          title={lang === 'ko' ? '회사 소개' : 'About Company'}
           subtitle={data.company_name}
           logoUrl={logoUrl}
           logoAlt={data.company_name}

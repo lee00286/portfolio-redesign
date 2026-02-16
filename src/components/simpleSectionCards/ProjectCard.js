@@ -1,4 +1,5 @@
 import { getFilteredProjectData } from '@/util/helpers';
+import Link from 'next/link';
 import NewWindowIcon from '../icons/NewWindowIcon';
 import GitHubLogo from '../icons/GitHubLogo';
 
@@ -14,6 +15,10 @@ function ProjectCard({ cardIndex, data }) {
   const filteredData = getFilteredProjectData(data, lang);
 
   if (filteredData.is_active === false) return <></>;
+
+  const titleText = [filteredData.position, filteredData.title]
+    .filter(Boolean)
+    .join(' - ');
 
   return (
     <div className="simple-section--card">
@@ -65,10 +70,15 @@ function ProjectCard({ cardIndex, data }) {
           </div>
         )}
 
-        {(filteredData.position || filteredData.title) && (
+        {titleText && (
           <h3>
-            {filteredData.position || ''}
-            {filteredData.title && ` - ${filteredData.title}`}
+            <Link
+              href={`/projects/${filteredData.id}`}
+              className="text-primary-base no-underline hover:underline focus:underline"
+              style={{ transition: 'color 0.15s ease' }}
+            >
+              {titleText}
+            </Link>
           </h3>
         )}
 

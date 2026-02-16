@@ -1,8 +1,14 @@
 import { notFound } from 'next/navigation';
 import { getSupabaseData, getImageUrl } from '@/lib/supabase/getSupbaseData';
-import { getFilteredExperienceData } from '@/util/helpers';
 
 const lang = 'en';
+
+// Table names to their corresponding helper filter functions
+const FILTER_FN_MAP = {
+  experiences: 'getFilteredExperienceData',
+  projects: 'getFilteredProjectData',
+  educations: 'getFilteredEducationData'
+};
 
 /**
  * Fetches detail data and renders the provided sections.
@@ -13,6 +19,11 @@ const lang = 'en';
  */
 async function Details({ dbTableName = '', dbFilters = {}, renderSections }) {
   if (!dbTableName || !dbFilters || !Object.keys(dbFilters).length) {
+    notFound();
+  }
+
+  const filterFnName = FILTER_FN_MAP[dbTableName];
+  if (!filterFnName) {
     notFound();
   }
 
@@ -32,7 +43,10 @@ async function Details({ dbTableName = '', dbFilters = {}, renderSections }) {
     notFound();
   }
 
-  const data = getFilteredExperienceData(dbData[0], lang);
+  // Dynamically import the filter function (to avoid importing all helpers at once)
+  const helpers = await import('@/util/helpers');
+  const filterFn = helpers[filterFnName];
+  const data = filterFn(dbData[0], lang);
 
   if (!data.is_active) {
     notFound();

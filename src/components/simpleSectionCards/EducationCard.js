@@ -1,4 +1,5 @@
 import { getFilteredEducationData } from '@/util/helpers';
+import Link from 'next/link';
 
 const lang = 'en';
 
@@ -38,8 +39,14 @@ function EducationCard({ data }) {
 
         {(filteredData.major || filteredData.school) && (
           <h3 className="h4">
-            {filteredData.major || ''}
-            {filteredData.school && ` - ${filteredData.school}`}
+            <Link
+              href={filteredData.id ? `/educations/${filteredData.id}` : '#'}
+              className="text-primary-base no-underline hover:underline focus:underline"
+              style={{ transition: 'color 0.15s ease' }}
+            >
+              {filteredData.major || ''}
+              {filteredData.school && ` - ${filteredData.school}`}
+            </Link>
           </h3>
         )}
 
