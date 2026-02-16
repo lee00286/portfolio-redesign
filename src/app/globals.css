@@ -283,6 +283,40 @@
     @apply my-2 border-gray-300/50;
   }
 
+  /* DataList Table */
+  .data-list {
+    @apply overflow-x-auto flex flex-col gap-4 px-0 sm:px-3 py-5 w-full;
+  }
+
+  .data-list table {
+    @apply border-collapse w-full;
+  }
+
+  .data-list thead {
+    @apply border-b border-gray-200;
+  }
+
+  .data-list th {
+    @apply px-3 py-2 bg-primary-100 font-mono font-medium text-gray-600 text-left text-[12px] tracking-wider uppercase whitespace-nowrap;
+  }
+
+  .data-list tbody tr {
+    @apply border-b border-gray-100 cursor-pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .data-list tbody tr:last-child {
+    @apply border-b-0;
+  }
+
+  .data-list tbody tr:hover {
+    @apply bg-primary-100/50;
+  }
+
+  .data-list td {
+    @apply px-3 py-2.5 min-w-[105px] text-gray-700 text-sm whitespace-nowrap;
+  }
+
   .details-markdown p code {
     @apply rounded px-1.5 py-0.5 bg-primary-50 font-mono font-medium text-primary-800 text-sm;
     border: 1px solid rgba(240, 164, 0, 0.15);

@@ -6,6 +6,7 @@ export const SUPABASE_SERVICE_ROLE_KEY =
 export const SUPABASE_ADMIN_SERVICE_ROLE_KEY =
   process.env.SUPABASE_ADMIN_SERVICE_ROLE_KEY ?? '';
 
+// Simple Section Query Options
 export const simpleSectionDefaultQueryOptions = {
   select: '*',
   order: 'created_at',
@@ -14,10 +15,19 @@ export const simpleSectionDefaultQueryOptions = {
   skipSoftDelete: true
 };
 
-export const experiencesQueryOptions = {
+export const experiencesSimpleSectionQueryOptions = {
   select: '*',
   order: 'start_date',
   ascending: false,
   limit: 5,
+  skipSoftDelete: true
+};
+
+// Data List Query Options
+export const defaultQueryOptions = {
+  select: '*',
+  order: 'created_at',
+  ascending: false,
+  limit: 20,
   skipSoftDelete: true
 };

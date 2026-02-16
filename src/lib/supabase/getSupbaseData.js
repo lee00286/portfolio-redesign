@@ -14,7 +14,8 @@ export const getServerData = cache(async (tableName, options = {}) => {
     ascending = false,
     limit = 5,
     filters = {},
-    skipSoftDelete = true
+    skipSoftDelete = true,
+    isActiveFilter = false
   } = options;
 
   try {
@@ -22,6 +23,10 @@ export const getServerData = cache(async (tableName, options = {}) => {
 
     if (skipSoftDelete) {
       query = query.is('deleted_at', null);
+    }
+
+    if (isActiveFilter) {
+      query = query.is('is_active', true);
     }
 
     Object.entries(filters).forEach(([key, value]) => {

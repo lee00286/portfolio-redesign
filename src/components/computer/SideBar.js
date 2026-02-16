@@ -56,7 +56,7 @@ function SideBar() {
           <Link
             key={`sidebar-button-${index}`}
             className="btn btn--nav"
-            href={`/#${section.title ? section.title.toLowerCase() : ''}`}
+            href={`/${section.title ? section.title.toLowerCase() : ''}`}
             rel="noopener noreferrer"
             aria-label={section.iconAlt}
           >

@@ -1,5 +1,6 @@
 import MenuBarClock from '@/components/computer/MenuBarClock';
 import SideBar from '@/components/computer/SideBar';
+import Link from 'next/link';
 
 /**
  * Layout of the computer screen.
@@ -23,11 +24,13 @@ function ScreenLayout({ children }) {
           WebkitBackdropFilter: 'blur(16px)'
         }}
       >
-        <p className="!font-semibold !text-xs !text-white/80">
-          <span aria-label="Duck emoji">𓅿</span>
-          &nbsp;&nbsp;
-          <span>Portfolio</span>
-        </p>
+        <Link href="/" className="cursor-pointer text-white/80 hover:underline">
+          <p className="!font-semibold !text-xs !text-white/80">
+            <span aria-label="Duck emoji">𓅿</span>
+            &nbsp;&nbsp;
+            <span>Portfolio</span>
+          </p>
+        </Link>
         <MenuBarClock />
       </div>
 
