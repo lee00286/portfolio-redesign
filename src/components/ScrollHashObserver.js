@@ -1,12 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Observes the scroll position and updates the URL hash accordingly.
- * @returns
  */
 function ScrollHashObserver() {
+  const rafId = useRef(null);
+  const currentHash = useRef('');
+
   useEffect(() => {
     const scrollContainer = document.querySelector('[data-scroll-container]');
     if (!scrollContainer) return;
@@ -17,51 +19,44 @@ function ScrollHashObserver() {
 
     if (!sections || sections?.length === 0) return;
 
-    let currentId = '';
+    const updateHash = (newHash) => {
+      if (newHash === currentHash.current) return;
+      currentHash.current = newHash;
+
+      history.replaceState(null, '', newHash || window.location.pathname);
+    };
 
     const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
-      const containerTop = scrollContainer.getBoundingClientRect().top;
+      // Cancel any pending frame to avoid stacking updates
+      if (rafId.current) cancelAnimationFrame(rafId.current);
 
-      // If at the bottom of the page, anchor to the last section
-      if (scrollTop + clientHeight >= scrollHeight - 1) {
-        const last = sections[sections.length - 1];
-        const newHash = `#${last.id}`;
+      rafId.current = requestAnimationFrame(() => {
+        const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+        const containerTop = scrollContainer.getBoundingClientRect().top;
 
-        if (newHash !== currentId) {
-          currentId = newHash;
-          history.replaceState(null, '', newHash);
-          window.dispatchEvent(new Event('hashchange'));
+        // If at the bottom of the page, anchor to the last section
+        if (scrollTop + clientHeight >= scrollHeight - 1) {
+          const last = sections[sections.length - 1];
+          updateHash(`#${last.id}`);
+          return;
         }
-        return;
-      }
 
-      let candidate = null;
+        let candidate = null;
 
-      for (const section of sections) {
-        // Skip sections that are not in the DOM
-        if (section.offsetParent === null) continue;
+        for (const section of sections) {
+          if (section.offsetParent === null) continue;
 
-        const rect = section.getBoundingClientRect();
+          const rect = section.getBoundingClientRect();
 
-        if (rect.top - containerTop <= 0) {
-          candidate = section;
-        } else {
-          break;
+          if (rect.top - containerTop <= 0) {
+            candidate = section;
+          } else {
+            break;
+          }
         }
-      }
 
-      // if (!candidate) {
-      //   candidate = sections[0];
-      // }
-
-      const newHash = candidate ? `#${candidate.id}` : '';
-
-      if (newHash !== currentId) {
-        currentId = newHash;
-        history.replaceState(null, '', newHash);
-        window.dispatchEvent(new Event('hashchange'));
-      }
+        updateHash(candidate ? `#${candidate.id}` : '');
+      });
     };
 
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
@@ -69,6 +64,7 @@ function ScrollHashObserver() {
 
     return () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
   }, []);
 
