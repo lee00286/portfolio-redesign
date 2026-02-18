@@ -60,14 +60,17 @@ function SideBar() {
             rel="noopener noreferrer"
             aria-label={section.iconAlt}
           >
-            <Image
-              aria-hidden
-              src={section.iconSrc}
-              alt={section.iconAlt}
-              width={section.width ?? 20}
-              height={section.height ?? 20}
+            <div
               className={`btn--sidebar ${section.sidebarClass ? section.sidebarClass : ''}`}
-            />
+            >
+              <Image
+                aria-hidden
+                src={section.iconSrc}
+                alt={section.iconAlt}
+                width={section.width ?? 20}
+                height={section.height ?? 20}
+              />
+            </div>
             <span className="hidden md:inline-block !text-sm font-medium">
               {section.title}
             </span>

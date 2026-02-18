@@ -150,7 +150,7 @@
   }
 
   .btn--nav {
-    @apply flex-1 xxmd:flex-none justify-center xxmd:justify-start border-none rounded-lg h-full xxmd:h-auto;
+    @apply flex-1 xxmd:flex-none justify-center xxmd:justify-start border-none rounded-lg px-4 h-full xxmd:h-auto;
     background-color: rgba(255, 255, 255, 0.6);
     box-shadow: none;
     transition:
@@ -164,11 +164,15 @@
   }
 
   .btn--nav .btn--sidebar {
-    @apply w-[18px] h-[18px];
+    @apply flex justify-center items-center w-[25px] h-[25px];
     max-width: unset;
   }
 
-  .btn--nav .btn--sidebar-lg {
+  .btn--nav .btn--sidebar img {
+    @apply w-[18px] h-[18px] object-contain;
+  }
+
+  .btn--nav .btn--sidebar-lg img {
     @apply w-[22px] h-[22px];
   }
 
@@ -252,7 +256,7 @@
   }
 
   .simple-section--container {
-    @apply flex flex-col gap-1 rounded-xl px-4 sm:px-5 py-4 sm:py-5 w-full bg-white/80;
+    @apply flex flex-col gap-1 rounded-xl px-4 py-4 sm:py-5 w-full bg-white/80;
     border: 1px solid rgba(0, 0, 0, 0.06);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
   }
@@ -285,7 +289,7 @@
 
   /* DataList Table */
   .data-list {
-    @apply overflow-x-auto flex flex-col gap-4 px-0 sm:px-3 py-5 w-full;
+    @apply flex flex-col gap-4 px-0 sm:px-3 py-5 w-full;
   }
 
   .data-list table {
