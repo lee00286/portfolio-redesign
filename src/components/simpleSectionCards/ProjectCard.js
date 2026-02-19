@@ -48,8 +48,9 @@ function ProjectCard({ cardIndex, data }) {
                 <a
                   href={filteredData.url}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="btn btn--link !text-xs"
+                  aria-label="Demo (opens in new tab)"
                 >
                   <span className="block">Demo</span>
                   <NewWindowIcon />
@@ -59,8 +60,9 @@ function ProjectCard({ cardIndex, data }) {
                 <a
                   href={filteredData.github}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className="btn btn--link !text-xs"
+                  aria-label="GitHub (opens in new tab)"
                 >
                   <span className="block">GitHub</span>
                   <GitHubLogo />

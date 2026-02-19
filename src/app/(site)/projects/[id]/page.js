@@ -36,6 +36,7 @@ function renderProjectSections(data, logoUrl) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--primary !py-1 !text-xs"
+                aria-label="Demo (opens in new tab)"
               >
                 Demo
               </a>
@@ -46,6 +47,7 @@ function renderProjectSections(data, logoUrl) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn !py-1 !text-xs"
+                aria-label="GitHub (opens in new tab)"
               >
                 GitHub
               </a>

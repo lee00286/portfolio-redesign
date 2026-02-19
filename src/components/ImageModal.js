@@ -6,7 +6,7 @@ import { useModal } from '@/contexts/ModalProvider';
 const FOCUSABLE_SELECTOR =
   'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
 
-function ImageModal() {
+function ImageModal({ lang = 'en' }) {
   const { modalData, onClose } = useModal();
 
   const modalRef = useRef(null);
@@ -77,6 +77,9 @@ function ImageModal() {
       className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center sm:rounded-b-xl"
       style={{ backdropFilter: 'blur(2px)' }}
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={lang === 'en' ? 'Image View' : '이미지 보기'}
     >
       <div
         ref={modalRef}

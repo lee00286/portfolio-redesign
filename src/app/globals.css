@@ -29,6 +29,11 @@
   height: auto;
 }
 
+:focus-visible {
+  outline: 2px solid #ffb603;
+  outline-offset: 2px;
+}
+
 @layer components {
   body {
     @apply w-screen h-dvh max-h-dvh overflow-hidden;
@@ -222,6 +227,11 @@
     opacity: 0.8;
   }
 
+  .mac-btn:focus-visible {
+    outline-offset: 1px;
+    outline-color: rgba(255, 255, 255, 0.8);
+  }
+
   .mac-btn--close {
     @apply bg-[#ff5f57];
   }
@@ -311,6 +321,10 @@
 
   .data-list tbody tr:last-child {
     @apply border-b-0;
+  }
+
+  .data-list tbody tr:focus-visible {
+    outline-offset: -2px;
   }
 
   .data-list tbody tr:hover {

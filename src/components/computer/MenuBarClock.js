@@ -29,9 +29,12 @@ function MenuBarClock() {
   }, []);
 
   return (
-    <p className="!font-mono !font-bold !text-xs !text-[rgba(255,255,255,0.8)]">
+    <time
+      aria-hidden="true"
+      className="!font-mono !font-bold !text-xs !text-[rgba(255,255,255,0.8)]"
+    >
       {time}
-    </p>
+    </time>
   );
 }
 

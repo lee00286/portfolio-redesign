@@ -9,14 +9,14 @@ import Link from 'next/link';
  */
 function ScreenLayout({ children }) {
   return (
-    <div
+    <main
       id="screen"
-      role="main"
       tabIndex="-1"
       className="flex flex-col justify-start items-center p-0 w-full h-full"
     >
       {/* Menu Bar */}
-      <div
+      <nav
+        aria-label="Menu bar"
         className="z-[20] flex justify-between items-center rounded-tl-lg rounded-tr-lg px-4 py-[6px] w-full h-[32px]"
         style={{
           backgroundColor: 'rgba(30, 35, 40, 0.55)',
@@ -26,13 +26,13 @@ function ScreenLayout({ children }) {
       >
         <Link href="/" className="cursor-pointer text-white/80 hover:underline">
           <p className="!font-semibold !text-xs !text-white/80">
-            <span aria-label="Duck emoji">𓅿</span>
+            <span aria-hidden="true">𓅿</span>
             &nbsp;&nbsp;
             <span>Portfolio</span>
           </p>
         </Link>
         <MenuBarClock />
-      </div>
+      </nav>
 
       {/* Desktop */}
       <div className="z-[10] grid grid-rows-[auto_7%] xsm:grid-rows-[auto_6%] xxmd:grid-rows-none xxmd:grid-cols-[26%_auto] xxmd:rounded-bl-lg xxmd:rounded-br-lg w-full h-[calc(100%-32px)]">
@@ -42,7 +42,7 @@ function ScreenLayout({ children }) {
         {/* Right Screen */}
         {children}
       </div>
-    </div>
+    </main>
   );
 }
 

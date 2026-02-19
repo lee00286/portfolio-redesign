@@ -12,11 +12,24 @@ function DataListItem({
 
   if (!data) return <></>;
 
+  const handleNavigate = () => {
+    router.push(`/${dbTableName}/${data[uniqueIdKey]}`);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleNavigate();
+    }
+  };
+
   return (
     <tr
-      onClick={() => {
-        router.push(`/${dbTableName}/${data[uniqueIdKey]}`);
-      }}
+      tabIndex={0}
+      role="link"
+      onClick={handleNavigate}
+      onKeyDown={handleKeyDown}
+      aria-label={`View ${dbTableName.replace(/s$/, '')} details`}
     >
       {Array.isArray(tableBody) &&
         tableBody.length > 0 &&
