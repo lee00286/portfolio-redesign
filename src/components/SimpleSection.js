@@ -1,5 +1,6 @@
 import React from 'react';
 import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
+import { getLang } from '@/lib/lang';
 import { handleSupabaseError } from '@/util/helpers';
 import { simpleSectionDefaultQueryOptions } from '@/constants/supabase';
 import AboutCard from './simpleSectionCards/AboutCard';
@@ -26,6 +27,7 @@ async function SimpleSection({
       : simpleSectionDefaultQueryOptions
     : simpleSectionDefaultQueryOptions;
 
+  const lang = await getLang();
   const { dbData, error } = await getSupabaseData(dbTableName, options);
 
   return (
@@ -53,13 +55,23 @@ async function SimpleSection({
         >
           {dbData.map((data, index) =>
             dbTableName === 'about' ? (
-              <AboutCard key={data.id} data={data} />
+              <AboutCard key={data.id} data={data} lang={lang} />
             ) : dbTableName === 'educations' ? (
-              <EducationCard key={data.id} data={data} />
+              <EducationCard key={data.id} data={data} lang={lang} />
             ) : dbTableName === 'experiences' ? (
-              <ExperienceCard key={data.id} cardIndex={index} data={data} />
+              <ExperienceCard
+                key={data.id}
+                cardIndex={index}
+                data={data}
+                lang={lang}
+              />
             ) : dbTableName === 'projects' ? (
-              <ProjectCard key={data.id} cardIndex={index} data={data} />
+              <ProjectCard
+                key={data.id}
+                cardIndex={index}
+                data={data}
+                lang={lang}
+              />
             ) : (
               <React.Fragment key={data.id || `data-${index}`}></React.Fragment>
             )
@@ -67,7 +79,9 @@ async function SimpleSection({
         </div>
       ) : Array.isArray(dbData) && dbData.length === 0 ? (
         <p className="!font-medium !text-gray-700 !text-sm">
-          No {dbTableName} to display.
+          {lang === 'ko'
+            ? `표시할 ${dbTableName}이(가) 없습니다.`
+            : `No ${dbTableName} to display.`}
         </p>
       ) : (
         <p className="!font-medium !text-red-500 !text-sm">

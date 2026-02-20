@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
+import { getLang } from '@/lib/lang';
 import { getSupabaseData, getImageUrl } from '@/lib/supabase/getSupbaseData';
-
-const lang = 'en';
 
 // Table names to their corresponding helper filter functions
 const FILTER_FN_MAP = {
@@ -15,7 +14,7 @@ const FILTER_FN_MAP = {
  *
  * @param {string} dbTableName - The Supabase table name
  * @param {Object} dbFilters - Equality filters for the query
- * @param {Function} renderSections - Render function receiving (data, logoUrl) and returning JSX
+ * @param {Function} renderSections - Render function receiving (data, logoUrl, lang) and returning JSX
  */
 async function Details({ dbTableName = '', dbFilters = {}, renderSections }) {
   if (!dbTableName || !dbFilters || !Object.keys(dbFilters).length) {
@@ -43,6 +42,8 @@ async function Details({ dbTableName = '', dbFilters = {}, renderSections }) {
     notFound();
   }
 
+  const lang = await getLang();
+
   // Dynamically import the filter function (to avoid importing all helpers at once)
   const helpers = await import('@/util/helpers');
   const filterFn = helpers[filterFnName];
@@ -56,7 +57,7 @@ async function Details({ dbTableName = '', dbFilters = {}, renderSections }) {
 
   return (
     <section className="details-section">
-      {renderSections(data, logoUrl)}
+      {renderSections(data, logoUrl, lang)}
     </section>
   );
 }

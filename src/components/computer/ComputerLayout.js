@@ -6,7 +6,7 @@ import ScreenLayout from './ScreenLayout';
  * @param {*} children
  * @returns
  */
-function ComputerLayout({ children }) {
+function ComputerLayout({ children, lang = 'en' }) {
   return (
     <div className="relative flex justify-center items-center py-8 lg:py-[72px] px-0 sm:px-4 xsm:px-8 lg:px-[72px] w-full h-full">
       <div className="relative mx-auto my-0 mb-[16px] md:mb-[32px] xxmd:mb-[40px] max-w-desktop w-full h-full xxmd:h-auto xxmd:aspect-[4/3] xl:aspect-[16/10]">
@@ -22,7 +22,7 @@ function ComputerLayout({ children }) {
             className="relative flex justify-center items-center m-auto rounded-lg w-full h-full overflow-hidden"
             style={{ boxShadow: 'inset 0 0 12px rgba(0,0,0,0.3)' }}
           >
-            <ScreenLayout>{children}</ScreenLayout>
+            <ScreenLayout lang={lang}>{children}</ScreenLayout>
 
             {/* Wallpaper */}
             <div className="z-[1] absolute top-0 left-0 rounded-lg w-full h-full xxmd:h-auto max-h-full object-cover overflow-hidden">

@@ -4,9 +4,9 @@ import SimpleSection from '../SimpleSection';
 
 const sections = [
   {
-    title: 'Educations',
-    description: 'List of educations.',
+    title: { en: 'Educations', ko: '학력' },
     dbTableName: 'educations',
+    href: '/educations',
     iconSrc: '/img/icons/education-icon.svg',
     iconAlt: 'Education',
     width: 25,
@@ -14,16 +14,16 @@ const sections = [
     sidebarClass: 'btn--sidebar-lg'
   },
   {
-    title: 'Experiences',
-    description: 'List of experiences.',
+    title: { en: 'Experiences', ko: '경력' },
     dbTableName: 'experiences',
+    href: '/experiences',
     iconSrc: '/img/icons/work-bag-icon.svg',
     iconAlt: 'Work bag icon'
   },
   {
-    title: 'Projects',
-    description: 'List of projects I have worked on.',
+    title: { en: 'Projects', ko: '프로젝트' },
     dbTableName: 'projects',
+    href: '/projects',
     iconSrc: '/img/icons/write-icon.svg',
     iconAlt: 'Write icon'
   }
@@ -31,10 +31,9 @@ const sections = [
 
 /**
  * Sidebar of the computer screen.
- * Dislpays navigation menus.
- * @returns
+ * Displays navigation menus.
  */
-function SideBar() {
+function SideBar({ lang = 'en' }) {
   return (
     <aside
       aria-label="Sidebar"
@@ -51,17 +50,22 @@ function SideBar() {
         sectionContainerClass="!bg-[rgba(255,255,255,0.7)]"
       />
 
-      <nav aria-label="Site navigation">
+      <nav
+        aria-label="Site navigation"
+        className="my-auto xxmd:my-0 w-full md:w-auto"
+      >
         <ul className="flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 list-none p-0 m-0">
           {Array.isArray(sections) &&
             sections.length > 0 &&
             sections.map((section, index) => (
-              <li key={`sidebar-button-${index}`}>
+              <li
+                key={`sidebar-button-${index}`}
+                className="flex-1 md:flex-none"
+              >
                 <Link
                   className="btn btn--nav"
-                  href={`/${section.title ? section.title.toLowerCase() : ''}`}
-                  rel="noopener noreferrer"
-                  aria-label={section.iconAlt}
+                  href={section.href}
+                  aria-label={section.title[lang] || section.title.en}
                 >
                   <div
                     className={`btn--sidebar ${section.sidebarClass ? section.sidebarClass : ''}`}
@@ -75,7 +79,7 @@ function SideBar() {
                     />
                   </div>
                   <span className="hidden md:inline-block !text-sm font-medium">
-                    {section.title}
+                    {section.title[lang] || section.title.en}
                   </span>
                 </Link>
               </li>

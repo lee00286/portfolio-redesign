@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import { getFilteredAboutData } from '@/util/helpers';
 
-const lang = 'en';
-
 /**
  * Displays the "About" data from the database.
  * Used in both the sidebar (desktop) and main content area (mobile).
  */
-function AboutCard({ data }) {
+function AboutCard({ data, lang = 'en' }) {
   if (!data) return <></>;
 
   const filteredData = getFilteredAboutData(data, lang);

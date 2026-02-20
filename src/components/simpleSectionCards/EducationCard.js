@@ -1,13 +1,11 @@
 import { getFilteredEducationData } from '@/util/helpers';
 import Link from 'next/link';
 
-const lang = 'en';
-
 /**
  * Displays education data.
  * Skips rendering if the entry is marked inactive.
  */
-function EducationCard({ data }) {
+function EducationCard({ data, lang = 'en' }) {
   if (!data) return <></>;
 
   const filteredData = getFilteredEducationData(data, lang);
@@ -28,11 +26,11 @@ function EducationCard({ data }) {
         {(filteredData.start_date || filteredData.end_date) && (
           <p className="eyebrow mb-1.5">
             <span className="text-nowrap">
-              {filteredData.start_date || 'Unknown'}
+              {filteredData.start_date || (lang === 'ko' ? '미정' : 'Unknown')}
             </span>{' '}
             &mdash;&nbsp;
             <span className="text-nowrap">
-              {filteredData.end_date || 'Present'}
+              {filteredData.end_date || (lang === 'ko' ? '현재' : 'Present')}
             </span>
           </p>
         )}

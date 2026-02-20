@@ -7,9 +7,7 @@ import DetailsSection from '@/components/details/DetailsSection';
 import DetailsMarkdown from '@/components/markdown/DetailsMarkdown';
 import ImageModal from '@/components/ImageModal';
 
-const lang = 'en';
-
-function renderProjectSections(data, logoUrl) {
+function renderProjectSections(data, logoUrl, lang) {
   const title = [data.position, data.title].filter(Boolean).join(' - ');
 
   return (
@@ -36,9 +34,13 @@ function renderProjectSections(data, logoUrl) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--primary !py-1 !text-xs"
-                aria-label="Demo (opens in new tab)"
+                aria-label={
+                  lang === 'en'
+                    ? 'Demo (opens in new tab)'
+                    : '데모 (새 탭에서 열림)'
+                }
               >
-                Demo
+                {lang === 'en' ? 'Demo' : '데모'}
               </a>
             )}
             {data.github && (
@@ -47,7 +49,11 @@ function renderProjectSections(data, logoUrl) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn !py-1 !text-xs"
-                aria-label="GitHub (opens in new tab)"
+                aria-label={
+                  lang === 'en'
+                    ? 'GitHub (opens in new tab)'
+                    : 'GitHub (새 탭에서 열림)'
+                }
               >
                 GitHub
               </a>
@@ -59,7 +65,7 @@ function renderProjectSections(data, logoUrl) {
       {data?.detail_md && (
         <>
           <hr />
-          <DetailsMarkdown data={data} />
+          <DetailsMarkdown data={data} lang={lang} />
         </>
       )}
     </>

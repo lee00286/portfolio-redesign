@@ -16,9 +16,7 @@ import {
 } from './Typography';
 import { ImageGrid, MarkdownImage } from './Media';
 
-const lang = 'en';
-
-function DetailsMarkdown({ data }) {
+function DetailsMarkdown({ data, lang = 'en' }) {
   if (!data) return <></>;
 
   return (

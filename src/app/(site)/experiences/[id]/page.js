@@ -7,9 +7,7 @@ import DetailsSection from '@/components/details/DetailsSection';
 import DetailsMarkdown from '@/components/markdown/DetailsMarkdown';
 import ImageModal from '@/components/ImageModal';
 
-const lang = 'en';
-
-function renderExperienceSections(data, logoUrl) {
+function renderExperienceSections(data, logoUrl, lang) {
   const title = [data.position, data.company_name].filter(Boolean).join(' - ');
 
   return (
@@ -47,7 +45,7 @@ function renderExperienceSections(data, logoUrl) {
       {data?.detail_md && (
         <>
           <hr />
-          <DetailsMarkdown data={data} />
+          <DetailsMarkdown data={data} lang={lang} />
         </>
       )}
     </>

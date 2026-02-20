@@ -6,9 +6,7 @@ import DetailsSection from '@/components/details/DetailsSection';
 import DetailsMarkdown from '@/components/markdown/DetailsMarkdown';
 import ImageModal from '@/components/ImageModal';
 
-const lang = 'en';
-
-function renderEducationSections(data, logoUrl) {
+function renderEducationSections(data, logoUrl, lang) {
   return (
     <>
       <DetailsHeader
@@ -32,7 +30,7 @@ function renderEducationSections(data, logoUrl) {
       {data?.detail_md && (
         <>
           <hr />
-          <DetailsMarkdown data={data} />
+          <DetailsMarkdown data={data} lang={lang} />
         </>
       )}
     </>

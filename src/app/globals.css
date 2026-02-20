@@ -36,7 +36,7 @@
 
 @layer components {
   body {
-    @apply w-screen h-dvh max-h-dvh overflow-hidden;
+    @apply w-screen h-svh max-h-svh overflow-hidden;
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;

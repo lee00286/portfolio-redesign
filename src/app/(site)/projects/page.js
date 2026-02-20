@@ -1,7 +1,6 @@
+import { getLang } from '@/lib/lang';
 import WindowLayout from '@/components/computer/WindowLayout';
 import DataList from '@/components/list/DataList';
-
-const lang = 'en';
 
 const selectQueryEN =
   'id, project_id, start_date, end_date, title_en, pos_title_en';
@@ -13,6 +12,8 @@ const tableBodyEN = ['title_en', 'pos_title_en', 'start_date', 'end_date'];
 const tableBodyKO = ['title_ko', 'pos_title_ko', 'start_date', 'end_date'];
 
 export default async function ProjectDetails() {
+  const lang = await getLang();
+
   const selectQuery = lang === 'en' ? selectQueryEN : selectQueryKO;
   const tableHeaders = lang === 'en' ? tableHeadersEN : tableHeadersKO;
   const tableBody = lang === 'en' ? tableBodyEN : tableBodyKO;

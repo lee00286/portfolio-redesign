@@ -1,7 +1,6 @@
+import { getLang } from '@/lib/lang';
 import WindowLayout from '@/components/computer/WindowLayout';
 import DataList from '@/components/list/DataList';
-
-const lang = 'en';
 
 const selectQueryEN =
   'id, experience_id, start_date, end_date, company_name_en, pos_title_en';
@@ -23,6 +22,8 @@ const tableBodyKO = [
 ];
 
 export default async function ExperienceDetails() {
+  const lang = await getLang();
+
   const selectQuery = lang === 'en' ? selectQueryEN : selectQueryKO;
   const tableHeaders = lang === 'en' ? tableHeadersEN : tableHeadersKO;
   const tableBody = lang === 'en' ? tableBodyEN : tableBodyKO;

@@ -1,15 +1,13 @@
-import { getFilteredProjectData } from '@/util/helpers';
 import Link from 'next/link';
+import { getFilteredProjectData } from '@/util/helpers';
 import NewWindowIcon from '../icons/NewWindowIcon';
 import GitHubLogo from '../icons/GitHubLogo';
-
-const lang = 'en';
 
 /**
  * Displays project data.
  * Skips rendering if the entry is marked inactive.
  */
-function ProjectCard({ cardIndex, data }) {
+function ProjectCard({ cardIndex, data, lang = 'en' }) {
   if (!data) return <></>;
 
   const filteredData = getFilteredProjectData(data, lang);
@@ -35,11 +33,12 @@ function ProjectCard({ cardIndex, data }) {
           <div className="flex justify-between items-center gap-3 mb-1.5 w-full">
             <p className="eyebrow">
               <span className="text-nowrap">
-                {filteredData.start_date || 'Unknown'}
+                {filteredData.start_date ||
+                  (lang === 'ko' ? '미정' : 'Unknown')}
               </span>{' '}
               &mdash;&nbsp;
               <span className="text-nowrap">
-                {filteredData.end_date || 'Present'}
+                {filteredData.end_date || (lang === 'ko' ? '현재' : 'Present')}
               </span>
             </p>
 
@@ -50,9 +49,15 @@ function ProjectCard({ cardIndex, data }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn--link !text-xs"
-                  aria-label="Demo (opens in new tab)"
+                  aria-label={
+                    lang === 'en'
+                      ? 'Demo (opens in new tab)'
+                      : '데모 (새 탭에서 열림)'
+                  }
                 >
-                  <span className="block">Demo</span>
+                  <span className="block">
+                    {lang === 'en' ? 'Demo' : '데모'}
+                  </span>
                   <NewWindowIcon />
                 </a>
               )}
@@ -62,7 +67,11 @@ function ProjectCard({ cardIndex, data }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn--link !text-xs"
-                  aria-label="GitHub (opens in new tab)"
+                  aria-label={
+                    lang === 'en'
+                      ? 'GitHub (opens in new tab)'
+                      : 'GitHub (새 탭에서 열림)'
+                  }
                 >
                   <span className="block">GitHub</span>
                   <GitHubLogo />
