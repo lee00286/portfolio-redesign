@@ -1,8 +1,11 @@
 'use client';
 
+import { useState, useRef, useEffect, useTransition, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { useState, useRef, useEffect, useTransition } from 'react';
+import { createPortal } from 'react-dom';
 import { switchLang } from '@/lib/actions/lang';
+
+const SHEET_ANIMATION_DURATION = 200;
 
 const languages = [
   { code: 'en', label: 'English', icon: 'A' },
@@ -10,29 +13,79 @@ const languages = [
 ];
 
 /**
- * macOS-style keyboard input language switcher for the menu bar.
- * Displays current language icon; opens a dropdown to select language.
+ * Language switcher
+ * Desktop: dropdown menu
+ * Mobile: Slide-up action sheet
  */
 function LangSwitcher({ lang = 'en' }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+
   const [isOpen, setIsOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [screenEl, setScreenEl] = useState(null);
+  const [currentLang, setCurrentLang] = useState(languages[0]);
+
   const menuRef = useRef(null);
+  const closingTimer = useRef(null);
 
-  const currentLang = languages.find((l) => l.code === lang) || languages[0];
+  // Whether the mobile sheet is visible (open or animating closed)
+  const sheetVisible = isOpen || isClosing;
 
-  const handleSelect = (code) => {
-    if (code === lang) {
-      setIsOpen(false);
-      return;
-    }
-    startTransition(async () => {
-      await switchLang(code);
-      router.refresh();
-    });
+  useEffect(() => {
+    console.log(lang);
+    console.log(languages.find((l) => l.code === lang));
+    console.log(languages[0]);
+    console.log(languages.find((l) => l.code === lang) || languages[0]);
+
+    setCurrentLang(languages.find((l) => l.code === lang) || languages[0]);
+  }, [lang]);
+
+  // Get the screen element for portal rendering
+  useEffect(() => {
+    setScreenEl(document.getElementById('screen'));
+  }, []);
+
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (closingTimer.current) clearTimeout(closingTimer.current);
+    };
+  }, []);
+
+  const closeSheet = useCallback(() => {
+    setIsClosing(true);
     setIsOpen(false);
-  };
+    closingTimer.current = setTimeout(() => {
+      setIsClosing(false);
+    }, SHEET_ANIMATION_DURATION);
+  }, []);
 
+  const handleSelect = useCallback(
+    (code) => {
+      if (code === currentLang?.code) {
+        closeSheet();
+        return;
+      }
+
+      // UI language switching
+      const selected = languages.find((l) => l.code === code);
+      if (selected) {
+        setCurrentLang(selected);
+      }
+
+      // Server and cookie-based language switching
+      startTransition(async () => {
+        await switchLang(code);
+        router.refresh();
+      });
+
+      closeSheet();
+    },
+    [currentLang, router, closeSheet]
+  );
+
+  // Close on click outside (desktop)
   useEffect(() => {
     if (!isOpen) return;
     const handleClickOutside = (e) => {
@@ -44,45 +97,53 @@ function LangSwitcher({ lang = 'en' }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
+  // Close on Escape
   useEffect(() => {
     if (!isOpen) return;
     const handleEsc = (e) => {
-      if (e.key === 'Escape') setIsOpen(false);
+      if (e.key === 'Escape') closeSheet();
     };
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
-  }, [isOpen]);
+  }, [isOpen, closeSheet]);
 
   return (
     <div ref={menuRef} className="relative">
       <button
-        onClick={() => setIsOpen((prev) => !prev)}
-        disabled={isPending}
+        onClick={() => {
+          if (isOpen) {
+            closeSheet();
+          } else {
+            setIsOpen(true);
+          }
+        }}
+        disabled={isPending || isClosing}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-label={`Language: ${currentLang.label}`}
+        aria-label={`Language: ${currentLang?.label}`}
         className={`
-          flex items-center justify-center cursor-pointer border-none rounded px-2 py-1 hover:bg-white/10 ${
-            isOpen ? 'bg-white/10' : 'bg-transparent'
-          }
+          flex items-center justify-center cursor-pointer border-none rounded xmd:py-1 px-1 xmd:px-2
+          hover:bg-black/5 xmd:hover:bg-white/10
+          ${isOpen ? 'bg-black/5 xmd:bg-white/10' : 'bg-transparent'}
         `}
         style={{
           transition: 'background-color 0.15s ease',
           opacity: isPending ? 0.5 : 1
         }}
       >
-        <span className="flex justify-center items-center rounded-sm border border-white/80 w-6 h-4">
-          <span className="!font-semibold !text-white/80 !text-[11px] leading-[1] text-center">
-            {currentLang.icon}
+        <span className="flex justify-center items-center rounded-full xmd:rounded-sm border border-primary-200 xmd:border-white/80 w-6 h-6 xmd:h-4 bg-primary-200 xmd:bg-transparent">
+          <span className="!font-semibold !text-gray-800 xmd:!text-white/80 !text-[11px] leading-[1] text-center">
+            {currentLang?.icon}
           </span>
         </span>
       </button>
 
+      {/* Dropdown menu (Desktop) */}
       {isOpen && (
         <ul
           role="listbox"
           aria-label="Select language"
-          className="absolute right-0 top-full mt-1 mb-0 mx-0 min-w-[160px] rounded-md p-1 shadow-lg list-none"
+          className="dskt-only absolute right-0 top-full mt-1 mb-0 mx-0 min-w-[160px] rounded-md p-1 shadow-lg list-none"
           style={{
             backgroundColor: 'rgba(40, 44, 52, 0.8)',
             backdropFilter: 'blur(20px)',
@@ -91,14 +152,18 @@ function LangSwitcher({ lang = 'en' }) {
           }}
         >
           {languages.map((l) => (
-            <li key={l.code} role="option" aria-selected={l.code === lang}>
+            <li
+              key={l.code}
+              role="option"
+              aria-selected={l.code === currentLang?.code}
+            >
               <button
                 onClick={() => handleSelect(l.code)}
                 className="flex items-center gap-2 rounded-md border-none p-1.5 w-full bg-transparent hover:bg-white/20 text-left cursor-pointer"
                 style={{ transition: 'background-color 0.1s ease' }}
               >
                 <span className="w-[9px] !opacity-80">
-                  {l.code === lang ? (
+                  {l.code === currentLang?.code ? (
                     <img
                       src="/img/icons/checkmark-icon.svg"
                       alt="Checkmark icon"
@@ -123,6 +188,69 @@ function LangSwitcher({ lang = 'en' }) {
           ))}
         </ul>
       )}
+
+      {/* Slide-up action sheet (Mobile) */}
+      {sheetVisible &&
+        screenEl &&
+        createPortal(
+          <div
+            role="presentation"
+            className={`mbl-only lang-sheet-overlay ${isClosing ? 'lang-sheet-overlay--closing' : ''}`}
+            onMouseDown={(e) => e.stopPropagation()}
+            onClick={closeSheet}
+          >
+            <div
+              className={`lang-sheet ${isClosing ? 'lang-sheet--closing' : ''}`}
+              onClick={(e) => e.stopPropagation()}
+              role="listbox"
+              aria-label="Select language"
+            >
+              <div className="lang-sheet-handle" />
+              <p className="mb-3 !font-medium !text-gray-700 !text-md xmd:!text-xs text-center">
+                {currentLang?.code === 'ko' ? '언어 선택' : 'Select Language'}
+              </p>
+              {languages.map((l) => (
+                <button
+                  key={l.code}
+                  role="option"
+                  aria-selected={l.code === currentLang?.code}
+                  onClick={() => handleSelect(l.code)}
+                  className={`lang-sheet-option ${l.code === currentLang?.code ? 'lang-sheet-option--active' : ''}`}
+                >
+                  <span className="flex justify-center items-center rounded-sm border border-primary-200 w-7 h-5 bg-primary-100">
+                    <span className="!font-semibold !text-gray-700 !text-[13px] leading-[1] text-center">
+                      {l.icon}
+                    </span>
+                  </span>
+                  <span className="flex-1 !font-medium !text-gray-700 !text-[15px]">
+                    {l.label}
+                  </span>
+                  {l.code === currentLang?.code && (
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="text-primary-600"
+                    >
+                      <path
+                        d="M5 13l4 4L19 7"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </button>
+              ))}
+              <button onClick={closeSheet} className="lang-sheet-cancel">
+                {currentLang?.code === 'ko' ? '취소' : 'Cancel'}
+              </button>
+            </div>
+          </div>,
+          screenEl
+        )}
     </div>
   );
 }

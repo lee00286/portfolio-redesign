@@ -1,8 +1,11 @@
 import { cookies } from 'next/headers';
+import {
+  SUPPORTED_LANGS,
+  DEFAULT_LANG,
+  LANG_COOKIE_NAME
+} from './lang-constants';
 
-export const SUPPORTED_LANGS = ['en', 'ko'];
-export const DEFAULT_LANG = 'en';
-export const LANG_COOKIE_NAME = 'lang';
+export { SUPPORTED_LANGS, DEFAULT_LANG, LANG_COOKIE_NAME };
 
 /**
  * Gets the current language from the cookie.

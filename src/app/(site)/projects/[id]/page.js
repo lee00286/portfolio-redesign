@@ -79,7 +79,7 @@ export default async function ProjectDetails({ params }) {
     <WindowLayout>
       <ModalProvider>
         <div
-          className="sm:rounded-b-xl w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-hidden"
+          className="sm:rounded-b-xl w-full h-full max-h-full overflow-hidden"
           style={{ transform: 'translateZ(0)' }}
         >
           <div className="px-4 sm:px-5 py-3 w-full h-full overflow-x-hidden overflow-y-auto">

@@ -1,47 +1,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import SimpleSection from '../SimpleSection';
-
-const sections = [
-  {
-    title: { en: 'Educations', ko: '학력' },
-    dbTableName: 'educations',
-    href: '/educations',
-    iconSrc: '/img/icons/education-icon.svg',
-    iconAlt: 'Education',
-    width: 25,
-    height: 25,
-    sidebarClass: 'btn--sidebar-lg'
-  },
-  {
-    title: { en: 'Experiences', ko: '경력' },
-    dbTableName: 'experiences',
-    href: '/experiences',
-    iconSrc: '/img/icons/work-bag-icon.svg',
-    iconAlt: 'Work bag icon'
-  },
-  {
-    title: { en: 'Projects', ko: '프로젝트' },
-    dbTableName: 'projects',
-    href: '/projects',
-    iconSrc: '/img/icons/write-icon.svg',
-    iconAlt: 'Write icon'
-  }
-];
+import { menuPages } from '@/constants/sidebar';
 
 /**
- * Sidebar of the computer screen.
- * Displays navigation menus.
+ * Desktop sidebar
+ * Shows left panel with about menuPage and navigation links
  */
 function SideBar({ lang = 'en' }) {
   return (
     <aside
       aria-label="Sidebar"
-      className="row-start-2 xxmd:row-auto xxmd:col-span-1 flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 xxmd:rounded-bl-lg px-4 sm:px-5 py-2.5 xxmd:py-5 bg-[rgba(255,255,255,0.2)]"
-      style={{
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)'
-      }}
+      className="dskt-only mac-blur-bottom col-span-1 flex flex-col justify-start items-stretch gap-3 rounded-bl-lg px-5 py-5 bg-[rgba(255,255,255,0.2)]"
     >
       <SimpleSection
         dbTableName="about"
@@ -50,40 +20,29 @@ function SideBar({ lang = 'en' }) {
         sectionContainerClass="!bg-[rgba(255,255,255,0.7)]"
       />
 
-      <nav
-        aria-label="Site navigation"
-        className="my-auto xxmd:my-0 w-full md:w-auto"
-      >
-        <ul className="flex xxmd:flex-col justify-around xxmd:justify-start items-stretch gap-3 list-none p-0 m-0">
-          {Array.isArray(sections) &&
-            sections.length > 0 &&
-            sections.map((section, index) => (
-              <li
-                key={`sidebar-button-${index}`}
-                className="flex-1 md:flex-none"
+      <nav aria-label="Site navigation">
+        <ul className="flex flex-col justify-start items-stretch gap-3 list-none p-0 m-0">
+          {menuPages.map((menuPage, index) => (
+            <li key={`sidebar-button-${index}`}>
+              <Link
+                className="btn btn--nav"
+                href={menuPage.href}
+                aria-label={menuPage.title[lang] || menuPage.title.en}
               >
-                <Link
-                  className="btn btn--nav"
-                  href={section.href}
-                  aria-label={section.title[lang] || section.title.en}
-                >
-                  <div
-                    className={`btn--sidebar ${section.sidebarClass ? section.sidebarClass : ''}`}
-                  >
-                    <Image
-                      aria-hidden="true"
-                      src={section.iconSrc}
-                      alt=""
-                      width={section.width ?? 20}
-                      height={section.height ?? 20}
-                    />
-                  </div>
-                  <span className="hidden md:inline-block !text-sm font-medium">
-                    {section.title[lang] || section.title.en}
-                  </span>
-                </Link>
-              </li>
-            ))}
+                <div className={`btn--sidebar ${menuPage.sidebarClass || ''}`}>
+                  <Image
+                    src={menuPage.iconSrc}
+                    alt={menuPage.iconAlt[lang] || menuPage.iconAlt.en}
+                    width={menuPage.width ?? 20}
+                    height={menuPage.height ?? 20}
+                  />
+                </div>
+                <span className="btn--nav-label">
+                  {menuPage.title[lang] || menuPage.title.en}
+                </span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </aside>

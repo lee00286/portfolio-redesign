@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 /**
  * Live clock on the right side of the menu bar.
- * @returns
  */
 function MenuBarClock() {
   const [time, setTime] = useState('');
@@ -31,7 +30,7 @@ function MenuBarClock() {
   return (
     <time
       aria-hidden="true"
-      className="!font-mono !font-bold !text-xs !text-[rgba(255,255,255,0.8)]"
+      className="!font-mono !font-bold !text-gray-700 xmd:!text-[rgba(255,255,255,0.8)] !text-sm xmd:!text-xs"
     >
       {time}
     </time>

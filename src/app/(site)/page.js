@@ -32,7 +32,7 @@ export default async function Home() {
     <WindowLayout>
       <div
         data-scroll-container
-        className="px-4 sm:px-5 py-3 w-full h-[calc(100%-40px)] max-h-[calc(100%-40px)] overflow-x-hidden overflow-y-auto"
+        className="px-4 xmd:px-5 py-3 w-full h-full max-h-full overflow-x-hidden overflow-y-auto"
       >
         <ScrollHashObserver />
 
@@ -48,7 +48,11 @@ export default async function Home() {
             <SimpleSection
               key={`simple-section-${index}`}
               title={section.title[lang] || section.title.en}
-              description={section.description ? (section.description[lang] || section.description.en) : ''}
+              description={
+                section.description
+                  ? section.description[lang] || section.description.en
+                  : ''
+              }
               dbTableName={section.dbTableName}
               queryOptions={
                 section.dbTableName === 'experiences'

@@ -42,7 +42,7 @@ function ProjectCard({ cardIndex, data, lang = 'en' }) {
               </span>
             </p>
 
-            <div className="hidden xsm:flex justify-end items-center gap-2.5 md:gap-3">
+            <div className="hidden xmd:flex justify-end items-center gap-2.5 md:gap-3">
               {filteredData.url && (
                 <a
                   href={filteredData.url}
@@ -118,7 +118,7 @@ function ProjectCard({ cardIndex, data, lang = 'en' }) {
           </div>
         )}
 
-      <div className="flex xsm:hidden justify-start items-center gap-3 mt-1.5 border-t border-gray-200 pt-3 w-full">
+      <div className="flex xmd:hidden justify-start items-center gap-3 mt-1.5 border-t border-gray-200 pt-3 w-full">
         {filteredData.url && (
           <a
             href={filteredData.url}

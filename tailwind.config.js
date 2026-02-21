@@ -32,7 +32,8 @@ module.exports = {
 
       // max-width
       'sm-max': { max: '479.98px' },
-      'md-max': { max: '767.98px' }
+      'md-max': { max: '767.98px' },
+      'xmd-max': { max: '853.98px' }
     },
     extend: {
       fontFamily: {

@@ -1,15 +1,22 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
+
+const MBL_BREAKPOINT = 854;
 
 /**
  * Observes the scroll position and updates the URL hash accordingly.
+ * Only active at some breakpoint.
  */
 function ScrollHashObserver() {
   const rafId = useRef(null);
   const currentHash = useRef('');
+  const cleanupScroll = useRef(null);
 
-  useEffect(() => {
+  const activate = useCallback(() => {
+    // If observer is already active
+    if (cleanupScroll.current) return;
+
     const scrollContainer = document.querySelector('[data-scroll-container]');
     if (!scrollContainer) return;
 
@@ -24,17 +31,16 @@ function ScrollHashObserver() {
       currentHash.current = newHash;
 
       history.replaceState(null, '', newHash || window.location.pathname);
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
     };
 
     const handleScroll = () => {
-      // Cancel any pending frame to avoid stacking updates
       if (rafId.current) cancelAnimationFrame(rafId.current);
 
       rafId.current = requestAnimationFrame(() => {
         const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
         const containerTop = scrollContainer.getBoundingClientRect().top;
 
-        // If at the bottom of the page, anchor to the last section
         if (scrollTop + clientHeight >= scrollHeight - 1) {
           const last = sections[sections.length - 1];
           updateHash(`#${last.id}`);
@@ -62,11 +68,35 @@ function ScrollHashObserver() {
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    return () => {
+    cleanupScroll.current = () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
       if (rafId.current) cancelAnimationFrame(rafId.current);
+      cleanupScroll.current = null;
     };
   }, []);
+
+  const deactivate = useCallback(() => {
+    if (cleanupScroll.current) cleanupScroll.current();
+  }, []);
+
+  useEffect(() => {
+    // Activate/deactivate depending on screen size
+    const handleResize = () => {
+      if (window.innerWidth >= MBL_BREAKPOINT) {
+        activate();
+      } else {
+        deactivate();
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      deactivate();
+    };
+  }, [activate, deactivate]);
 
   return null;
 }

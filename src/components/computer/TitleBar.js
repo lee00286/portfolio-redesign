@@ -5,8 +5,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 /**
- * Title bar of the browser window.
- * @returns
+ * Desktop title bar
  */
 function TitleBar() {
   const pathname = usePathname();
@@ -30,8 +29,7 @@ function TitleBar() {
   }, []);
 
   return (
-    <div className="z-[20] flex items-center gap-3 sm:rounded-tl-xl sm:rounded-tr-xl border-b border-primary-200 py-2 px-4 w-full h-[40px] bg-primary-100">
-      {/* Buttons */}
+    <div className="dskt-only z-[20] flex items-center gap-3 rounded-tl-xl rounded-tr-xl border-b border-primary-200 pt-2 pb-2 px-4 w-full h-full bg-primary-100">
       <div className="flex justify-start items-center gap-1.5 shrink-0">
         <Link
           href={currPath}
@@ -48,34 +46,36 @@ function TitleBar() {
         </button>
       </div>
 
-      {/* URL Bar (breadcrumbs) */}
+      {/* URL Bar */}
       <div className="flex-1 flex items-center justify-center">
-        <div className="hidden sm:flex items-center gap-1.5 rounded-md border border-primary-200 py-1 px-3 max-w-[320px] w-full bg-white">
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="shrink-0 text-gray-400"
-          >
-            <title>Lock icon</title>
-            <rect
-              x="5"
-              y="11"
-              width="14"
+        <div className="flex justify-left items-center gap-1.5 rounded-md border border-primary-200 py-1 px-3 max-w-[320px] w-full bg-white">
+          <div className="shrink-0 text-gray-400">
+            <svg
+              width="10"
               height="10"
-              rx="2"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-            <path
-              d="M8 11V7a4 4 0 118 0v4"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-          <p className="!font-mono !text-[11px] !text-gray-500 truncate !leading-normal">
+              viewBox="0 0 24 24"
+              fill="none"
+              className="shrink-0 text-gray-400"
+            >
+              <title>Lock icon</title>
+              <rect
+                x="5"
+                y="11"
+                width="14"
+                height="10"
+                rx="2"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <path
+                d="M8 11V7a4 4 0 118 0v4"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+          <p className="!font-mono !text-[11px] !text-gray-500 truncate !leading-normal text-left">
             yenalee.dev{pathname}
             {hash || ''}
           </p>
