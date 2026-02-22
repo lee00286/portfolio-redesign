@@ -6,7 +6,7 @@ import { useModal } from '@/contexts/ModalProvider';
 const FOCUSABLE_SELECTOR =
   'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
 
-function ImageModal() {
+function ImageModal({ lang = 'en' }) {
   const { modalData, onClose } = useModal();
 
   const modalRef = useRef(null);
@@ -74,18 +74,32 @@ function ImageModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center sm:rounded-b-xl"
+      style={{ backdropFilter: 'blur(2px)' }}
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={lang === 'ko' ? '이미지 보기' : 'Image View'}
     >
       <div
         ref={modalRef}
         className="relative max-w-[90%] max-h-[90%]"
         onClick={(e) => e?.stopPropagation()}
       >
-        <img src={modalData.src} alt={modalData.alt} />
+        <img
+          src={modalData.src}
+          alt={modalData.alt}
+          className="rounded-lg"
+          style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.4)' }}
+        />
         <button
-          className="absolute -top-1 right-0 -translate-y-[100%] font-bold text-white text-xl cursor-pointer"
+          className="absolute -top-2 -right-2 flex items-center justify-center w-7 h-7 rounded-full bg-white/90 text-gray-700 text-sm font-semibold cursor-pointer"
+          style={{
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            transition: 'background-color 0.15s ease'
+          }}
           onClick={onClose}
+          aria-label="Close image"
         >
           ✕
         </button>

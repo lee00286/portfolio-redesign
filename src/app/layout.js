@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { getLang } from '@/lib/lang';
 import '@/app/globals.css';
 
 const geistSans = Geist({
@@ -12,15 +13,17 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const lang = await getLang();
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header>
           <Link href="#screen" className="skip">
-            Skip to main content
+            {lang === 'ko' ? '본문으로 건너뛰기' : 'Skip to main content'}
           </Link>
         </header>
 

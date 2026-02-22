@@ -1,8 +1,11 @@
 import { getFilteredEducationData } from '@/util/helpers';
+import Link from 'next/link';
 
-const lang = 'en';
-
-function EducationCard({ data }) {
+/**
+ * Displays education data.
+ * Skips rendering if the entry is marked inactive.
+ */
+function EducationCard({ data, lang = 'en' }) {
   if (!data) return <></>;
 
   const filteredData = getFilteredEducationData(data, lang);
@@ -15,40 +18,46 @@ function EducationCard({ data }) {
         <img
           src={filteredData.image_url}
           alt={filteredData.school}
-          className="w-full h-48 object-cover rounded"
+          className="rounded-lg w-full h-48 object-cover"
         />
       )}
 
       <div className="w-full">
-        <div className="flex justify-between items-center gap-3 mb-2 w-full">
-          {(filteredData.start_date || filteredData.end_date) && (
-            <p className="eyebrow">
-              <span className="text-nowrap">
-                {filteredData.start_date || 'Unknown'}
-              </span>{' '}
-              &mdash;&nbsp;
-              <span className="text-nowrap">
-                {filteredData.end_date || 'Present'}
-              </span>
-            </p>
-          )}
-        </div>
+        {(filteredData.start_date || filteredData.end_date) && (
+          <p className="eyebrow mb-1.5">
+            <span className="text-nowrap">
+              {filteredData.start_date || (lang === 'ko' ? '미정' : 'Unknown')}
+            </span>{' '}
+            &mdash;&nbsp;
+            <span className="text-nowrap">
+              {filteredData.end_date || (lang === 'ko' ? '현재' : 'Present')}
+            </span>
+          </p>
+        )}
 
         {(filteredData.major || filteredData.school) && (
           <h3 className="h4">
-            {filteredData.major || ''}
-            {filteredData.school && ` - ${filteredData.school}`}
+            <Link
+              href={filteredData.id ? `/educations/${filteredData.id}` : '#'}
+              className="text-primary-base no-underline hover:underline focus:underline"
+              style={{ transition: 'color 0.15s ease' }}
+            >
+              {filteredData.major || ''}
+              {filteredData.school && ` - ${filteredData.school}`}
+            </Link>
           </h3>
         )}
 
         {filteredData.location && (
-          <p className="mt-1 !text-gray-400 !font-bold !text-sm">
+          <p className="mt-1 !text-gray-500 !font-medium !text-sm">
             {filteredData.location}
           </p>
         )}
       </div>
 
-      {filteredData.description && <p>{filteredData.description}</p>}
+      {filteredData.description && (
+        <p className="!text-gray-700">{filteredData.description}</p>
+      )}
     </div>
   );
 }

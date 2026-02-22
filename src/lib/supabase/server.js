@@ -9,6 +9,20 @@ export const createSupabaseServer = () => {
   }
 
   return createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+    global: {
+      fetch: async (url, options) => {
+        const res = await fetch(url, options);
+
+        if (!res.ok) {
+          const text = await res.text();
+          throw Object.assign(new Error(text), {
+            status: res.status
+          });
+        }
+
+        return res;
+      }
+    },
     auth: {
       autoRefreshToken: false,
       persistSession: false

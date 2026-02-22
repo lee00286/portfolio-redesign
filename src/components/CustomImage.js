@@ -15,9 +15,14 @@ function CustomImage({
 
   if (!src) return <></>;
 
-  const onClick = () => {
-    if (hasLightbox) {
-      onOpen({ src, alt });
+  const handleOpen = () => {
+    onOpen({ src, alt });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleOpen();
     }
   };
 
@@ -27,8 +32,16 @@ function CustomImage({
       alt={alt}
       width={width || 1200}
       height={height || 800}
-      className={`rounded-lg border border-gray-600 object-contain w-full ${imgClass ? imgClass : ''}`}
-      onClick={onClick}
+      className={`rounded-lg border border-gray-200 object-contain w-full ${imgClass ? imgClass : ''}`}
+      {...(hasLightbox
+        ? {
+            role: 'button',
+            tabIndex: 0,
+            onClick: handleOpen,
+            onKeyDown: handleKeyDown,
+            'aria-label': `View ${alt} in full size`
+          }
+        : {})}
     />
   );
 }
