@@ -1,7 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { SUPPORTED_LANGS, DEFAULT_LANG, LANG_COOKIE_NAME } from '@/lib/lang';
+import { SUPPORTED_LANGS, DEFAULT_LANG, LANG_COOKIE_NAME } from '@/constants/language';
 
 /**
  * Switch the language preference cookie

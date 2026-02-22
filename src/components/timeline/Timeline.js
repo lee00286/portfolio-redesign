@@ -1,7 +1,6 @@
-import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
-import { getLang } from '@/lib/lang';
-import { handleSupabaseError } from '@/util/helpers';
 import Link from 'next/link';
+import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
+import { handleSupabaseError } from '@/util/helpers';
 
 /**
  * Vertical timeline list
@@ -12,9 +11,9 @@ async function Timeline({
   dbTableName = '',
   uniqueKey = 'id',
   queryOptions = {},
-  renderItem // card content
+  renderItem, // card content
+  lang = 'en'
 }) {
-  const lang = await getLang();
   const { dbData, error } = await getSupabaseData(dbTableName, queryOptions);
 
   return (

@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
-import { getLang } from '@/lib/lang';
 import { handleSupabaseError } from '@/util/helpers';
 import { simpleSectionDefaultQueryOptions } from '@/constants/supabase';
 import AboutCard from './simpleSectionCards/AboutCard';
@@ -20,7 +19,8 @@ async function SimpleSection({
   mobileOnly = false,
   sectionClass = '',
   sectionContainerClass = '',
-  queryOptions = simpleSectionDefaultQueryOptions
+  queryOptions = simpleSectionDefaultQueryOptions,
+  lang = 'en'
 }) {
   const options = queryOptions
     ? Object.keys(queryOptions)?.length > 0
@@ -28,7 +28,6 @@ async function SimpleSection({
       : simpleSectionDefaultQueryOptions
     : simpleSectionDefaultQueryOptions;
 
-  const lang = await getLang();
   const { dbData, error } = await getSupabaseData(dbTableName, options);
 
   return (

@@ -1,8 +1,11 @@
+import { getLang } from '@/lib/lang';
 import WindowLayout from '@/components/computer/WindowLayout';
 import Timeline from '@/components/timeline/Timeline';
 import TimelineEducationCard from '@/components/timeline/TimelineEducationCard';
 
-export default async function EducationDetails() {
+export default async function EducationDetails({ searchParams }) {
+  const lang = await getLang(searchParams);
+
   return (
     <WindowLayout>
       <div
@@ -20,9 +23,10 @@ export default async function EducationDetails() {
               skipSoftDelete: true,
               isActiveFilter: true
             }}
-            renderItem={({ data, index, lang }) => (
+            renderItem={({ data, index }) => (
               <TimelineEducationCard data={data} lang={lang} />
             )}
+            lang={lang}
           />
         </div>
       </div>

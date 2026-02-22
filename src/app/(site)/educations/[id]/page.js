@@ -1,10 +1,34 @@
 import { ModalProvider } from '@/contexts/ModalProvider';
+import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
+import { getLang } from '@/lib/lang';
+import { getFilteredEducationData } from '@/util/helpers';
 import WindowLayout from '@/components/computer/WindowLayout';
 import Details from '@/components/details/Details';
 import DetailsHeader from '@/components/details/DetailsHeader';
 import DetailsSection from '@/components/details/DetailsSection';
 import DetailsMarkdown from '@/components/markdown/DetailsMarkdown';
 import ImageModal from '@/components/ImageModal';
+
+export async function generateMetadata({ params, searchParams }) {
+  const { id } = await params;
+
+  const lang = await getLang(searchParams);
+
+  const { dbData } = await getSupabaseData('educations', {
+    filters: { education_id: id }
+  });
+
+  if (!dbData?.length) return { title: 'Education' };
+
+  const d = getFilteredEducationData(dbData[0], lang);
+  const title = [d.major, d.school].filter(Boolean).join(' - ');
+
+  return {
+    title: title || 'Education',
+    description: d.description || undefined,
+    openGraph: { title, description: d.description || undefined }
+  };
+}
 
 function renderEducationSections(data, logoUrl, lang) {
   return (
@@ -37,8 +61,10 @@ function renderEducationSections(data, logoUrl, lang) {
   );
 }
 
-export default async function EducationDetails({ params }) {
+export default async function EducationDetails({ params, searchParams }) {
   const { id: educationId } = await params;
+
+  const lang = await getLang(searchParams);
 
   return (
     <WindowLayout>
@@ -52,6 +78,7 @@ export default async function EducationDetails({ params }) {
               dbTableName="educations"
               dbFilters={{ education_id: educationId }}
               renderSections={renderEducationSections}
+              lang={lang}
             />
           </div>
 

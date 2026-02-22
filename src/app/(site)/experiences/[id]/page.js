@@ -1,4 +1,7 @@
 import { ModalProvider } from '@/contexts/ModalProvider';
+import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
+import { getLang } from '@/lib/lang';
+import { getFilteredExperienceData } from '@/util/helpers';
 import WindowLayout from '@/components/computer/WindowLayout';
 import Details from '@/components/details/Details';
 import DetailsHeader from '@/components/details/DetailsHeader';
@@ -6,6 +9,27 @@ import TechStack from '@/components/details/TechStack';
 import DetailsSection from '@/components/details/DetailsSection';
 import DetailsMarkdown from '@/components/markdown/DetailsMarkdown';
 import ImageModal from '@/components/ImageModal';
+
+export async function generateMetadata({ params, searchParams }) {
+  const { id } = await params;
+
+  const lang = await getLang(searchParams);
+
+  const { dbData } = await getSupabaseData('experiences', {
+    filters: { experience_id: id }
+  });
+
+  if (!dbData?.length) return { title: 'Experience' };
+
+  const d = getFilteredExperienceData(dbData[0], lang);
+  const title = [d.position, d.company_name].filter(Boolean).join(' - ');
+
+  return {
+    title: title || 'Experience',
+    description: d.description || undefined,
+    openGraph: { title, description: d.description || undefined }
+  };
+}
 
 function renderExperienceSections(data, logoUrl, lang) {
   const title = [data.position, data.company_name].filter(Boolean).join(' - ');
@@ -52,8 +76,10 @@ function renderExperienceSections(data, logoUrl, lang) {
   );
 }
 
-export default async function ExperienceDetails({ params }) {
+export default async function ExperienceDetails({ params, searchParams }) {
   const { id: experienceId } = await params;
+
+  const lang = await getLang(searchParams);
 
   return (
     <WindowLayout>
@@ -67,6 +93,7 @@ export default async function ExperienceDetails({ params }) {
               dbTableName="experiences"
               dbFilters={{ experience_id: experienceId }}
               renderSections={renderExperienceSections}
+              lang={lang}
             />
           </div>
 

@@ -25,8 +25,8 @@ const sections = [
   }
 ];
 
-export default async function Home() {
-  const lang = await getLang();
+export default async function Home({ searchParams }) {
+  const lang = await getLang(searchParams);
 
   return (
     <WindowLayout>
@@ -40,6 +40,7 @@ export default async function Home() {
           dbTableName="about"
           mobileOnly={true}
           sectionContainerClass="!bg-[rgba(255,255,255,0.9)]"
+          lang={lang}
         />
 
         {Array.isArray(sections) &&

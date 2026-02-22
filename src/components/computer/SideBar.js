@@ -18,6 +18,7 @@ function SideBar({ lang = 'en' }) {
         desktopOnly={true}
         sectionClass="!mb-3 !p-0"
         sectionContainerClass="!bg-[rgba(255,255,255,0.7)]"
+        lang={lang}
       />
 
       <nav aria-label="Site navigation">

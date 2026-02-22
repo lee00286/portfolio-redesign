@@ -2,7 +2,9 @@ import WindowLayout from '@/components/computer/WindowLayout';
 import Timeline from '@/components/timeline/Timeline';
 import TimelineExperienceCard from '@/components/timeline/TimelineExperienceCard';
 
-export default async function ExperienceDetails() {
+export default async function ExperienceDetails({ searchParams }) {
+  const lang = await getLang(searchParams);
+
   return (
     <WindowLayout>
       <div
@@ -20,9 +22,10 @@ export default async function ExperienceDetails() {
               skipSoftDelete: true,
               isActiveFilter: true
             }}
-            renderItem={({ data, index, lang }) => (
+            renderItem={({ data, index }) => (
               <TimelineExperienceCard data={data} index={index} lang={lang} />
             )}
+            lang={lang}
           />
         </div>
       </div>

@@ -7,7 +7,7 @@ import {
   SUPPORTED_LANGS,
   DEFAULT_LANG,
   LANG_COOKIE_NAME
-} from '@/lib/lang-constants';
+} from '@/constants/language';
 
 function getClientLang() {
   const match = document.cookie.match(

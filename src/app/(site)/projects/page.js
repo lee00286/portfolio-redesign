@@ -1,8 +1,11 @@
+import { getLang } from '@/lib/lang';
 import WindowLayout from '@/components/computer/WindowLayout';
 import Timeline from '@/components/timeline/Timeline';
 import TimelineProjectCard from '@/components/timeline/TimelineProjectCard';
 
-export default async function ProjectDetails() {
+export default async function ProjectDetails({ searchParams }) {
+  const lang = await getLang(searchParams);
+
   return (
     <WindowLayout>
       <div
@@ -20,7 +23,7 @@ export default async function ProjectDetails() {
               skipSoftDelete: true,
               isActiveFilter: true
             }}
-            renderItem={({ data, index, lang }) => (
+            renderItem={({ data, index }) => (
               <TimelineProjectCard data={data} index={index} lang={lang} />
             )}
           />

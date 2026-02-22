@@ -1,4 +1,7 @@
 import { ModalProvider } from '@/contexts/ModalProvider';
+import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
+import { getLang } from '@/lib/lang';
+import { getFilteredProjectData } from '@/util/helpers';
 import WindowLayout from '@/components/computer/WindowLayout';
 import Details from '@/components/details/Details';
 import DetailsHeader from '@/components/details/DetailsHeader';
@@ -6,6 +9,27 @@ import TechStack from '@/components/details/TechStack';
 import DetailsSection from '@/components/details/DetailsSection';
 import DetailsMarkdown from '@/components/markdown/DetailsMarkdown';
 import ImageModal from '@/components/ImageModal';
+
+export async function generateMetadata({ params, searchParams }) {
+  const { id } = await params;
+
+  const lang = await getLang(searchParams);
+
+  const { dbData } = await getSupabaseData('projects', {
+    filters: { project_id: id }
+  });
+
+  if (!dbData?.length) return { title: 'Project' };
+
+  const d = getFilteredProjectData(dbData[0], lang);
+  const title = [d.position, d.title].filter(Boolean).join(' - ');
+
+  return {
+    title: title || 'Project',
+    description: d.description || undefined,
+    openGraph: { title, description: d.description || undefined }
+  };
+}
 
 function renderProjectSections(data, logoUrl, lang) {
   const title = [data.position, data.title].filter(Boolean).join(' - ');
@@ -35,12 +59,12 @@ function renderProjectSections(data, logoUrl, lang) {
                 rel="noopener noreferrer"
                 className="btn btn--primary !py-1 !text-xs"
                 aria-label={
-                  lang === 'ko'
-                    ? '데모 (새 탭에서 열림)'
-                    : 'Demo (opens in new tab)'
+                  lang === 'en'
+                    ? 'Demo (opens in new tab)'
+                    : '데모 (새 탭에서 열림)'
                 }
               >
-                {lang === 'ko' ? '데모' : 'Demo'}
+                {lang === 'en' ? 'Demo' : '데모'}
               </a>
             )}
             {data.github && (
@@ -50,9 +74,9 @@ function renderProjectSections(data, logoUrl, lang) {
                 rel="noopener noreferrer"
                 className="btn !py-1 !text-xs"
                 aria-label={
-                  lang === 'ko'
-                    ? 'GitHub (새 탭에서 열림)'
-                    : 'GitHub (opens in new tab)'
+                  lang === 'en'
+                    ? 'GitHub (opens in new tab)'
+                    : 'GitHub (새 탭에서 열림)'
                 }
               >
                 GitHub
@@ -72,8 +96,10 @@ function renderProjectSections(data, logoUrl, lang) {
   );
 }
 
-export default async function ProjectDetails({ params }) {
+export default async function ProjectDetails({ params, searchParams }) {
   const { id: projectId } = await params;
+
+  const lang = await getLang(searchParams);
 
   return (
     <WindowLayout>
@@ -87,6 +113,7 @@ export default async function ProjectDetails({ params }) {
               dbTableName="projects"
               dbFilters={{ project_id: projectId }}
               renderSections={renderProjectSections}
+              lang={lang}
             />
           </div>
 
