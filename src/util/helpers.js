@@ -1,6 +1,7 @@
 import { ADMIN_FORM_MODE } from '@/constants/admin';
+import { DEFAULT_LANG } from '@/constants/language';
 
-export const getFilteredAboutData = (data, lang = 'en') => {
+export const getFilteredAboutData = (data, lang = DEFAULT_LANG) => {
   if (!data) return {};
   if (!Object.keys(data)?.length) return {};
 
@@ -14,7 +15,7 @@ export const getFilteredAboutData = (data, lang = 'en') => {
   };
 };
 
-export const getFilteredEducationData = (data, lang = 'en') => {
+export const getFilteredEducationData = (data, lang = DEFAULT_LANG) => {
   if (!data) return {};
   if (!Object.keys(data)?.length) return {};
 
@@ -36,7 +37,7 @@ export const getFilteredEducationData = (data, lang = 'en') => {
   };
 };
 
-export const getFilteredExperienceData = (data, lang = 'en') => {
+export const getFilteredExperienceData = (data, lang = DEFAULT_LANG) => {
   if (!data) return {};
   if (!Object.keys(data)?.length) return {};
 
@@ -65,7 +66,7 @@ export const getFilteredExperienceData = (data, lang = 'en') => {
   };
 };
 
-export const getFilteredProjectData = (data, lang = 'en') => {
+export const getFilteredProjectData = (data, lang = DEFAULT_LANG) => {
   if (!data) return {};
   if (!Object.keys(data)?.length) return {};
 

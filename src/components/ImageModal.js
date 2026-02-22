@@ -2,11 +2,12 @@
 
 import { useEffect, useRef } from 'react';
 import { useModal } from '@/contexts/ModalProvider';
+import { DEFAULT_LANG } from '@/constants/language';
 
 const FOCUSABLE_SELECTOR =
   'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
 
-function ImageModal({ lang = 'en' }) {
+function ImageModal({ lang = DEFAULT_LANG }) {
   const { modalData, onClose } = useModal();
 
   const modalRef = useRef(null);

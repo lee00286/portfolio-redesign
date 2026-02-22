@@ -1,10 +1,11 @@
+import { DEFAULT_LANG } from '@/constants/language';
 import MenuBarClock from '@/components/computer/MenuBarClock';
 import LangSwitcher from '@/components/LangSwitcher';
 
 /**
  * Computer menu bar
  */
-function MenuBar({ lang = 'en' }) {
+function MenuBar({ lang = DEFAULT_LANG }) {
   return (
     <nav
       aria-label={lang === 'ko' ? '메뉴 바' : 'Menu bar'}

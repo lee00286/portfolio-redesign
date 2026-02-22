@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getFilteredExperienceData } from '@/util/helpers';
+import { DEFAULT_LANG } from '@/constants/language';
 
 /**
  * Timeline card for experience
@@ -8,7 +9,7 @@ function TimelineExperienceCard({
   data,
   uniqueKey = 'id',
   index = 0,
-  lang = 'en'
+  lang = DEFAULT_LANG
 }) {
   if (!data) return null;
 

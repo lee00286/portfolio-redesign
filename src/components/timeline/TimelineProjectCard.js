@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getFilteredProjectData } from '@/util/helpers';
+import { DEFAULT_LANG } from '@/constants/language';
 import NewWindowIcon from '@/components/icons/NewWindowIcon';
 import GitHubLogo from '@/components/icons/GitHubLogo';
 
@@ -10,7 +11,7 @@ function TimelineProjectCard({
   data,
   uniqueKey = 'id',
   index = 0,
-  lang = 'en'
+  lang = DEFAULT_LANG
 }) {
   if (!data) return null;
 

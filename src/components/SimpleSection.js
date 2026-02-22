@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
 import { handleSupabaseError } from '@/util/helpers';
 import { simpleSectionDefaultQueryOptions } from '@/constants/supabase';
+import { DEFAULT_LANG } from '@/constants/language';
 import AboutCard from './simpleSectionCards/AboutCard';
 import EducationCard from './simpleSectionCards/EducationCard';
 import ExperienceCard from './simpleSectionCards/ExperienceCard';
@@ -20,7 +21,7 @@ async function SimpleSection({
   sectionClass = '',
   sectionContainerClass = '',
   queryOptions = simpleSectionDefaultQueryOptions,
-  lang = 'en'
+  lang = DEFAULT_LANG
 }) {
   const options = queryOptions
     ? Object.keys(queryOptions)?.length > 0

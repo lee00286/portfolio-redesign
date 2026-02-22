@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useTransition, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { switchLang } from '@/lib/actions/lang';
+import { DEFAULT_LANG } from '@/constants/language';
 
 const SHEET_ANIMATION_DURATION = 200;
 
@@ -17,7 +18,7 @@ const languages = [
  * Desktop: dropdown menu
  * Mobile: Slide-up action sheet
  */
-function LangSwitcher({ lang = 'en' }) {
+function LangSwitcher({ lang = DEFAULT_LANG }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 

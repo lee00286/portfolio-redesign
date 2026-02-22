@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { DEFAULT_LANG } from '@/constants/language';
 import { mblMenuPages } from '@/constants/sidebar';
 
 /**
  * Mobile bottom navbar
  * Displays nav buttons in a horizontal bar
  */
-function PhoneNavBar({ lang = 'en' }) {
+function PhoneNavBar({ lang = DEFAULT_LANG }) {
   return (
     <aside
       aria-label="Sidebar"

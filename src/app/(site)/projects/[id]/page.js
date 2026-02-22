@@ -59,12 +59,12 @@ function renderProjectSections(data, logoUrl, lang) {
                 rel="noopener noreferrer"
                 className="btn btn--primary !py-1 !text-xs"
                 aria-label={
-                  lang === 'en'
-                    ? 'Demo (opens in new tab)'
-                    : '데모 (새 탭에서 열림)'
+                  lang === 'ko'
+                    ? '데모 (새 탭에서 열림)'
+                    : 'Demo (opens in new tab)'
                 }
               >
-                {lang === 'en' ? 'Demo' : '데모'}
+                {lang === 'ko' ? '데모' : 'Demo'}
               </a>
             )}
             {data.github && (
@@ -74,9 +74,9 @@ function renderProjectSections(data, logoUrl, lang) {
                 rel="noopener noreferrer"
                 className="btn !py-1 !text-xs"
                 aria-label={
-                  lang === 'en'
-                    ? 'GitHub (opens in new tab)'
-                    : 'GitHub (새 탭에서 열림)'
+                  lang === 'ko'
+                    ? 'GitHub (새 탭에서 열림)'
+                    : 'GitHub (opens in new tab)'
                 }
               >
                 GitHub

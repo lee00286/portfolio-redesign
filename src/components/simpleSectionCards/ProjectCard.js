@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { getFilteredProjectData } from '@/util/helpers';
+import { DEFAULT_LANG } from '@/constants/language';
 import NewWindowIcon from '../icons/NewWindowIcon';
 import GitHubLogo from '../icons/GitHubLogo';
 
@@ -7,7 +9,7 @@ import GitHubLogo from '../icons/GitHubLogo';
  * Displays project data.
  * Skips rendering if the entry is marked inactive.
  */
-function ProjectCard({ cardIndex, data, lang = 'en' }) {
+function ProjectCard({ cardIndex, data, lang = DEFAULT_LANG }) {
   if (!data) return <></>;
 
   const filteredData = getFilteredProjectData(data, lang);
@@ -21,9 +23,11 @@ function ProjectCard({ cardIndex, data, lang = 'en' }) {
   return (
     <div className="simple-section--card">
       {filteredData.image_url && (
-        <img
+        <Image
           src={filteredData.image_url}
-          alt={filteredData.title}
+          alt={filteredData.title || 'Project card image'}
+          width={600}
+          height={192}
           className="rounded-lg w-full h-48 object-cover"
         />
       )}

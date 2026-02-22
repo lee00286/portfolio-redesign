@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown';
 import rehypeUnwrapImages from 'rehype-unwrap-images';
 import remarkDirective from 'remark-directive';
 import remarkImageGrid from '@/util/markdown';
+import { DEFAULT_LANG } from '@/constants/language';
 import {
   CodeBlock,
   H2,
@@ -16,7 +17,7 @@ import {
 } from './Typography';
 import { ImageGrid, MarkdownImage } from './Media';
 
-function DetailsMarkdown({ data, lang = 'en' }) {
+function DetailsMarkdown({ data, lang = DEFAULT_LANG }) {
   if (!data) return <></>;
 
   return (

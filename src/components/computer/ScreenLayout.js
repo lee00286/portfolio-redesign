@@ -1,3 +1,4 @@
+import { DEFAULT_LANG } from '@/constants/language';
 import MenuBar from '@/components/computer/MenuBar';
 import SideBar from '@/components/computer/SideBar';
 import PhoneStatusBar from '@/components/phone/PhoneStatusBar';
@@ -6,7 +7,7 @@ import PhoneNavBar from '@/components/phone/PhoneNavBar';
 /**
  * Layout of the computer screen
  */
-function ScreenLayout({ children, lang = 'en' }) {
+function ScreenLayout({ children, lang = DEFAULT_LANG }) {
   return (
     <main
       id="screen"

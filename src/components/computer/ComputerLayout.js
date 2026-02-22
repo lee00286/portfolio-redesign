@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { DEFAULT_LANG } from '@/constants/language';
 import ScreenLayout from './ScreenLayout';
 
 /**
@@ -6,7 +7,7 @@ import ScreenLayout from './ScreenLayout';
  * Desktop (>= xmd): Computer monitor
  * Mobile (< xmd): Phone frame
  */
-function ComputerLayout({ children, lang = 'en' }) {
+function ComputerLayout({ children, lang = DEFAULT_LANG }) {
   return (
     <div className="device-outer">
       <div className="device-container">

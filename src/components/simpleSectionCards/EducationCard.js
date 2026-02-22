@@ -1,11 +1,13 @@
-import { getFilteredEducationData } from '@/util/helpers';
+import Image from 'next/image';
 import Link from 'next/link';
+import { getFilteredEducationData } from '@/util/helpers';
+import { DEFAULT_LANG } from '@/constants/language';
 
 /**
  * Displays education data.
  * Skips rendering if the entry is marked inactive.
  */
-function EducationCard({ data, lang = 'en' }) {
+function EducationCard({ data, lang = DEFAULT_LANG }) {
   if (!data) return <></>;
 
   const filteredData = getFilteredEducationData(data, lang);
@@ -15,9 +17,11 @@ function EducationCard({ data, lang = 'en' }) {
   return (
     <div className="simple-section--card">
       {filteredData.image_url && (
-        <img
+        <Image
           src={filteredData.image_url}
-          alt={filteredData.school}
+          alt={filteredData.school || 'Education card image'}
+          width={600}
+          height={192}
           className="rounded-lg w-full h-48 object-cover"
         />
       )}

@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import SimpleSection from '../SimpleSection';
+import { DEFAULT_LANG } from '@/constants/language';
 import { menuPages } from '@/constants/sidebar';
+import SimpleSection from '../SimpleSection';
 
 /**
  * Desktop sidebar
  * Shows left panel with about menuPage and navigation links
  */
-function SideBar({ lang = 'en' }) {
+function SideBar({ lang = DEFAULT_LANG }) {
   return (
     <aside
       aria-label="Sidebar"

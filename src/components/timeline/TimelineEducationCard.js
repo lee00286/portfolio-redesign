@@ -1,10 +1,15 @@
 import Link from 'next/link';
 import { getFilteredEducationData } from '@/util/helpers';
+import { DEFAULT_LANG } from '@/constants/language';
 
 /**
  * Timeline card for education
  */
-function TimelineEducationCard({ data, uniqueKey = 'id', lang = 'en' }) {
+function TimelineEducationCard({
+  data,
+  uniqueKey = 'id',
+  lang = DEFAULT_LANG
+}) {
   if (!data) return null;
 
   const d = getFilteredEducationData(data, lang);

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getSupabaseData, getImageUrl } from '@/lib/supabase/getSupbaseData';
+import { DEFAULT_LANG } from '@/constants/language';
 
 // Table names to their corresponding helper filter functions
 const FILTER_FN_MAP = {
@@ -20,7 +21,7 @@ async function Details({
   dbTableName = '',
   dbFilters = {},
   renderSections,
-  lang = 'en'
+  lang = DEFAULT_LANG
 }) {
   if (!dbTableName || !dbFilters || !Object.keys(dbFilters).length) {
     notFound();

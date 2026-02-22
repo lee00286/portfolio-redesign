@@ -1,11 +1,13 @@
-import { getFilteredExperienceData } from '@/util/helpers';
+import Image from 'next/image';
 import Link from 'next/link';
+import { getFilteredExperienceData } from '@/util/helpers';
+import { DEFAULT_LANG } from '@/constants/language';
 
 /**
  * Displays experience data.
  * Skips rendering if the entry is marked inactive.
  */
-function ExperienceCard({ cardIndex, data, lang = 'en' }) {
+function ExperienceCard({ cardIndex, data, lang = DEFAULT_LANG }) {
   if (!data) return <></>;
 
   const filteredData = getFilteredExperienceData(data, lang);
@@ -15,9 +17,11 @@ function ExperienceCard({ cardIndex, data, lang = 'en' }) {
   return (
     <div className="simple-section--card">
       {filteredData.image_url && (
-        <img
+        <Image
           src={filteredData.image_url}
-          alt={filteredData.company_name}
+          alt={filteredData.company_name || 'Experience card image'}
+          width={600}
+          height={192}
           className="rounded-lg w-full h-48 object-cover"
         />
       )}
