@@ -23,16 +23,26 @@ This project prioritizes **data flow over abstraction**. Architectural decisions
 The app lives in a single codebase and handles both public and internal admin dashboard.
 
 ### Public Pages
+
 - Uses **Next.js Server Components** to fetch data directly from Supabase, reducing client-side JavaScript and improving SEO
-- Responsive image handling via Supabase Storage and Next.js image optimization
+- Responsive image handling via Supabase Storage and `next/image` optimization
+- Bilingual support (EN/KO) using cookie-based language switching with server-side resolution
+- Dynamic Open Graph metadata and SEO generated per page
 
 ### Internal Admin Dashboard
+
 - Used for managing portfolio content and assets
 - Built as **part of the same app** rather than as a separate service, to keep the codebase simple and maintainable
 - Admin server-side logic is kept separate for security purposes
 - Access is restricted to authorized environments
 - Admin authentication is handled through a hashed token stored in an HTTP-only cookie
-- Basic security headers are applied to `/admin/*` and `/api/admin/*` routes
+
+### Security
+
+- Security headers (CSP, HSTS, X-Content-Type-Options, Referrer-Policy) applied to all routes
+- Admin routes receive additional protections (X-Frame-Options: DENY)
+- Constant-time password comparison to prevent timing attacks
+- HTTP-only cookies with Secure and SameSite flags
 
 ## Testing
 
@@ -46,7 +56,12 @@ The project includes unit tests to cover:
 - Supabase interaction logic with controlled mock chains
 
 ## Technical Notes
+
 - Utilized Next.js **Server Components** instead of a separate REST API layer for internal data access
 - Admin-level write and storage operations run server-side using the **Supabase Service Role**
 - Shared server-side utilities are extracted where they can be reused
 - Detailed contents are written in **Markdown** and rendered using `react-markdown` to improve the content editing and display experience
+
+## Credits
+
+Favicon and icons sourced from [SVGRepo](https://www.svgrepo.com/) under their respective open licenses.
