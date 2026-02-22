@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { getSupabaseData } from '@/lib/supabase/getSupbaseData';
 import { getLang } from '@/lib/lang';
 import { handleSupabaseError } from '@/util/helpers';
@@ -43,7 +44,14 @@ async function SimpleSection({
             role="presentation"
           />
           <div>
-            {title && <h2>{title}</h2>}
+            {title && (
+              <Link
+                href={`/#${dbTableName}`}
+                className="h2 hover:underline focus:underline"
+              >
+                <h2>{title}</h2>
+              </Link>
+            )}
             {description && <p>{description}</p>}
           </div>
         </div>

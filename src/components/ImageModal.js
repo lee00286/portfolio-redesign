@@ -79,7 +79,7 @@ function ImageModal({ lang = 'en' }) {
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={lang === 'en' ? 'Image View' : '이미지 보기'}
+      aria-label={lang === 'ko' ? '이미지 보기' : 'Image View'}
     >
       <div
         ref={modalRef}

@@ -33,11 +33,6 @@ function LangSwitcher({ lang = 'en' }) {
   const sheetVisible = isOpen || isClosing;
 
   useEffect(() => {
-    console.log(lang);
-    console.log(languages.find((l) => l.code === lang));
-    console.log(languages[0]);
-    console.log(languages.find((l) => l.code === lang) || languages[0]);
-
     setCurrentLang(languages.find((l) => l.code === lang) || languages[0]);
   }, [lang]);
 
@@ -122,9 +117,9 @@ function LangSwitcher({ lang = 'en' }) {
         aria-expanded={isOpen}
         aria-label={`Language: ${currentLang?.label}`}
         className={`
-          flex items-center justify-center cursor-pointer border-none rounded xmd:py-1 px-1 xmd:px-2
-          hover:bg-black/5 xmd:hover:bg-white/10
-          ${isOpen ? 'bg-black/5 xmd:bg-white/10' : 'bg-transparent'}
+          flex items-center justify-center cursor-pointer border-none rounded-full py-1 px-1 xmd:px-2
+          hover:bg-primary-200/10 xmd:hover:bg-white/10
+          ${isOpen ? 'bg-primary-200/10 xmd:bg-white/10' : 'bg-transparent'}
         `}
         style={{
           transition: 'background-color 0.15s ease',
@@ -209,41 +204,43 @@ function LangSwitcher({ lang = 'en' }) {
               <p className="mb-3 !font-medium !text-gray-700 !text-md xmd:!text-xs text-center">
                 {currentLang?.code === 'ko' ? '언어 선택' : 'Select Language'}
               </p>
-              {languages.map((l) => (
-                <button
-                  key={l.code}
-                  role="option"
-                  aria-selected={l.code === currentLang?.code}
-                  onClick={() => handleSelect(l.code)}
-                  className={`lang-sheet-option ${l.code === currentLang?.code ? 'lang-sheet-option--active' : ''}`}
-                >
-                  <span className="flex justify-center items-center rounded-sm border border-primary-200 w-7 h-5 bg-primary-100">
-                    <span className="!font-semibold !text-gray-700 !text-[13px] leading-[1] text-center">
-                      {l.icon}
+              <div className="flex flex-col justify-start items-stretch gap-1 w-full">
+                {languages.map((l) => (
+                  <button
+                    key={l.code}
+                    role="option"
+                    aria-selected={l.code === currentLang?.code}
+                    onClick={() => handleSelect(l.code)}
+                    className={`lang-sheet-option ${l.code === currentLang?.code ? 'lang-sheet-option--active' : ''}`}
+                  >
+                    <span className="flex justify-center items-center rounded-sm border border-primary-300 w-7 h-5 bg-white">
+                      <span className="!font-semibold !text-gray-700 !text-[13px] leading-[1] text-center">
+                        {l.icon}
+                      </span>
                     </span>
-                  </span>
-                  <span className="flex-1 !font-medium !text-gray-700 !text-[15px]">
-                    {l.label}
-                  </span>
-                  {l.code === currentLang?.code && (
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="text-primary-600"
-                    >
-                      <path
-                        d="M5 13l4 4L19 7"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-                </button>
-              ))}
+                    <span className="flex-1 !font-medium !text-gray-700 !text-[15px]">
+                      {l.label}
+                    </span>
+                    {l.code === currentLang?.code && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        className="text-primary-600"
+                      >
+                        <path
+                          d="M5 13l4 4L19 7"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                ))}
+              </div>
               <button onClick={closeSheet} className="lang-sheet-cancel">
                 {currentLang?.code === 'ko' ? '취소' : 'Cancel'}
               </button>

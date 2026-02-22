@@ -50,13 +50,13 @@ function ProjectCard({ cardIndex, data, lang = 'en' }) {
                   rel="noopener noreferrer"
                   className="btn btn--link !text-xs"
                   aria-label={
-                    lang === 'en'
-                      ? 'Demo (opens in new tab)'
-                      : '데모 (새 탭에서 열림)'
+                    lang === 'ko'
+                      ? '데모 (새 탭에서 열림)'
+                      : 'Demo (opens in new tab)'
                   }
                 >
                   <span className="block">
-                    {lang === 'en' ? 'Demo' : '데모'}
+                    {lang === 'ko' ? '데모' : 'Demo'}
                   </span>
                   <NewWindowIcon />
                 </a>
@@ -68,9 +68,9 @@ function ProjectCard({ cardIndex, data, lang = 'en' }) {
                   rel="noopener noreferrer"
                   className="btn btn--link !text-xs"
                   aria-label={
-                    lang === 'en'
-                      ? 'GitHub (opens in new tab)'
-                      : 'GitHub (새 탭에서 열림)'
+                    lang === 'ko'
+                      ? 'GitHub (새 탭에서 열림)'
+                      : 'GitHub (opens in new tab)'
                   }
                 >
                   <span className="block">GitHub</span>

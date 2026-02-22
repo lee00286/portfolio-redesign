@@ -7,7 +7,7 @@ import LangSwitcher from '@/components/LangSwitcher';
 function MenuBar({ lang = 'en' }) {
   return (
     <nav
-      aria-label={lang === 'en' ? 'Menu bar' : '메뉴 바'}
+      aria-label={lang === 'ko' ? '메뉴 바' : 'Menu bar'}
       className="dskt-only mac-blur z-[20] flex-shrink-0 flex justify-between items-center rounded-tl-lg rounded-tr-lg px-4 pt-[6px] pb-[6px] w-full h-[32px]"
     >
       <a
