@@ -103,7 +103,10 @@ function LangSwitcher({ lang = 'en' }) {
   }, [isOpen, closeSheet]);
 
   return (
-    <div ref={menuRef} className="relative">
+    <div
+      ref={menuRef}
+      className="relative flex xmd:block justify-start items-center py-1 xmd:py-0 px-1 xmd:px-0 h-full xmd:h-auto"
+    >
       <button
         onClick={() => {
           if (isOpen) {
@@ -117,16 +120,16 @@ function LangSwitcher({ lang = 'en' }) {
         aria-expanded={isOpen}
         aria-label={`Language: ${currentLang?.label}`}
         className={`
-          flex items-center justify-center cursor-pointer border-none rounded-full py-1 px-1 xmd:px-2
-          hover:bg-primary-200/10 xmd:hover:bg-white/10
-          ${isOpen ? 'bg-primary-200/10 xmd:bg-white/10' : 'bg-transparent'}
+          flex items-center justify-center cursor-pointer border-none rounded-full xmd:rounded-md xmd:py-1 xmd:px-2
+        hover:bg-primary-300 xmd:hover:bg-white/10
+          ${isOpen ? 'bg-primary-300 xmd:bg-white/10' : 'bg-primary-200 xmd:bg-transparent'}
         `}
         style={{
           transition: 'background-color 0.15s ease',
           opacity: isPending ? 0.5 : 1
         }}
       >
-        <span className="flex justify-center items-center rounded-full xmd:rounded-sm border border-primary-200 xmd:border-white/80 w-6 h-6 xmd:h-4 bg-primary-200 xmd:bg-transparent">
+        <span className="flex justify-center items-center rounded-full xmd:rounded-sm border border-primary-200 xmd:border-white/80 w-6 h-6 xmd:h-4 bg-transparent">
           <span className="!font-semibold !text-gray-800 xmd:!text-white/80 !text-[11px] leading-[1] text-center">
             {currentLang?.icon}
           </span>

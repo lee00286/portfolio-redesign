@@ -44,18 +44,17 @@ function PhoneTitleBar() {
   }, []);
 
   return (
-    <div className="mbl-only flex items-center gap-3 border-b border-primary-200 pt-2 pb-4 px-4 sm:px-6 w-full bg-primary-100">
-      <div className="flex-1 flex items-center justify-center">
-        <div className="flex items-center gap-0 rounded-full border border-primary-200/50 py-0 pl-0.5 w-full bg-white">
-          <LangSwitcher lang={lang} />
+    <div className="mbl-only flex items-center gap-3 border-b border-primary-200 pt-2 pb-4 px-4 sm:px-6 w-full max-w-full bg-primary-100">
+      <div className="flex-1 flex items-center justify-center w-full">
+        <div className="grid grid-rows-none grid-cols-[34px_auto] rounded-full border border-primary-200/50 py-0 pl-0.5 w-full bg-white">
+          <div className="flex justify-start items-center h-full">
+            <LangSwitcher lang={lang} />
+          </div>
 
-          <p className="flex-1 py-2 !font-mono !text-gray-500 truncate !text-[13px] !leading-normal text-center">
+          <p className="flex-auto py-2 pr-2 !font-mono !text-gray-500 truncate !text-[13px] !leading-normal text-center">
             yenalee.dev{pathname}
             {hash || ''}
           </p>
-
-          {/* Spacer to balance the lang switcher width */}
-          <div className="shrink-0 w-[34px]" />
         </div>
       </div>
     </div>

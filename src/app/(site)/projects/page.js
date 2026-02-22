@@ -15,6 +15,7 @@ export default async function ProjectDetails({ searchParams }) {
         <div className="px-4 sm:px-5 py-3 w-full h-full overflow-x-hidden overflow-y-auto">
           <Timeline
             dbTableName="projects"
+            uniqueKey="project_id"
             queryOptions={{
               select: '*',
               order: 'start_date',
