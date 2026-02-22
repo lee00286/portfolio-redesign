@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { timingSafeEqual } from 'crypto';
 import { generateAdminToken } from '@/lib/admin/auth';
 
 const SESSION_MAX_AGE = 60 * 60 * 24; // 24 hours
@@ -7,11 +8,16 @@ export async function POST(req) {
   try {
     const { password } = await req.json();
 
-    if (
-      !process.env.ADMIN_PASSWORD ||
-      !password ||
-      password !== process.env.ADMIN_PASSWORD
-    ) {
+    const expected = process.env.ADMIN_PASSWORD;
+
+    if (!expected || !password) {
+      return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
+    }
+
+    const a = Buffer.from(password);
+    const b = Buffer.from(expected);
+
+    if (a.length !== b.length || !timingSafeEqual(a, b)) {
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
     }
 
