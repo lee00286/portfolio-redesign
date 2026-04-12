@@ -24,8 +24,12 @@ export default async function EducationDetails({ searchParams }) {
               skipSoftDelete: true,
               isActiveFilter: true
             }}
-            renderItem={({ data, index }) => (
-              <TimelineEducationCard data={data} lang={lang} />
+            renderItem={({ data, index, uniqueKey }) => (
+              <TimelineEducationCard
+                data={data}
+                uniqueKey={uniqueKey}
+                lang={lang}
+              />
             )}
             lang={lang}
           />

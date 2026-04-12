@@ -24,8 +24,13 @@ export default async function ProjectDetails({ searchParams }) {
               skipSoftDelete: true,
               isActiveFilter: true
             }}
-            renderItem={({ data, index }) => (
-              <TimelineProjectCard data={data} index={index} lang={lang} />
+            renderItem={({ data, index, uniqueKey }) => (
+              <TimelineProjectCard
+                data={data}
+                index={index}
+                uniqueKey={uniqueKey}
+                lang={lang}
+              />
             )}
           />
         </div>

@@ -24,8 +24,13 @@ export default async function ExperienceDetails({ searchParams }) {
               skipSoftDelete: true,
               isActiveFilter: true
             }}
-            renderItem={({ data, index }) => (
-              <TimelineExperienceCard data={data} index={index} lang={lang} />
+            renderItem={({ data, index, uniqueKey }) => (
+              <TimelineExperienceCard
+                data={data}
+                index={index}
+                uniqueKey={uniqueKey}
+                lang={lang}
+              />
             )}
             lang={lang}
           />
