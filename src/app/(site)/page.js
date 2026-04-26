@@ -60,6 +60,7 @@ export default async function Home({ searchParams }) {
                   ? experiencesSimpleSectionQueryOptions
                   : null
               }
+              lang={lang}
             />
           ))}
       </div>
