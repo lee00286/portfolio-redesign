@@ -23,7 +23,11 @@ describe('POST /login', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    process.env = { ...ORIGINAL_ENV, ADMIN_PASSWORD: 'correct-password' };
+    process.env = {
+      ...ORIGINAL_ENV,
+      ADMIN_PASSWORD: 'correct-password',
+      ADMIN_ENABLE_PASSWORD_LOGIN: 'true'
+    };
   });
 
   afterAll(() => {
@@ -85,5 +89,15 @@ describe('POST /login', () => {
 
     expect(res.status).toBe(400);
     expect(res.body.error).toBe('Invalid request');
+  });
+
+  it('returns 404 when password login is disabled', async () => {
+    delete process.env.ADMIN_ENABLE_PASSWORD_LOGIN;
+
+    const res = await POST({
+      json: async () => ({ password: 'correct-password' })
+    });
+
+    expect(res.status).toBe(404);
   });
 });

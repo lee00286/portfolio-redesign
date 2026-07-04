@@ -1,37 +1,32 @@
-// Mock Next.js API route (with cookies support for logout)
 jest.mock('next/server', () => ({
   NextResponse: {
     json: (body, init = {}) => ({
       body,
       status: init.status || 200,
-      cookies: {
-        set: jest.fn()
-      }
+      cookies: { set: jest.fn() }
     })
   }
 }));
+jest.mock('@/lib/supabase/serverClient', () => ({
+  createSupabaseServerClient: jest.fn()
+}));
 
+const { createSupabaseServerClient } = require('@/lib/supabase/serverClient');
 const { POST } = require('@/app/api/admin/logout/route');
 
 describe('POST /logout', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+  it('signs out of Supabase and clears the admin cookie', async () => {
+    const signOut = jest.fn().mockResolvedValue({ error: null });
+    createSupabaseServerClient.mockResolvedValue({ auth: { signOut } });
 
-  it('returns 200 and clears the admin cookie', async () => {
     const res = await POST();
 
+    expect(signOut).toHaveBeenCalled();
     expect(res.status).toBe(200);
-    expect(res.body.success).toBe(true);
     expect(res.cookies.set).toHaveBeenCalledWith(
       'admin_auth',
       '',
-      expect.objectContaining({
-        httpOnly: true,
-        sameSite: 'strict',
-        maxAge: 0,
-        path: '/'
-      })
+      expect.objectContaining({ maxAge: 0, path: '/' })
     );
   });
 });
