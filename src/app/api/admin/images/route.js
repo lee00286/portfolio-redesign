@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createAdminSupabaseServer } from '@/lib/supabase/admin';
+import { guardAdmin } from '@/lib/admin/guardAdmin';
 
-export async function GET(req) {
+export const GET = guardAdmin(async (req) => {
   try {
     const searchParams = req.nextUrl.searchParams;
 
@@ -40,4 +41,4 @@ export async function GET(req) {
     console.error('[ADMIN IMAGES GET API ERROR]', err);
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
-}
+});
