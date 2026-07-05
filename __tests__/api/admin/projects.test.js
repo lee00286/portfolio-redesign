@@ -8,6 +8,10 @@ jest.mock('next/server', () => ({
   }
 }));
 
+jest.mock('@/lib/admin/requireAdmin', () => ({
+  isAdminRequestAuthorized: jest.fn().mockResolvedValue(true)
+}));
+
 // Mock Supabase Chain functions
 const createSupabaseMock = (initialData = {}) => {
   let row = { ...initialData };
@@ -59,6 +63,7 @@ const createSupabaseMock = (initialData = {}) => {
 const { POST } = require('@/app/api/admin/projects/route');
 const { PUT, PATCH, DELETE } = require('@/app/api/admin/projects/[id]/route');
 const { createAdminSupabaseServer } = require('@/lib/supabase/admin');
+const { isAdminRequestAuthorized } = require('@/lib/admin/requireAdmin');
 
 jest.mock('@/lib/supabase/admin');
 
@@ -69,6 +74,7 @@ describe('POST /projects', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    isAdminRequestAuthorized.mockResolvedValue(true);
     supabase = createSupabaseMock();
 
     supabase.maybeSingle.mockResolvedValue({
@@ -78,6 +84,14 @@ describe('POST /projects', () => {
 
     // Return new Supabase mock object for each test
     createAdminSupabaseServer.mockReturnValue(supabase);
+  });
+
+  it('returns 401 when the request is not authorized', async () => {
+    isAdminRequestAuthorized.mockResolvedValueOnce(false);
+
+    const res = await POST({ json: async () => ({ project_id: 'x' }) });
+
+    expect(res.status).toBe(401);
   });
 
   it('returns 400 if project_id is missing', async () => {

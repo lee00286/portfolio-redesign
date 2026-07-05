@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createAdminSupabaseServer } from '@/lib/supabase/admin';
+import { guardAdmin } from '@/lib/admin/guardAdmin';
 
-export async function POST(req) {
+export const POST = guardAdmin(async (req) => {
   try {
     const formData = await req.formData();
     const file = formData.get('file');
@@ -81,4 +82,4 @@ export async function POST(req) {
     console.error('[IMAGE UPLOAD ERROR]', err);
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
-}
+});

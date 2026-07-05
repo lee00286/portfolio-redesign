@@ -8,6 +8,10 @@ jest.mock('next/server', () => ({
   }
 }));
 
+jest.mock('@/lib/admin/requireAdmin', () => ({
+  isAdminRequestAuthorized: jest.fn().mockResolvedValue(true)
+}));
+
 // Mock crypto.randomUUID
 global.crypto = {
   randomUUID: jest.fn(() => 'test-uuid')

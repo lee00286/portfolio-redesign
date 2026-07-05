@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createAdminSupabaseServer } from '@/lib/supabase/admin';
+import { guardAdmin } from '@/lib/admin/guardAdmin';
 
-export async function POST(req) {
+export const POST = guardAdmin(async (req) => {
   try {
     const body = await req.json();
     const { experience_id, ...newData } = body;
@@ -59,4 +60,4 @@ export async function POST(req) {
     console.error('[ADMIN EXPERIENCE API ERROR]', err);
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
-}
+});
