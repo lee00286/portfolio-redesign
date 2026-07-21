@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createAdminSupabaseServer } from '@/lib/supabase/admin';
+import { guardAdmin } from '@/lib/admin/guardAdmin';
 
-export async function POST(req) {
+export const POST = guardAdmin(async (req) => {
   try {
     const { imageIds = [] } = await req.json();
 
@@ -65,4 +66,4 @@ export async function POST(req) {
       { status: 500 }
     );
   }
-}
+});

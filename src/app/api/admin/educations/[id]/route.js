@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { createAdminSupabaseServer } from '@/lib/supabase/admin';
+import { guardAdmin } from '@/lib/admin/guardAdmin';
 import { updateEducationById } from '@/lib/admin/updateData';
 
-export async function PUT(req, { params }) {
+export const PUT = guardAdmin(async (req, { params }) => {
   try {
     // Get id from request
     const { id } = await params;
@@ -71,12 +72,12 @@ export async function PUT(req, { params }) {
     console.error('[ADMIN EDUCATION UPDATE API ERROR]', err);
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
-}
+});
 
 /**
  * Restore
  */
-export async function PATCH(req, { params }) {
+export const PATCH = guardAdmin(async (req, { params }) => {
   try {
     // Get id from request
     const { id } = await params;
@@ -110,12 +111,12 @@ export async function PATCH(req, { params }) {
     console.error('[ADMIN EDUCATION RESTORE API ERROR]', err);
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
-}
+});
 
 /**
  * Soft Delete
  */
-export async function DELETE(req, { params }) {
+export const DELETE = guardAdmin(async (req, { params }) => {
   try {
     // Get id from request
     const { id } = await params;
@@ -149,4 +150,4 @@ export async function DELETE(req, { params }) {
     console.error('[ADMIN EDUCATION DELETE API ERROR]', err);
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
-}
+});
